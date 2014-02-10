@@ -59,4 +59,5 @@ that can auth to the nm epscor portal
 * Setup and activate a python virtualenv
 * git clone
 * pip install -r requirements.txt
+* python manage.py syncdb (setup initial account/database via sqlite)
 * python manage.py runserver ...
