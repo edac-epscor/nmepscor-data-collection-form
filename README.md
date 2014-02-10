@@ -40,6 +40,8 @@ that can auth to the nm epscor portal
 * Testing
 * Angular must have a better interstitial/overlay that can be bound to $http
   and jQuery with a timer and/or retry/error handler and/or event queue
+* The django debug toolbar isn't very useful in the JSON views
+* There's got to be a better django-crud-json framework available
 
 
 # Next Steps
@@ -48,4 +50,13 @@ that can auth to the nm epscor portal
 * EMail
 * Content/Dialog Updates
 * Some way to obtain PI and/or account relationships
+* More form validators
 
+
+# To Run (not install)
+
+***
+* Setup and activate a python virtualenv
+* git clone
+* pip install -r requirements.txt
+* python manage.py runserver ...
