@@ -59,5 +59,6 @@ that can auth to the nm epscor portal
 * Setup and activate a python virtualenv
 * git clone
 * pip install -r requirements.txt
+* Rename mdform/secret_settings.template.py to secret_settings.py and fill in for your app
 * python manage.py syncdb (setup initial account/database via sqlite)
 * python manage.py runserver ...
