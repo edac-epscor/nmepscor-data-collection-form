@@ -1,0 +1,7 @@
+Restructured from:
+
+https://github.com/robertjchristian/angular-enterprise-seed
+
+But unfortunately with a lot of the tests and node run scripts removed, as the
+foundational demo app has been removed and replaced with the djangoized form.
+

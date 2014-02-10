@@ -1,0 +1,96 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>NMEPSCoR Metadata Tool: <small>Required for all Datasets</small></h2>
+            </div>
+            <div>
+                <p>We're now gathering information to assist in semantic search for your project.  This will assist
+                in automatic dataset discovery, and help other researcher's find your data. </p>
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+    <!--
+    "TAGGING": {
+        "placenames": null,
+        "tags": null
+    }
+
+    -->
+    
+    <div class="row" ng-controller="s4Form">
+
+      <!--
+      <div class="collapse in">
+        <pre> form = {{formData | json}}
+        </pre>
+      </div>
+      -->
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Tagging
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal" role="form" name="step4_form">
+                  <div class="form-group">
+                    <p>
+                    Please include a list of terms to describe the collection.
+                    Include as many terms as you’d like, separating each term
+                    with a comma. Examples include “Precipitation, Temperature,
+                    Relative Humidity, Weather” for a set of weather station
+                    datasets. 
+                    </p>
+                    <label for="taggingTags" class="col-sm-2 control-label">Tags</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" rows="2" id="taggingTags" ng-model="formData.TAGGING.tags" 
+                      ngMinLength=0 ngMaxLength=300 required></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <p> 
+                    If your data includes a spatial component, please include a
+                    list of placenames, separated by a comma. Please enter
+                    placenames if you are providing a report about a particular
+                    watershed or metro area (Socorro or Pecos River) or a
+                    general location for your study area (Middle Rio Grande or
+                    Lincoln County). 
+                    </p>
+                    <label for="datasetPlacenames" class="col-sm-2 control-label">
+                      <a tooltip-placement="bottom" tooltip="Consider going from more specific (watershed) to less specific (state).  For example, Middle Rio Grande, Bernalilo County, New Mexico.">Placenames</a>
+                    </label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" rows="3" id="datasetPlacenames" ng-model="formData.DATASET.placenames"></textarea>
+                    </div>
+                    <p>  
+                    </p>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <!-- Will need a switch here to capture describe attributes in next form -->
+
+                      <span ng-switch on=formData.DESCRIBE.choice>
+                        <!-- just field collection goes to desc sites, all else to workflow -->
+                        <button ng-switch-when="fieldcollection" class="btn btn-default" 
+                          ng-click="nextStep(formData, '/descSites')"
+                          ng-disabled="step4_form.$invalid"
+                        >Next Step</button>
+                        <button ng-switch-default class="btn btn-default" 
+                          ng-click="nextStep(formData, '/descWorkflow')"
+                          ng-disabled="step4_form.$invalid"
+                        >Next Step
+                        </button>
+                      </span>
+
+                      <reset-button></reset-button>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

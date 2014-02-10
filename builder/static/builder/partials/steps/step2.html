@@ -1,0 +1,158 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>NMEPSCoR Metadata Tool: <small>Files to Document</small></h2>
+            </div>
+            <div>
+                <p> Provide a list of the files that are part of this collection.  </p>
+
+                <p> 
+                  The [Title] field refers to the title of the dataset as it will appear in the
+                  NM EPSCoR data portal and selected repositories. We encourage you to create
+                  meaningful, descriptive titles that can be understood to a variety of
+                  audiences. Try to avoid titles such as “x34656-fg73 Large” or “XKC Jemez
+                  040412-052513”. 
+                </p>
+
+                <p>
+
+                  Remember that the portal may contain similar kinds of data
+                  so, while a title like “Soil Logs” might be meaningful to you when accessing
+                  files on your local system, it could become one of twenty “Soil Logs” datasets
+                  provided by different researchers across different institutions and study
+                  sites. Consider providing a title such as “Gila Watershed Project, UNM, Soil
+                  Logs May 2013”.
+                </p>
+
+                <p> If you are documenting ongoing data collection, provide a sample dataset file name and title. 
+                </p>
+
+                <p>
+                  If you are providing multitabbed spreadsheets, include the tab
+                  name. You may need to include more than one file entry if documenting multiple
+                  tabs. 
+                </p>
+
+                <p> 
+                  If you are delivering shapefiles, you don’t need to list all of the related files, just the .shp file. Just remember to send all of the related files to EDAC. 
+                </p>
+
+                <p> 
+                  If you are including any datetime information in the file name, please consider formatting that value as yyyyMMdd-HHmm or the appropriate subset of that. Two digit year formats are strongly discouraged. 
+                 </p>
+
+            <br><br>
+        </div>
+    </div>
+    
+    <div class="row" ng-controller="s2Form">
+      
+      <!--
+      <div class="collapse in">
+        <pre> form = {{formData | json}}
+        </pre>
+      </div>
+      -->
+      
+       <div class="panel panel-primary">
+          <div class="panel-heading">
+              Files to Document
+          </div>
+          <div class="panel-body span10">
+            <!-- angular x-editable -->
+            <form editable-form name="fileform" onaftersave="" oncancel="cancel()">
+              <table class="table table-striped table-bordered table-hover table-condensed span10 filesTable">
+                <thead>
+                  <tr>
+                    <th class="span6">File Name</th>
+                    <th class="span2">Title</th>
+                    <th class="span2" ng-hide="hideTableInfo" >
+                      Tab Name
+                    </th>
+                    <th ng-show="fileform.$visible">
+                      <span>Action</span>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- if you use orderby, careful of impact on delete methods... -->
+                  <tr ng-repeat="fileO in formData.FILES.datatable">
+                    
+                    <td ><span editable-text="fileO.file_name"
+                        e-form="fileform" e-required>
+                      {{fileO.file_name || 'empty'}}
+                    </span></td>
+                    
+                    <td> <span editable-text="fileO.title" e-form="fileform" e-required>
+                      {{fileO.title || 'empty'}}
+                    </span></td>
+                    
+                    <td ng-hide="hideTableInfo"> 
+                      <span editable-text="fileO.tabname" e-form="fileform">
+                        {{fileO.tabname || 'empty'}}
+                      </span> 
+                    </td>
+
+                    <td ng-show="fileform.$visible">
+                      <!--
+                      <button type="button" ng-show="fileform.$visible"
+                        ng-click="copyFile($index)"
+                        class="btn pull-left">
+                        <span class="glyphicon glyphicon-arrow-down">Copy</span>
+                      </button>
+                      -->
+                      <button type="button"
+                        ng-click="delFile($index)" 
+                        class="btn btn-danger pull-right"> 
+                        <span class="glyphicon glyphicon-minus-sign">Del</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- buttons -->
+              <div class="btn-edit">
+                <button type="button" class="btn btn-default" ng-show="!fileform.$visible" ng-click="fileform.$show()">
+                  Edit
+                </button>
+              </div>
+
+              <div class="btn-form" ng-show="fileform.$visible">
+                <button type="button" ng-disabled="fileform.$waiting" ng-click="addFile()" class="btn btn-default pull-right btn-lg"> 
+                  <span class="glyphicon glyphicon-plus-sign">Add Row
+                  </span> 
+                </button>
+                
+                <button type="submit" ng-disabled="fileform.$waiting" class="btn btn-primary">
+                  Save
+                </button>
+                <button type="button" ng-disabled="fileform.$waiting" ng-click="fileform.$cancel()" class="btn btn-default">
+                  Cancel
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        
+
+        <div class="row">
+        <!-- We always follow with step 2; files to document -->
+        <a class="btn btn-primary" ng-click="nextStep(formData, '/step3')"
+          ng-disabled="fileform.$invalid || fileform.$visible"
+          >Next Step
+        </a>
+
+        <!--
+          <a class="btn btn-danger" ng-click="reset()" tooltip="Behave as if you just entered this page">Reset this step</a>
+          -->
+          <reset-button></reset-button>
+
+          <quit-button> <quit-button />
+        </div>
+      </div>
+    </div> 
+  </div>
