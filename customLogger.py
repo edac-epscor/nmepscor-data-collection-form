@@ -150,12 +150,12 @@ def getLogDictSchema(stripColors=False):
             'mdform': {
                 'handlers': ['console'],
                 'propagate': True,
-                'level': 'DEBUG'
+                'level': 'WARN'
             },
             'builder': {
                 'handlers': ['console'],
                 'propagate': True,
-                'level': 'DEBUG'
+                'level': 'WARN'
             },
         },
     }
