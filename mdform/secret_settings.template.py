@@ -6,3 +6,6 @@ SECRET_EPSCOR_SERVER = '127.0.0.1'  # Probably not your drupal site
 ADMINS = (
     ('ADMIN_NAME', 'ADMIN_EMAIL@example.com'),
 )
+
+
+ALLOWED_HOSTS = ['www.my-example-name.com']

@@ -8,7 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-from secret_settings import SECRET_KEY, SECRET_EPSCOR_SERVER, ADMINS
+from secret_settings import SECRET_KEY, SECRET_EPSCOR_SERVER, ADMINS,\
+    ALLOWED_HOSTS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -23,15 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # To prevent login to the admin site and pop an error message.
 #  Handy when performing updates in the console
 ADMIN_ENABLED = True
 
 TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -110,6 +109,7 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ###########
 # LOGGING #
