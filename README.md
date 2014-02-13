@@ -61,4 +61,7 @@ that can auth to the nm epscor portal
 * pip install -r requirements.txt
 * Rename mdform/secret_settings.template.py to secret_settings.py and fill in for your app
 * python manage.py syncdb (setup initial account/database via sqlite)
-* python manage.py runserver ...
+* python manage.py runserver 0.0.0.0:8000
+* Test by visiting http://localhost:8000/builder/
+  - This will redirect you to /builder/#/
+  - This URL may be changed at a later date
