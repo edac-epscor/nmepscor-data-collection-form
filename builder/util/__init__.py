@@ -74,7 +74,7 @@ def remoteAuthenticate(**kwargs):
         'form_id': 'user_login'  # stupid drupal
     }  # no chance of ever sending epscor server other params
 
-    response = requests.post(URL, data=PAYLOAD, timeout=5.0)  # 2s
+    response = requests.post(URL, data=PAYLOAD, timeout=8.0)  # 2s
 
     #invalidLogin = forms.ValidationError(
     #    AuthenticationForm.error_messages['invalid_login'],
