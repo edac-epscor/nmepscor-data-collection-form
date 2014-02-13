@@ -60,8 +60,18 @@ that can auth to the nm epscor portal
 * git clone
 * pip install -r requirements.txt
 * Rename mdform/secret_settings.template.py to secret_settings.py and fill in for your app
+  - Set secret epscor server
+  - Set allowed hosts to your hostname
+    - If debug is not set, and you are not accessing by hostname, you will get a security error from the django host validator
 * python manage.py syncdb (setup initial account/database via sqlite)
 * python manage.py runserver 0.0.0.0:8000
-* Test by visiting http://localhost:8000/builder/
+* Test by visiting http://localhost:8000/builder/ (if debug is on)
+  - Visit at host name if debug is off (http://example.com....)
   - This will redirect you to /builder/#/
   - This URL may be changed at a later date
+
+# If in production environment
+
+***
+* Be sure debug is False
+* python manage.py collectstatic (collect static files for serving outside of wsgi)

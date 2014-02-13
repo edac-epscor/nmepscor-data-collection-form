@@ -243,8 +243,8 @@ epscorForm.run(function (
     $rootScope.loginInput = 'user@gmail.com';
     $rootScope.passwordInput = 'complexpassword';
     */
-    $rootScope.loginInput = 'epscor';
-    $rootScope.passwordInput = 'changeme';
+    $rootScope.loginInput = '';
+    $rootScope.passwordInput = '';
 
     $rootScope.$watch('authService.authorized()', function () {
 
