@@ -8,4 +8,4 @@ ADMINS = (
 )
 
 
-ALLOWED_HOSTS = ['www.my-example-name.com']
+ALLOWED_HOSTS = ['www.my-example-name.com', '127.0.0.1']
