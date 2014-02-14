@@ -130,7 +130,6 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 epscorForm.run(function (
         $rootScope,
         $location,
-        $http,
         $timeout,
         AuthService,
         SubmissionService,

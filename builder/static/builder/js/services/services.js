@@ -158,7 +158,7 @@ epscorForm.factory('AuthService',
                 // Need CSRF header
                 console.log('cookies: + ' + $cookies.text);
                 $http.post(
-                    '/signin',
+                    'signin',
                     {
                         'username':  name,
                         'password':  password
@@ -191,7 +191,7 @@ epscorForm.factory('AuthService',
                 $rootScope.authorized = false;
 
                 $http.get(
-                    '/logout'
+                    'logout'
                 )
                 .success(function(data, status, headers, config) {
                     $location.path('/');
@@ -214,7 +214,7 @@ epscorForm.factory('AuthService',
             },
             keepalive: function() {
                 //console.log("KeepAlive request");
-                $http.get('/keepAlive')
+                $http.get('keepAlive')
                 .success(function() {
                     console.log("KeepAlive request good");
                 })
