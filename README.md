@@ -70,14 +70,19 @@ that can auth to the nm epscor portal
     - Explanation at https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 * python manage.py syncdb (setup initial account/database via sqlite)
 * python manage.py runserver 0.0.0.0:8000
-* Test by visiting http://127.0.0.1:8000/builder/ (if debug is on)
+* Test by visiting http://127.0.0.1:8000 (if debug is on)
   - Visit at host name if debug is off (http://example.com....)
-  - This will redirect you to /builder/#/
+  - This will redirect you to 127.0.0.1:8000/#/
   - This URL may be changed at a later date
   - If debug is off, you will need staticfiles served or will see a blank page.
 
 # If in production environment
 
 ***
-* Be sure debug is False
+* See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+  - Be sure debug is False
 * python manage.py collectstatic (collect static files for serving outside of wsgi)
+  - Add the folder this creates as an apache served folder
+* I believe this entire app is now 'rooted' within whatever folder it lies in
+  - Therefore it can be mod-rewritten into folders of Apache
+
