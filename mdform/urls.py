@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from django.conf.urls.static import static
 
 from django.conf import settings
 from django.contrib import admin
@@ -7,10 +6,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'mdform.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    (r'^builder/', include('builder.urls')),
+    (r'^$', 'builder.views.metadataIdx'),
+    (r'^submissions/', include('builder.urls')),
     (r'^keepAlive$', 'builder.views.revalidate'),
     (r'^signin$', 'builder.views.authDrupal'),
     (r'^logout$', 'builder.views.signout'),
@@ -19,18 +16,12 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-            {
-                'document_root': settings.MEDIA_ROOT,
-                'show_indexes': True
-            })
+    urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'^static/(?P<path>.*)$', 'serve'),
     )
-
-    urlpatterns += static(
-        settings.STATIC_URL,
-        document_root=settings.STATIC_ROOT
-    )
+    #urlpatterns += staticfiles_urlpatterns()
+    #  This is supposedly equivalent to the above, but it doesn't appear to
+    #  actually work.
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
     # to INSTALLED_APPS to enable admin documentation:

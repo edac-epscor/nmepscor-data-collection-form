@@ -27,48 +27,48 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
     // App Exploratory Routes
     $routeProvider.when('/', {
-        templateUrl:'/static/builder/partials/home.html',
+        templateUrl:'static/builder/partials/home.html',
         controller:'homeController'
     });
     $routeProvider.when('/contact', {
-        templateUrl:'/static/builder/partials/contact.html'
+        templateUrl:'static/builder/partials/contact.html'
     });
     $routeProvider.when('/about', {
-        templateUrl:'/static/builder/partials/about.html'
+        templateUrl:'static/builder/partials/about.html'
     });
     $routeProvider.when('/faq', {
-        templateUrl:'/static/builder/partials/faq.html'
+        templateUrl:'static/builder/partials/faq.html'
     });
 
 
     // Form Routes
     $routeProvider.when('/loadForm/:subID', {
-        templateUrl:'/static/builder/partials/steps/step0.html',
+        templateUrl:'static/builder/partials/steps/step0.html',
         controller:'loadController'
     });
 
     $routeProvider.when('/step0', {
-        templateUrl:'/static/builder/partials/steps/step0.html',
+        templateUrl:'static/builder/partials/steps/step0.html',
         controller: 'submissionsController'
     });
 
     $routeProvider.when('/step1', {
-        templateUrl:'/static/builder/partials/steps/step1.html',
+        templateUrl:'static/builder/partials/steps/step1.html',
         controller: 's1Form'
     });
 
     $routeProvider.when('/step2', {
-        templateUrl:'/static/builder/partials/steps/step2.html',
+        templateUrl:'static/builder/partials/steps/step2.html',
         controller: 's2Form'
     });
 
     $routeProvider.when('/step3', {
-        templateUrl:'/static/builder/partials/steps/step3_for_all_ds.html',
+        templateUrl:'static/builder/partials/steps/step3_for_all_ds.html',
         controller: 's3Form'
     });
 
     $routeProvider.when('/step4', {
-        templateUrl:'/static/builder/partials/steps/step4_tagging.html',
+        templateUrl:'static/builder/partials/steps/step4_tagging.html',
         controller: 's4Form'
     });
 
@@ -77,37 +77,37 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
 
     $routeProvider.when('/descSites', {
-        templateUrl:'/static/builder/partials/steps/descSites.html',
+        templateUrl:'static/builder/partials/steps/descSites.html',
         controller: 'siteForm'
     });
 
     $routeProvider.when('/descWorkflow', {
-        templateUrl:'/static/builder/partials/steps/descWorkflow.html',
+        templateUrl:'static/builder/partials/steps/descWorkflow.html',
         controller: 'workflowForm'
     });
 
     $routeProvider.when('/descAttributes', {
-        templateUrl:'/static/builder/partials/steps/descAttributes.html',
+        templateUrl:'static/builder/partials/steps/descAttributes.html',
         controller: 'attributeForm'
     });
 
     $routeProvider.when('/timeInfo', {
-        templateUrl:'/static/builder/partials/steps/timeInfo.html',
+        templateUrl:'static/builder/partials/steps/timeInfo.html',
         controller: 'timeForm'
     });
 
     $routeProvider.when('/embargo', {
-        templateUrl:'/static/builder/partials/steps/embargo.html',
+        templateUrl:'static/builder/partials/steps/embargo.html',
         controller: 'embargoForm'
     });
 
     $routeProvider.when('/publish', {
-        templateUrl:'/static/builder/partials/steps/publish.html',
+        templateUrl:'static/builder/partials/steps/publish.html',
         controller: 'publishForm'
     });
 
     $routeProvider.when('/dumpData', {
-        templateUrl:'/static/builder/partials/steps/dumpData.html',
+        templateUrl:'static/builder/partials/steps/dumpData.html',
         controller: 'longForm'
     });
 
@@ -115,7 +115,7 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     // are including just this simple route with a parameterized
     // partial value (see playground.js and playground.html)
     $routeProvider.when('/playground/:widgetName', {
-        templateUrl:'/static/builder/playground/playground.html',
+        templateUrl:'static/builder/playground/playground.html',
         controller:'PlaygroundCtrl'
     });
 
@@ -154,13 +154,13 @@ epscorForm.run(function (
  
     // async load constants
     $rootScope.constants = [];
-    $rootScope.restService.get('/static/builder/data/constants.json', function (data) {
+    $rootScope.restService.get('static/builder/data/constants.json', function (data) {
         $rootScope.constants = data[0];
     });
 
     $rootScope.blankForm = {};
     $rootScope.formData = {};
-    $rootScope.restService.get('/static/builder/mock_json/blankForm.json', function(data){
+    $rootScope.restService.get('static/builder/mock_json/blankForm.json', function(data){
         // blankform holds the uninitialized to full-reset to.
         // formData holds the copy that persists between ng pages.
         $rootScope.blankForm = data;

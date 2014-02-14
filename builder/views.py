@@ -227,7 +227,6 @@ def revalidate(request):
     return reset
 
 
-
 @sensitive_post_parameters()
 @csrf_protect
 @never_cache

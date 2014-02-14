@@ -74,6 +74,7 @@ that can auth to the nm epscor portal
   - Visit at host name if debug is off (http://example.com....)
   - This will redirect you to /builder/#/
   - This URL may be changed at a later date
+  - If debug is off, you will need staticfiles served or will see a blank page.
 
 # If in production environment
 

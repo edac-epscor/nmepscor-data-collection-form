@@ -43,7 +43,7 @@ epscorForm.factory('SubmissionService',
             create: function(form, callback) {
                 $http({
                     method: 'POST',
-                    url: '/builder/submissions/new',
+                    url: 'submissions/new',
                     data: form
                 }).success(function(data, status, headers, config) {
                     console.log("Server created/updated document");
@@ -56,7 +56,7 @@ epscorForm.factory('SubmissionService',
             list: function(username, callback) {
                 return $http({
                     method: 'POST',
-                    url: '/builder/submissions/list',
+                    url: 'submissions/list',
                     data: {
                         'username' : username
                     }
@@ -73,7 +73,7 @@ epscorForm.factory('SubmissionService',
             update: function(form, callback) {
                 $http({
                     method: 'POST',
-                    url: '/builder/submissions/update',
+                    url: 'submissions/update',
                     data: form
                 }).success(function(data, status, headers, config) {
                     console.log("Server updated document");
@@ -103,7 +103,7 @@ epscorForm.factory('SubmissionService',
                 // Mark the form as immutable
                 $http({
                     method: 'POST',
-                    url: '/builder/submissions/finalize',
+                    url: 'submissions/finalize',
                     data: {'id' : ID}
                 }).success(function(data, status, headers, config) {
                     console.log("Server finalized document");
