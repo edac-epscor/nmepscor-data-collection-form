@@ -1,10 +1,13 @@
 #   Utility functions
 
 from django.conf import settings
+from django.http import HttpResponse
 from django import forms
 import requests
+import json
 
 import logging
+
 log = logging.getLogger(__name__)
 
 from django.utils import formats
@@ -160,3 +163,28 @@ def datetime2Human(dt):
     """
 
     return formats.date_format(dt.astimezone(DENVER), 'DATETIME_FORMAT')
+
+
+def invalidLogin(request, message):
+    """
+    Given a request, generate a response to the AuthService saying
+    "Log them out, this is bad"
+
+    Side effects:  logout, invalidate login cookie
+    """
+    # Invalid
+    log.info(' ' * 5 + 'Form failed basic input sanitization (invalid)')
+    # Too short
+    toRet = {
+        'status': False,
+        'msg': message
+    }
+
+    result = HttpResponse(
+        json.dumps(toRet),
+        content_type='application/json'
+    )
+
+    # Set cookie
+    deAuth(request, result)
+    return result

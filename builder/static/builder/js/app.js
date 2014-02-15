@@ -278,7 +278,9 @@ epscorForm.run(function (
         $rootScope.failNotifier = new NotificationManager($rootScope);
 
         if ( $rootScope.authService.numFails() > 0) {
-            $rootScope.failNotifier.notify('error', 'Failed Login');
+            $rootScope.failNotifier.notify('error', 'Failed Login: ' + 
+                $rootScope.authService.failMsg()
+            );
         }
 
     }, true);
@@ -297,5 +299,4 @@ epscorForm.run(function (
             }
         }
     );
-
 });

@@ -25,6 +25,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.http import HttpResponse
 from django.utils.html import strip_tags
+from django.forms import ValidationError
 
 from models import metadataModel
 from decorators import sessionAuthed
@@ -240,61 +241,55 @@ def authDrupal(request):
     """
     log.info('Authentication attempt')
 
-    success = False   # Is the user authorized
-
-    if request.method == "POST":
-        submitted = json.loads(request.body)
-        log.debug(' ' * 5 + 'Posted : %s' % str(submitted))
-
-        # Strip out any extras
-        PAYLOAD = {
-            "username": submitted['username'],
-            "password": submitted['password']
-        }
-
-        toRet = None
-
-        #  Proxy up
-        if util.validateLogin(**PAYLOAD):
-            # Just makes sure basic params are there
-            log.info(' ' * 5 + 'Valid form submitted')
-            # Proxy D7
-            success, drupalResponse = util.remoteAuthenticate(**PAYLOAD)
-            if success:
-                log.info(' ' * 5 + 'User Authenticated')
-                soup = BeautifulSoup(drupalResponse.text)
-                name = soup.title.text.split('|')[0].strip()
-                log.info(' ' * 5 + 'Grabbed name: %s' % name)
-                toRet = {
-                    'status': True,
-                    'msg': 'Welcome, %s' % strip_tags(name)
-                }
-            else:
-                log.info(' ' * 5 + 'User Failed to Authenticate')
-                # Can we relay the server msg ?  No, the drupal site has no
-                # messaging and just sends me right back to /user/login
-                toRet = {
-                    'status': False,
-                    'msg': 'Authentication failure for %s' %
-                    strip_tags(submitted['username'])
-                }
-
-            result = HttpResponse(
-                json.dumps(toRet),
-                content_type='application/json'
-            )
-
-            if success:
-                util.authUser(request, result, PAYLOAD['username'])
-            else:
-                # Don't sign in and muck if you already are.
-                util.deAuth(request, result)
-
-            return result
-
-        else:
-            # Exception should have already happened.
-            raise
-    else:
+    # Get request only
+    if request.method != "POST":
         log.error(' ' * 5 + 'By GET')
         raise Exception('this should only be posted to.')
+
+    submitted = json.loads(request.body)
+    #log.debug(' ' * 5 + 'Posted : %s' % str(submitted))
+
+    # Strip out any extra params
+    PAYLOAD = {
+        "username": submitted['username'],
+        "password": submitted['password']
+    }
+
+    #  Proxy up
+    try:
+        validForm = util.validateLogin(**PAYLOAD)
+    except ValidationError, v:
+        return util.invalidLogin(request, v.message)
+
+    if not validForm:
+        # Caution, in case API ever changes
+        return util.invalidLogin(request,
+            'Invalid Login or Password')
+
+    log.info(' ' * 5 + 'Valid form submitted')
+
+    # Proxy D7 to see if we're authorized
+    authenticated, drupalResponse = util.remoteAuthenticate(**PAYLOAD)
+    if not authenticated:
+        log.info(' ' * 5 + 'User Failed to Authenticate')
+        return util.invalidLogin(
+            request,
+            'Authentication failure for %s' % strip_tags(submitted['username'])
+        )
+
+    # Good to go
+    log.info(' ' * 5 + 'User Authenticated')
+    soup = BeautifulSoup(drupalResponse.text)
+    name = soup.title.text.split('|')[0].strip()
+    log.info(' ' * 5 + 'Grabbed name: %s' % name)
+    toRet = {
+        'status': True,
+        'msg': 'Welcome, %s' % strip_tags(name)
+    }
+    result = HttpResponse(
+        json.dumps(toRet),
+        content_type='application/json'
+    )
+
+    util.authUser(request, result, PAYLOAD['username'])
+    return result

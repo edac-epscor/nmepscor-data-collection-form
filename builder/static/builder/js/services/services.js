@@ -125,6 +125,7 @@ epscorForm.factory('AuthService',
 
         var currentUser = null;
         var loginMsg = null;
+        var failMsg = null;
         var numFailures = 0;
 
         // Write to this and django will 500
@@ -174,6 +175,7 @@ epscorForm.factory('AuthService',
                         // Previous modal is not yet dismissed!
                     } else {
                         // Notify ?  How...
+                        failMsg = data.msg;
                         numFailures = numFailures +1;
                         $rootScope.authorized = false;  // already false
                     }
@@ -181,6 +183,9 @@ epscorForm.factory('AuthService',
                 })
                 .error(function(data, status, headers, config) {
                     console.log("Failed log in as " + name);
+                    failMsg = data.msg;
+                    numFailures = numFailures +1;
+                    $rootScope.authorized = false;  // already false
                 });
 
                initialState = false;
@@ -202,6 +207,9 @@ epscorForm.factory('AuthService',
             },
             currentUser:function () {
                 return currentUser;
+            },
+            failMsg:function() {
+                return failMsg;
             },
             loginMsg:function() {
                 return loginMsg;
