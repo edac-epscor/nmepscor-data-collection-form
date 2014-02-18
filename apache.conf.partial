@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+# Place below inside your vhost section
+
+    # Bind builder/static to staticfiles
+    Alias /builder/static /home/vagrant/testsite/nmepscor-data-collection-form/staticfiles
+    AllowEncodedSlashes On
+
+    # Don't forget to fix your python path... 
+    WSGIDaemonProcess builder_com user=www-data group=www-data processes=1 threads=1 deadlock-timeout=60 display-name=builder \
+       python-path=/home/vagrant/testsite/nmepscor-data-collection-form/:/home/vagrant/testsite/:/home/vagrant/testsite/lib/python2.7/site-packages/
+    WSGIProcessGroup builder_com
+
+    WSGIScriptAlias /builder /home/vagrant/testsite/nmepscor-data-collection-form/wsgi.py
+    # The below works way easier and more generally, but won't root into a subdirectory
+    #WSGIScriptAlias / /home/vagrant/testsite/nmepscor-data-collection-form/wsgi.py 
+
+    WSGIApplicationGroup builder_com
+    WSGIPassAuthorization On
+
+    <Directory /home/vagrant/testsite/nmepscor-data-collection-form/>
+        <Files wsgi.py>
+            Order deny,allow
+            Allow from all
+        </Files>
+    </Directory>
+
+<VirtualHost>
