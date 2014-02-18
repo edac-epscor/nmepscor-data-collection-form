@@ -43,7 +43,7 @@ epscorForm.factory('SubmissionService',
             create: function(form, callback) {
                 $http({
                     method: 'POST',
-                    url: 'submissions/new',
+                    url: '/builder/submissions/new',
                     data: form
                 }).success(function(data, status, headers, config) {
                     console.log("Server created/updated document");
@@ -56,7 +56,7 @@ epscorForm.factory('SubmissionService',
             list: function(username, callback) {
                 return $http({
                     method: 'POST',
-                    url: 'submissions/list',
+                    url: '/builder/submissions/list',
                     data: {
                         'username' : username
                     }
@@ -73,7 +73,7 @@ epscorForm.factory('SubmissionService',
             update: function(form, callback) {
                 $http({
                     method: 'POST',
-                    url: 'submissions/update',
+                    url: '/builder/submissions/update',
                     data: form
                 }).success(function(data, status, headers, config) {
                     console.log("Server updated document");
@@ -103,7 +103,7 @@ epscorForm.factory('SubmissionService',
                 // Mark the form as immutable
                 $http({
                     method: 'POST',
-                    url: 'submissions/finalize',
+                    url: '/builder/submissions/finalize',
                     data: {'id' : ID}
                 }).success(function(data, status, headers, config) {
                     console.log("Server finalized document");
@@ -122,6 +122,7 @@ epscorForm.factory('AuthService',
     function ($http, $cookies, $rootScope, $location) {
         // Using $cookieStore not seeming to work according to docs, could be
         // old version.  $cookies is an object...so
+        var PREFIX = '/builder/';
 
         var currentUser = null;
         var loginMsg = null;
@@ -159,7 +160,7 @@ epscorForm.factory('AuthService',
                 // Need CSRF header
                 console.log('cookies: + ' + $cookies.text);
                 $http.post(
-                    'signin',
+                    PREFIX + 'signin',
                     {
                         'username':  name,
                         'password':  password
@@ -196,7 +197,7 @@ epscorForm.factory('AuthService',
                 $rootScope.authorized = false;
 
                 $http.get(
-                    'logout'
+                    PREFIX + 'logout'
                 )
                 .success(function(data, status, headers, config) {
                     $location.path('/');
@@ -222,7 +223,7 @@ epscorForm.factory('AuthService',
             },
             keepalive: function() {
                 //console.log("KeepAlive request");
-                $http.get('keepAlive')
+                $http.get(PREFIX + 'keepAlive')
                 .success(function() {
                     console.log("KeepAlive request good");
                 })

@@ -47,7 +47,7 @@ INSTALLED_APPS = (
 
 if DEBUG:
     INSTALLED_APPS += (
-        'debug_toolbar',
+        #'debug_toolbar',  # Debug toolbar causes nasty wsgi/urls.py crashes
         'django.contrib.admindocs',
     )
 
@@ -108,7 +108,8 @@ SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/builder/static/'
+ADMIN_MEDIA_PREFIX = '/builder/static/admin'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ###########

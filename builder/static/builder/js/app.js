@@ -24,51 +24,55 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
     // TODO use html5 *no hash) where possible
     // $locationProvider.html5Mode(true);
+    var ROUTE_PREFIX = '/builder/static/builder';  // abs deploy
+    var PARTIALS = ROUTE_PREFIX + '/partials';  // abs deploy
+    var STEPS = PARTIALS + '/steps';  // abs deploy
+    //var ROUTE_PREFIX = 'static/builder;  // relative
 
     // App Exploratory Routes
     $routeProvider.when('/', {
-        templateUrl:'static/builder/partials/home.html',
+        templateUrl: PARTIALS + '/home.html',
         controller:'homeController'
     });
     $routeProvider.when('/contact', {
-        templateUrl:'static/builder/partials/contact.html'
+        templateUrl: PARTIALS + '/contact.html'
     });
     $routeProvider.when('/about', {
-        templateUrl:'static/builder/partials/about.html'
+        templateUrl: PARTIALS + '/about.html'
     });
     $routeProvider.when('/faq', {
-        templateUrl:'static/builder/partials/faq.html'
+        templateUrl: PARTIALS + '/faq.html'
     });
 
 
     // Form Routes
     $routeProvider.when('/loadForm/:subID', {
-        templateUrl:'static/builder/partials/steps/step0.html',
+        templateUrl: STEPS + '/step0.html',
         controller:'loadController'
     });
 
     $routeProvider.when('/step0', {
-        templateUrl:'static/builder/partials/steps/step0.html',
+        templateUrl: STEPS + '/step0.html',
         controller: 'submissionsController'
     });
 
     $routeProvider.when('/step1', {
-        templateUrl:'static/builder/partials/steps/step1.html',
+        templateUrl: STEPS + '/step1.html',
         controller: 's1Form'
     });
 
     $routeProvider.when('/step2', {
-        templateUrl:'static/builder/partials/steps/step2.html',
+        templateUrl: STEPS + '/step2.html',
         controller: 's2Form'
     });
 
     $routeProvider.when('/step3', {
-        templateUrl:'static/builder/partials/steps/step3_for_all_ds.html',
+        templateUrl: STEPS + '/step3_for_all_ds.html',
         controller: 's3Form'
     });
 
     $routeProvider.when('/step4', {
-        templateUrl:'static/builder/partials/steps/step4_tagging.html',
+        templateUrl: STEPS + '/step4_tagging.html',
         controller: 's4Form'
     });
 
@@ -77,37 +81,37 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
 
     $routeProvider.when('/descSites', {
-        templateUrl:'static/builder/partials/steps/descSites.html',
+        templateUrl: STEPS + '/descSites.html',
         controller: 'siteForm'
     });
 
     $routeProvider.when('/descWorkflow', {
-        templateUrl:'static/builder/partials/steps/descWorkflow.html',
+        templateUrl: STEPS + '/descWorkflow.html',
         controller: 'workflowForm'
     });
 
     $routeProvider.when('/descAttributes', {
-        templateUrl:'static/builder/partials/steps/descAttributes.html',
+        templateUrl: STEPS + '/descAttributes.html',
         controller: 'attributeForm'
     });
 
     $routeProvider.when('/timeInfo', {
-        templateUrl:'static/builder/partials/steps/timeInfo.html',
+        templateUrl: STEPS + '/timeInfo.html',
         controller: 'timeForm'
     });
 
     $routeProvider.when('/embargo', {
-        templateUrl:'static/builder/partials/steps/embargo.html',
+        templateUrl: STEPS + '/embargo.html',
         controller: 'embargoForm'
     });
 
     $routeProvider.when('/publish', {
-        templateUrl:'static/builder/partials/steps/publish.html',
+        templateUrl: STEPS + '/publish.html',
         controller: 'publishForm'
     });
 
     $routeProvider.when('/dumpData', {
-        templateUrl:'static/builder/partials/steps/dumpData.html',
+        templateUrl: STEPS + '/dumpData.html',
         controller: 'longForm'
     });
 
@@ -153,13 +157,13 @@ epscorForm.run(function (
  
     // async load constants
     $rootScope.constants = [];
-    $rootScope.restService.get('static/builder/data/constants.json', function (data) {
+    $rootScope.restService.get('/builder/static/builder/data/constants.json', function (data) {
         $rootScope.constants = data[0];
     });
 
     $rootScope.blankForm = {};
     $rootScope.formData = {};
-    $rootScope.restService.get('static/builder/mock_json/blankForm.json', function(data){
+    $rootScope.restService.get('/builder/static/builder/mock_json/blankForm.json', function(data){
         // blankform holds the uninitialized to full-reset to.
         // formData holds the copy that persists between ng pages.
         $rootScope.blankForm = data;
