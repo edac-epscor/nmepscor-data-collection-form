@@ -6,7 +6,7 @@
     AllowEncodedSlashes On
 
     # Don't forget to fix your python path... 
-    WSGIDaemonProcess builder_com user=www-data group=www-data processes=1 threads=1 deadlock-timeout=60 display-name=builder \
+    WSGIDaemonProcess %{GLOBAL} user=www-data group=www-data processes=1 threads=1 deadlock-timeout=60 display-name=builder \
        python-path=/home/vagrant/testsite/nmepscor-data-collection-form/:/home/vagrant/testsite/:/home/vagrant/testsite/lib/python2.7/site-packages/
     WSGIProcessGroup builder_com
 
@@ -14,7 +14,7 @@
     # The below works way easier and more generally, but won't root into a subdirectory
     #WSGIScriptAlias / /home/vagrant/testsite/nmepscor-data-collection-form/wsgi.py 
 
-    WSGIApplicationGroup builder_com
+    WSGIApplicationGroup %{GLOBAL}
     WSGIPassAuthorization On
 
     <Directory /home/vagrant/testsite/nmepscor-data-collection-form/>
