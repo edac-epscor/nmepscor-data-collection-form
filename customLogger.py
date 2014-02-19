@@ -157,6 +157,12 @@ def getLogDictSchema(stripColors=False):
                 'propagate': True,
                 'level': 'WARN'
             },
+            # django only logs msg
+            'django.request': {
+                'handlers': ['badLog'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
         },
     }
     return configDS
