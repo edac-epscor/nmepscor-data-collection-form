@@ -166,6 +166,8 @@ information you’d include on a poster or when discussing a poster.
 
             <div class="col-sm-8">
             <!-- We follow with time info, attributes, or embargo -->
+              <reset-button></reset-button>
+              <quit-button></quit-button>
               
               <span ng-switch on=formData.DESCRIBE.choice>
                 <!-- just field collection goes to desc sites, all else to workflow -->
@@ -195,10 +197,6 @@ information you’d include on a poster or when discussing a poster.
                   ng-disabled="form_workflow.$invalid"
                 >Next Step</button>
               </span>
-              
-              <reset-button></reset-button>
-              <quit-button></quit-button>
-
             </div>
 
           </div>

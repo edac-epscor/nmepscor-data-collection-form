@@ -140,18 +140,14 @@
         
 
         <div class="row">
-        <!-- We always follow with step 2; files to document -->
-        <a class="btn btn-primary" ng-click="nextStep(formData, '/step3')"
-          ng-disabled="fileform.$invalid || fileform.$visible"
-          >Next Step
-        </a>
-
-        <!--
-          <a class="btn btn-danger" ng-click="reset()" tooltip="Behave as if you just entered this page">Reset this step</a>
-          -->
           <reset-button></reset-button>
+          <quit-button></quit-button>
 
-          <quit-button> <quit-button />
+          <!-- We always follow with step 2; files to document -->
+          <a class="btn btn-primary" ng-click="nextStep(formData, '/step3')"
+            ng-disabled="fileform.$invalid || fileform.$visible"
+            >Next Step
+          </a>
         </div>
       </div>
     </div> 

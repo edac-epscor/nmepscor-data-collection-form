@@ -71,8 +71,9 @@
 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <!-- Will need a switch here to capture describe attributes in next form -->
+                      <reset-button></reset-button>
 
+                      <!-- Will need a switch here to capture describe attributes in next form -->
                       <span ng-switch on=formData.DESCRIBE.choice>
                         <!-- just field collection goes to desc sites, all else to workflow -->
                         <button ng-switch-when="fieldcollection" class="btn btn-default" 
@@ -86,7 +87,6 @@
                         </button>
                       </span>
 
-                      <reset-button></reset-button>
                     </div>
                 </div>
               </form>

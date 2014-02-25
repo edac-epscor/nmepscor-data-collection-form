@@ -88,14 +88,10 @@ as Excel or or some other spreadsheet format.">2D/3D matrices***</a>,
 
         <div class="row">
         <!-- We always follow with step 2; files to document -->
-        <a class="btn btn-primary" ng-click="newDocument()"
-          ng-disabled="form_step1.$invalid"
-          >Create</a>
-          <a class="btn btn-danger" ng-click="reset()" tooltip="Behave as if you just entered this page">Reset this step</a>
-          <!--
-          <a class="btn btn-danger" href="#/quit" tooltip="Save my work, I'm done for now">Quit</a>
-             Not until they've done something
-          -->
+        <a class="btn btn-danger" ng-click="reset()" tooltip="Behave as if you just entered this page">Reset this step</a>
+
+        <a class="btn btn-primary" ng-click="newDocument()" ng-disabled="form_step1.$invalid" >Create</a>
+
         </div>
       </form>
     </div>
