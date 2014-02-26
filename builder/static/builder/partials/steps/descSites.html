@@ -113,17 +113,17 @@
                 <label for="addSiteElevation">Elevation</label>
                 <input type="text" id="addSiteElevation" ng-model="newSite.geometry.coordinates[2]" maxlength="50" size="50" />
 
-                <button class="btn btn-primary" ng-click="addSite()">Add This Site</button>
                 <button class="btn btn-danger" ng-click="cancelAddSite()"> Cancel</button>
+                <button class="btn btn-primary" ng-click="addSite()">Add This Site</button>
             </form>
           </div>
         </div>
 
         <div class="row">
         <!-- Always Onto Workflow -->
-          <a class="btn btn-primary" ng-click="nextStep(formData, '/descWorkflow')">Next Step</a>
           <reset-button></reset-button>
           <quit-button></quit-button>
+          <a class="btn btn-primary" ng-click="nextStep(formData, '/descWorkflow')">Next Step</a>
         </div>
       </div>
     </div> 
