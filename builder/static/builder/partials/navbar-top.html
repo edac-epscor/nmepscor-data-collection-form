@@ -29,15 +29,15 @@
                   Create New Collection, no hotkey
                   <li><a href="#/step1">Step 1</a></li>
                   -->
-                  <li><a href="#/step2">Step 2: Files To Document</a></li>
-                  <li><a href="#/step3">Step 3: Abstract/Purpose</a></li>
-                  <li><a href="#/step4">Step 4: Tagging</a></li>
-                  <li><a href="#/descSites">Step ?: Describe Sites</a></li>
-                  <li><a href="#/descWorkflow">Step ?: Describe Workflow</a></li>
-                  <li><a href="#/descAttributes">Step ?: Describe Attributes</a></li>
-                  <li><a href="#/timeInfo">Step ?: Time Information</a></li>
-                  <li><a href="#/embargo">Step ?: Embargo Requests</a></li>
-                  <li><a href="#/publish">Final Step: Submit Collection</a></li>
+                  <li><a ng-show="formData.META.id" href="#/step2">Step 2: Files To Document</a></li>
+                  <li><a ng-show="formData.META.id" href="#/step3">Step 3: Abstract/Purpose</a></li>
+                  <li><a ng-show="formData.META.id" href="#/step4">Step 4: Tagging</a></li>
+                  <li><a ng-show="formData.META.id" href="#/descSites">Step ?: Describe Sites</a></li>
+                  <li><a ng-show="formData.META.id" href="#/descWorkflow">Step ?: Describe Workflow</a></li>
+                  <li><a ng-show="formData.META.id" href="#/descAttributes">Step ?: Describe Attributes</a></li>
+                  <li><a ng-show="formData.META.id" href="#/timeInfo">Step ?: Time Information</a></li>
+                  <li><a ng-show="formData.META.id" href="#/embargo">Step ?: Embargo Requests</a></li>
+                  <li><a ng-show="formData.META.id" href="#/publish">Final Step: Submit Collection</a></li>
                 </ul>
             </li>
         </ul>
