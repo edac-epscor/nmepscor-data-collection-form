@@ -69,11 +69,11 @@
         <!-- Will need a switch here to capture describe attributes in next form -->
         <span ng-switch on=formData.DESCRIBE.choice>
           <!-- just field collection goes to desc sites, all else to workflow -->
-          <button ng-switch-when="fieldcollection" class="btn btn-default" 
+          <button ng-switch-when="fieldcollection" class="btn btn-primary" 
             ng-click="nextStep(formData, '/descSites')"
             ng-disabled="step4_form.$invalid"
           >Next Step</button>
-          <button ng-switch-default class="btn btn-default" 
+          <button ng-switch-default class="btn btn-primary" 
             ng-click="nextStep(formData, '/descWorkflow')"
             ng-disabled="step4_form.$invalid"
           >Next Step

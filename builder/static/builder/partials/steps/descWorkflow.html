@@ -176,28 +176,28 @@ foatn u’d include on a poster or when discussing a poster.
           
           <span ng-switch on=formData.DESCRIBE.choice>
             <!-- just field collection goes to desc sites, all else to workflow -->
-            <button ng-switch-when="basic" class="btn btn-default" 
+            <button ng-switch-when="basic" class="btn btn-primary" 
               ng-click="nextStep(formData, '/embargo')"
               ng-disabled="form_workflow.$invalid"
             >Next Step</button>
 
-            <button ng-switch-when="table" class="btn btn-default" 
+            <button ng-switch-when="table" class="btn btn-primary" 
               ng-click="nextStep(formData, '/descAttributes')"
               ng-disabled="form_workflow.$invalid"
             >Next Step</button>
 
-            <button ng-switch-when="fieldcollection" class="btn btn-default" 
+            <button ng-switch-when="fieldcollection" class="btn btn-primary" 
               ng-click="nextStep(formData, '/timeInfo')"
               ng-disabled="form_workflow.$invalid"
             >Next Step</button>
 
-            <button ng-switch-when="rastermodel" class="btn btn-default" 
+            <button ng-switch-when="rastermodel" class="btn btn-primary" 
               ng-click="nextStep(formData, '/timeInfo')"
               ng-disabled="form_workflow.$invalid"
             >Next Step</button>
 
             <!-- invalid should not happen -->
-            <button ng-switch-default class="btn btn-default" 
+            <button ng-switch-default class="btn btn-primary" 
               ng-click="nextStep(formData, '/404')"
               ng-disabled="form_workflow.$invalid"
             >Next Step</button>
