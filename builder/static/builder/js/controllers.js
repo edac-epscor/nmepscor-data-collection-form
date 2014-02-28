@@ -302,7 +302,6 @@
             "gridded"
         ];
 
-
         var attributeFormConfig = {
             "tabular": [
                 {"value": null, "name": "field", "label": "Field"},
@@ -334,6 +333,9 @@
 
         $scope.changeTableType = function(typ) {
             $scope.tableInfo = attributeFormConfig[$scope.formData.ATTRIBUTES.typeSelected];
+            $scope.recordList = $rootScope.formData.ATTRIBUTES.userTable[
+                $scope.formData.ATTRIBUTES.typeSelected
+            ];
         };
 
         // Blank Row
@@ -348,6 +350,10 @@
             ];
 
             $scope.recordList.push($scope.inserted);
+        };
+
+        $scope.saveTable= function() {
+            $rootScope.save($rootScope.formData); // Changes pushed to server on mini save
         };
 
         // User is irrecovably committed to this combination
@@ -385,7 +391,7 @@
     });
 
 
-  epscorForm.controller('timeForm', function timeForm($rootScope, $scope, $location) {
+    epscorForm.controller('timeForm', function timeForm($rootScope, $scope, $location) {
 
         $scope.TIMEZONES = [
             'Mountain',
