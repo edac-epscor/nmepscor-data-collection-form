@@ -1,0 +1,17 @@
+Django==1.6.1
+argparse==1.2.1
+beautifulsoup4==4.3.2
+colorlog==2.0.0
+distribute==0.6.24
+django-annoying==0.7.9
+django-bower==4.8.1
+django-debug-toolbar==1.0.1
+django-jsonfield==0.9.12
+docutils==0.11
+ipython==1.1.0
+pytz==2013.9
+requests==2.2.0
+six==1.6.1
+sqlparse==0.1.10
+wsgiref==0.1.2
+yolk==0.4.3

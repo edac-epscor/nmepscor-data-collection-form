@@ -42,17 +42,15 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'builder/css/app.css' %}"/>
 
+    <!--
     <script src="{% static 'builder/js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
+    -->
+    <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'respond/respond.min.js' %}"></script>
 
 </head>
 
 <body ng-app="epscorForm">
-
-<!--[if lt IE 7]>
-<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade
-    your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
-    improve your experience.</p>
-<![endif]-->
 
 <!-- bootstrap navbar -->
 <div ng-include="'{% static 'builder/partials/navbar-top.html' %}'"></div>
@@ -69,28 +67,29 @@
 <!-- footer -->
 <div ng-include="'{% static 'builder/partials/navbar-bottom.html' %}'"></div>
 
-<!--
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script>window.jQuery || document.write('<script src="//code.jquery.com/jquery-1.10.2.min.js"><\/script>')</script>
--->
+<script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
-  window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"><\/script>')
-</script>
-
-<!-- TODO localize -->
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static 'jqueryui/ui/jquery-ui.js' %}"></script>
 
 <!-- <script src="//angular-ui.github.com/lib/bootstrap/docs/assets/js/bootstrap.min.js"></script> -->
 <script src="{% static 'builder/js/vendor/bootstrap/bootstrap.min.js' %}"></script>
 
+<!--
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-cookies.min.js"></script>
+-->
+<script type="text/javascript" src="{% static 'angular/angular.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular-cookies/angular-cookies.min.js' %}"></script>
 
+<!--
 <script src="{% static 'builder/js/vendor/angularui/angular-ui.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'angular-ui/build/angular-ui.min.js' %}"></script>
 
+<script type="text/javascript" src="{% static 'ng-grid/ng-grid-2.0.3.min.js' %}"></script>
+<!--
 <script src="{% static 'builder/js/vendor/ng-grid/ng-grid.js' %}"></script>
+-->
 
 <!-- TODO needed?  Then localize... -->
 <!-- update me, 1 yr old -->
@@ -98,7 +97,10 @@
 <script src="//angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>
 Do we need to clone the rest of this too?
 -->
+<!--
 <script src="{% static 'builder/js/vendor/angularui/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js' %}"></script>
 
 <!-- for ui notifications -->
 <script src="{% static 'builder/js/notificationManager.js' %}"></script>
@@ -107,26 +109,32 @@ Do we need to clone the rest of this too?
 <!-- TODO localize -->
 <!--
 <script src="http://code.angularjs.org/1.0.1/angular-sanitize-1.0.1.js"></script>
--->
 <script src="{% static 'builder/js/vendor/angular/angular-sanitize-1.0.1.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'angular-sanitize/angular-sanitize.min.js' %}"></script>
 
 <!-- angular strap -->
+<!--
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+-->
+<script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
 
 <!-- ACE Editor -->
 <!-- TODO install via NPM or bring src locally -->
 
 <!--
 <script src="https://rawgithub.com/ajaxorg/ace-builds/v1.1.1/src-min-noconflict/ace.js"></script>
--->
 <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"></script>
+-->
+<script type="text/javascript" src="{% static 'ace-builds/src-min/ace.js' %}"></script>
 
 <!--
 <script src="http://angular-ui.github.io/ui-ace/build/ui-ace.js"></script>
 died over winter break.  Probably not needed in this app ultimately.
 <script src="http://angular-ui.github.io/ui-ace/dist/ui-ace.min.js"></script>
--->
 <script src="{% static 'builder/js/vendor/angular-ui-ace/ui-ace.min.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'angular-ui-ace/ui-ace.min.js' %}"></script>
 
 
 <!-- <script src="https://raw.github.com/ajaxorg/ace-builds/master/src/theme-xcode.js"></script> -->
@@ -135,11 +143,18 @@ died over winter break.  Probably not needed in this app ultimately.
 
 <!-- TODO needed? -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js"></script>
+
+<!--
 <script src="{% static 'builder/js/vendor/angularstrap/angular-strap.min.js' %}"></script>
 <script src="{% static 'builder/js/vendor/angularstrap/bootstrap-datepicker.js' %}"></script>
 <script src="{% static 'builder/js/vendor/angularstrap/bootstrap-timepicker.js' %}"></script>
-
 <script src="{% static 'builder/js/vendor/angular-xeditable/xeditable.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'angular-strap/dist/angular-strap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap-timepicker/js/bootstrap-timepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular-xeditable/dist/js/xeditable.min.js' %}"></script>
+
 
 <!--  TODO compile/optimise these during build -->
 <script src="{% static 'builder/js/app.js' %}"></script>
@@ -158,10 +173,14 @@ died over winter break.  Probably not needed in this app ultimately.
 <!-- example area for ui elements (non-production) -->
 <script src="{% static 'builder/playground/playground.js' %}"></script>
 
+<!--
 <script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/jquery.noty.js' %}"></script>
-
 <script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/layouts/bottomRight.js' %}"></script>
+-->
+<script type="text/javascript" src="{% static 'noty/js/noty/jquery.noty.js' %}"></script>
+<script type="text/javascript" src="{% static 'noty/js/noty/layouts/bottomRight.js' %}"></script>
 
+<!-- from... wheres? -->
 <script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/themes/nucleus.js' %}"></script>
 
 </body>

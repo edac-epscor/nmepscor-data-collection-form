@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sessions',
+    'djangobower',
     'builder',
 )
 
@@ -108,12 +109,56 @@ SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/builder/static/'
-ADMIN_MEDIA_PREFIX = '/builder/static/admin'
+WEB_ROOT = '/builder'  # If deploy in '/', '' if in /builder, '/builder'
+
+# Web (can't use urlparse.urljoin...)
+STATIC_URL = "{0}/static/".format(WEB_ROOT)
+ADMIN_MEDIA_PREFIX = "{0}admin".format(STATIC_URL)
+
+# System
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_FINDERS = tuple(
+    list(DEFAULT_SETTINGS.STATICFILES_FINDERS) +
+    ['djangobower.finders.BowerFinder'],
+)
 
 ###########
 # LOGGING #
 ###########
 
 LOGGING = getLogDictSchema(stripColors=not DEBUG)
+
+############
+# BOWER/JS #
+############
+
+BOWER_COMPONENTS_ROOT = os.path.join(
+    BASE_DIR, 'components'
+)
+
+BOWER_INSTALLED_APPS = (
+    'jquery#1.10.2',
+    'jqueryui#1.9.2',
+    'modernizr#2.6.2',
+    'respond#1.1.0',
+    'angular#1.0.8',
+    'angular-cookies#1.0.8',
+    'angular-ui#0.4.0',
+    # my ngr-grid was pre 2.0.3
+    'ng-grid#2.0.3',
+    #'angular-ui-bootstrap#0.1.0',  # Wrong formatting for tpls build ?
+    'angular-ui-bootstrap-bower#0.1.0',  # 2xcheck
+    #'angular-sanitize#1.0.1',  # Not in version list...
+    'angular-sanitize#1.0.8',  # upgraded
+    'underscore#1.4.4',  # upgraded
+    'ace-builds#1.1.1',  # we were cdnjs 1.1.01
+    'angular-ui-ace#0.1.0',  # upgraded
+    #'google-code-prettify',  # the bower finds are...weird...sticking with
+    #  cdnjs right now
+    'bootstrap#3.0.0',
+    'angular-strap#0.7.5',  # choose 3.0.0 in bower
+    'angular-xeditable#0.1.7',  # choose 3.0.0 in bower
+    'noty#2.1.0',  # choose 3.0.0 in bower
+    # somewhere the nucleus theme came into existence
+)
