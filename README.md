@@ -47,6 +47,8 @@ that can auth to the nm epscor portal
 # Next Steps
 
 ***
+* Finish bowerizing CSS which has minor mismatch in versions.
+  - Unpin versions and move closer to trunks/stable
 * EMail
 * Content/Dialog Updates
 * Some way to obtain PI and/or account relationships
@@ -81,6 +83,7 @@ that can auth to the nm epscor portal
 ***
 * See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
   - Be sure debug is False
+* python manage.py bower_install (Gather proper JS versions, choose bootstrap 3.0.0)
 * python manage.py collectstatic (collect static files for serving outside of wsgi)
   - Add the folder this creates as an apache served folder
 * I believe this entire app is now 'rooted' within whatever folder it lies in
