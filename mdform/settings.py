@@ -134,7 +134,7 @@ LOGGING = getLogDictSchema(stripColors=not DEBUG)
 ############
 
 BOWER_COMPONENTS_ROOT = os.path.join(
-    BASE_DIR, 'components'
+    BASE_DIR, 'vendor_components'
 )
 
 BOWER_INSTALLED_APPS = (
