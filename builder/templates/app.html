@@ -25,26 +25,18 @@
         }
     </style>
 
-    <link rel="stylesheet" href="{% static 'builder/css/vendor/bootstrap/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
-
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+    <!--
     <link rel="stylesheet" href="{% static 'builder/css/vendor/ng-grid/ng-grid.css' %}">
+    -->
+    <link rel="stylesheet" href="{% static 'ng-grid/ng-grid.css' %}">
 
-    <!-- TODO needed? -->
-    <link href="{% static 'builder/css/vendor/angularstrap/styles.css' %}" rel="stylesheet">
-
-    <link rel="stylesheet" href="{% static 'builder/css/vendor/angularstrap/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'builder/css/vendor/angularstrap/bootstrap-timepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'builder/css/vendor/angular-xeditable/xeditable.css' %}"/>
-
-    <!-- <link rel="stylesheet" href="css/vendor/animate/animate.css"> -->
+    <link rel="stylesheet" href="{% static 'angular-strap/vendor/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'angular-strap/vendor/bootstrap-timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'angular-xeditable/dist/css/xeditable.css' %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'builder/css/app.css' %}"/>
 
-    <!--
-    <script src="{% static 'builder/js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
-    -->
     <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
     <script type="text/javascript" src="{% static 'respond/respond.min.js' %}"></script>
 
@@ -91,26 +83,11 @@
 <script src="{% static 'builder/js/vendor/ng-grid/ng-grid.js' %}"></script>
 -->
 
-<!-- TODO needed?  Then localize... -->
-<!-- update me, 1 yr old -->
-<!--
-<script src="//angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>
-Do we need to clone the rest of this too?
--->
-<!--
-<script src="{% static 'builder/js/vendor/angularui/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js' %}"></script>
--->
+
 <script type="text/javascript" src="{% static 'angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js' %}"></script>
 
 <!-- for ui notifications -->
-<script src="{% static 'builder/js/notificationManager.js' %}"></script>
-
-<!-- enables rendering of injected html -->
-<!-- TODO localize -->
-<!--
-<script src="http://code.angularjs.org/1.0.1/angular-sanitize-1.0.1.js"></script>
-<script src="{% static 'builder/js/vendor/angular/angular-sanitize-1.0.1.js' %}"></script>
--->
+<script type="text/javascript" src="{% static 'builder/js/notificationManager.js' %}"></script>
 <script type="text/javascript" src="{% static 'angular-sanitize/angular-sanitize.min.js' %}"></script>
 
 <!-- angular strap -->
@@ -120,20 +97,7 @@ Do we need to clone the rest of this too?
 <script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
 
 <!-- ACE Editor -->
-<!-- TODO install via NPM or bring src locally -->
-
-<!--
-<script src="https://rawgithub.com/ajaxorg/ace-builds/v1.1.1/src-min-noconflict/ace.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"></script>
--->
 <script type="text/javascript" src="{% static 'ace-builds/src-min/ace.js' %}"></script>
-
-<!--
-<script src="http://angular-ui.github.io/ui-ace/build/ui-ace.js"></script>
-died over winter break.  Probably not needed in this app ultimately.
-<script src="http://angular-ui.github.io/ui-ace/dist/ui-ace.min.js"></script>
-<script src="{% static 'builder/js/vendor/angular-ui-ace/ui-ace.min.js' %}"></script>
--->
 <script type="text/javascript" src="{% static 'angular-ui-ace/ui-ace.min.js' %}"></script>
 
 
@@ -144,12 +108,6 @@ died over winter break.  Probably not needed in this app ultimately.
 <!-- TODO needed? -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js"></script>
 
-<!--
-<script src="{% static 'builder/js/vendor/angularstrap/angular-strap.min.js' %}"></script>
-<script src="{% static 'builder/js/vendor/angularstrap/bootstrap-datepicker.js' %}"></script>
-<script src="{% static 'builder/js/vendor/angularstrap/bootstrap-timepicker.js' %}"></script>
-<script src="{% static 'builder/js/vendor/angular-xeditable/xeditable.js' %}"></script>
--->
 <script type="text/javascript" src="{% static 'angular-strap/dist/angular-strap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
 <script type="text/javascript" src="{% static 'bootstrap-timepicker/js/bootstrap-timepicker.min.js' %}"></script>
@@ -169,14 +127,9 @@ died over winter break.  Probably not needed in this app ultimately.
 <script src="{% static 'builder/js/directives/notifications/notyDirective.js' %}"></script>
 
 
-
 <!-- example area for ui elements (non-production) -->
 <script src="{% static 'builder/playground/playground.js' %}"></script>
 
-<!--
-<script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/jquery.noty.js' %}"></script>
-<script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/layouts/bottomRight.js' %}"></script>
--->
 <script type="text/javascript" src="{% static 'noty/js/noty/jquery.noty.js' %}"></script>
 <script type="text/javascript" src="{% static 'noty/js/noty/layouts/bottomRight.js' %}"></script>
 
