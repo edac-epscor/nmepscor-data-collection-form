@@ -140,25 +140,33 @@ BOWER_COMPONENTS_ROOT = os.path.join(
 BOWER_INSTALLED_APPS = (
     'jquery#1.10.2',
     'jqueryui#1.9.2',
+
     'modernizr#2.6.2',
     'respond#1.1.0',
-    'angular#1.0.8',
-    'angular-cookies#1.0.8',
+
+    #'angular#1.0.8',
+    #'angular-cookies#1.0.8',
+    #'angular-sanitize#1.0.8',  # upgraded
+    'angular#1.2.1',
+    'angular-cookies#1.2.1',
+    'angular-sanitize#1.2.1',  # upgraded
+    'angular-route#1.2.1',  # upgraded
+
+    'bootstrap#3.0.0',
+    'angular-ui-bootstrap-bower#0.1.0',  # 2xcheck
+
     'angular-ui#0.4.0',
     # my ngr-grid was pre 2.0.3
     'ng-grid#2.0.3',
     #'angular-ui-bootstrap#0.1.0',  # Wrong formatting for tpls build ?
-    'angular-ui-bootstrap-bower#0.1.0',  # 2xcheck
-    #'angular-sanitize#1.0.1',  # Not in version list...
-    'angular-sanitize#1.0.8',  # upgraded
-    'underscore#1.4.4',  # upgraded
-    'ace-builds#1.1.1',  # we were cdnjs 1.1.01
-    'angular-ui-ace#0.1.0',  # upgraded
-    #'google-code-prettify',  # the bower finds are...weird...sticking with
-    #  cdnjs right now
-    'bootstrap#3.0.0',
-    'angular-strap#0.7.5',  # choose 3.0.0 in bower
     'angular-xeditable#0.1.7',  # choose 3.0.0 in bower
+
+    'underscore#1.4.4',  # upgraded
+    #'ace-builds#1.1.1',  # we were cdnjs 1.1.01
+    #'angular-ui-ace#0.1.0',  # upgraded
+    #'google-code-prettify',  # the bower finds are...weird...sticking with cdnjs right now
+    'angular-strap#0.7.5',  # choose 3.0.0 in bower
+
     'noty#2.1.0',  # choose 3.0.0 in bower
     # somewhere the nucleus theme came into existence
 )

@@ -9,8 +9,9 @@ var epscorForm = angular.module('epscorForm',
         'ngGrid', // angular grid
         'ui', // angular ui
         'ngCookies', // cookie support
+        'ngRoute', // Route dependency
         'ngSanitize', // for html-bind in ckeditor
-        'ui.ace', // ace code editor
+        //'ui.ace', // ace code editor
         'ui.bootstrap', // jquery ui bootstrap
         '$strap.directives' // angular strap
     ]);
