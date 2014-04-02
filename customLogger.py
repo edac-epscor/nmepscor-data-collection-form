@@ -147,15 +147,22 @@ def getLogDictSchema(stripColors=False):
         },
         'loggers': {
             # in any module of app, call getlogger(__name__)
+            'nmepscor-data-collection-form': {
+                'handlers': ['console'],
+                'propagate': True,
+                'level': 'DEBUG'
+            },
             'mdform': {
                 'handlers': ['console'],
                 'propagate': True,
-                'level': 'WARN'
+                #'level': 'WARN'
+                'level': 'DEBUG'
             },
             'builder': {
                 'handlers': ['console'],
                 'propagate': True,
-                'level': 'WARN'
+                #'level': 'WARN'
+                'level': 'DEBUG'
             },
             # django only logs msg
             'django.request': {
