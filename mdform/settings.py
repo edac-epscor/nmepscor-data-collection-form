@@ -30,6 +30,13 @@ DEBUG = True
 #  Handy when performing updates in the console
 ADMIN_ENABLED = True
 
+
+AUTHENTICATION_BACKENDS = (
+    'builder.backends.DualAuthBackend',
+    # Do NOT add django.contrib.auth.backends.ModelBackend  !
+    #  It's built into above
+)
+
 TEMPLATE_DEBUG = True
 
 # Application definition
@@ -151,16 +158,18 @@ BOWER_INSTALLED_APPS = (
 
     'bootstrap#3.0.0',
     'angular-ui-bootstrap-bower#0.1.0',  # 2xcheck
+    #'angular-ui-bootstrap#0.1.0',  # Wrong formatting for tpls build ?
 
     'angular-ui#0.4.0',
-    # my ngr-grid was pre 2.0.3
     'ng-grid#2.0.3',
-    #'angular-ui-bootstrap#0.1.0',  # Wrong formatting for tpls build ?
+    # my ng-grid was pre 2.0.3
     'angular-xeditable#0.1.7',  # choose 3.0.0 in bower
 
     'underscore#1.4.4',  # upgraded
     #'google-code-prettify',  # the bower finds are...weird...sticking with cdnjs right now
     'angular-strap#0.7.5',  # choose 3.0.0 in bower
+        #  I depend on 2.x series, with datepicker and timepicker deps .
+        #  choking on bootstrap 3.0
 
     'noty#2.1.0',  # choose 3.0.0 in bower
     # somewhere the nucleus theme came into existence

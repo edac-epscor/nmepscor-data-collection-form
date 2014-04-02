@@ -4,7 +4,6 @@ from django.conf.urls import patterns, url
 
 
 urlpatterns = patterns('',
-    #url(r'^$', views.metadataIdx),
     url(r'^list$', views.listSubmissionsByUserId),
     url(r'^new$', views.newSubmission),
     url(r'^update$', views.updateSubmission),

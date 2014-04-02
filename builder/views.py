@@ -20,6 +20,9 @@ from django.shortcuts import render
 #from django.template.response import TemplateResponse
 #from django.template import RequestContext
 
+from django.contrib.auth import login, logout
+from django.contrib.auth import authenticate
+
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
@@ -34,7 +37,6 @@ import util
 from util import SESSION
 from util import datetime2Human
 
-from bs4 import BeautifulSoup
 from annoying.decorators import ajax_request
 
 import logging
@@ -184,10 +186,13 @@ def metadataIdx(request):
             os.path.dirname(__file__), 'templates', 'app.html'
         ),
         #  Sooner or later I'll probably want some context in this...
-        {
-            'context1': 'a',
-        }
+        #{
+        #    'context1': 'a',
+        #}
     )
+
+    # We will want this before login
+    request.session.set_test_cookie()
 
     if SESSION.AUTHENTICATED not in request.session:
         util.deAuth(request, reply)
@@ -234,11 +239,12 @@ def revalidate(request):
 @ajax_request
 def authDrupal(request):
     """
-    Authorize user, set log in cookie
+    Authorize user, set log in cookie.
 
     Returns json response, but we don't use the decorator so we can munge the
     httpresponse cookie
     """
+
     log.info('Authentication attempt')
 
     # Get request only
@@ -247,7 +253,6 @@ def authDrupal(request):
         raise Exception('this should only be posted to.')
 
     submitted = json.loads(request.body)
-    #log.debug(' ' * 5 + 'Posted : %s' % str(submitted))
 
     # Strip out any extra params
     PAYLOAD = {
@@ -255,41 +260,38 @@ def authDrupal(request):
         "password": submitted['password']
     }
 
-    #  Proxy up
+    user = authenticate(**PAYLOAD)
+
+    # Error messaging to client, repeats auth work
     try:
-        validForm = util.validateLogin(**PAYLOAD)
+        util.validateLogin(**PAYLOAD)
     except ValidationError, v:
         return util.invalidLogin(request, v.message)
 
-    if not validForm:
-        # Caution, in case API ever changes
-        return util.invalidLogin(request,
-            'Invalid Login or Password')
-
     log.info(' ' * 5 + 'Valid form submitted')
 
-    # Proxy D7 to see if we're authorized
-    authenticated, drupalResponse = util.remoteAuthenticate(**PAYLOAD)
-    if not authenticated:
-        log.info(' ' * 5 + 'User Failed to Authenticate')
-        return util.invalidLogin(
-            request,
-            'Authentication failure for %s' % strip_tags(submitted['username'])
+    if user is None:
+        log.info(' ' * 5 + 'User Failed to Authenticate, force logout period')
+        logout(request)
+        return util.invalidLogin(request, "Logging out")
+
+    if user.is_active:
+        log.info(' ' * 5 + 'User Authenticated')
+        login(request, user)  # User session made
+        toRet = {
+            'status': True,
+            'msg': 'Welcome, %(first)s %(last)s' % {
+                'first': user.first_name,
+                'last': user.last_name,
+            }
+        }
+        result = HttpResponse(
+            json.dumps(toRet),
+            content_type='application/json'
         )
+        util.authUser(request, result, PAYLOAD['username'])
+        return result
 
-    # Good to go
-    log.info(' ' * 5 + 'User Authenticated')
-    soup = BeautifulSoup(drupalResponse.text)
-    name = soup.title.text.split('|')[0].strip()
-    log.info(' ' * 5 + 'Grabbed name: %s' % name)
-    toRet = {
-        'status': True,
-        'msg': 'Welcome, %s' % strip_tags(name)
-    }
-    result = HttpResponse(
-        json.dumps(toRet),
-        content_type='application/json'
-    )
-
-    util.authUser(request, result, PAYLOAD['username'])
-    return result
+    else:
+        # Account disabled
+        return util.invalidLogin(request, "Your Account is Disabled")
