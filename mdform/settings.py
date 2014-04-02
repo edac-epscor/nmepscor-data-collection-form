@@ -149,8 +149,8 @@ if 'test' in sys.argv:
 
 NOSE_ARGS = [
     '--with-coverage',
-    #'--with-doctest',
-    '--cover-package=builder, mdform',
+    '--with-doctest',
+    '--cover-package=builder',
     '--cover-html',
     '--cover-html-dir=coverage'
     #'--pdb'   # debug on error

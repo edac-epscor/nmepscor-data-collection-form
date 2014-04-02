@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 #   Utility functions
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django import forms
 import requests
 import json
@@ -180,7 +180,7 @@ def invalidLogin(request, message):
         'msg': message
     }
 
-    result = HttpResponse(
+    result = HttpResponseForbidden(
         json.dumps(toRet),
         content_type='application/json'
     )
