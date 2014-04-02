@@ -30,6 +30,10 @@ pip-delete-this-directory.txt
 .cache
 nosetests.xml
 coverage.xml
+coverage/
+
+# Bower
+vendor_components/
 
 # Translations
 *.mo
