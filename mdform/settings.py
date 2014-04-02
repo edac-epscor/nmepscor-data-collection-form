@@ -8,6 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+import sys
 from secret_settings import SECRET_KEY, SECRET_EPSCOR_SERVER, ADMINS,\
     ALLOWED_HOSTS
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'djangobower',
+    'django_nose',
     'builder',
 )
 
@@ -135,6 +137,24 @@ STATICFILES_FINDERS = tuple(
 ###########
 
 LOGGING = getLogDictSchema(stripColors=not DEBUG)
+
+###########
+# TESTING #
+###########
+
+# For unit tests
+if 'test' in sys.argv:
+    SOUTH_TESTS_MIGRATE = False
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    #'--with-doctest',
+    '--cover-package=builder, mdform',
+    '--cover-html',
+    '--cover-html-dir=coverage'
+    #'--pdb'   # debug on error
+]
 
 ############
 # BOWER/JS #
