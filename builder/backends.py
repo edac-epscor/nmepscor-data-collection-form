@@ -99,7 +99,7 @@ class RemoteDrupalBackend:
         log.info("Remotely Drupal Success for: %s" % username)
         try:
             # Check if the user exists in Django's local database
-            user = User.objects.get(email=username)
+            user = User.objects.get(username=username)
         except User.DoesNotExist:
             log.info("Creating first time user: %s" % username)
             # Create a user in Django's local database

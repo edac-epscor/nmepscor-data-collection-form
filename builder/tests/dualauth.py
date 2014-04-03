@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.test import TestCase
+from django.db import IntegrityError
 
 import mock
 from json import dumps
@@ -25,7 +26,7 @@ def fakeRemoteAuth_bad(**kwargs):
 class BackendTest(TestCase):
 
     fixtures = ['dualauth-users.xml']
-    backend = 'nmepscor-data-collection-form.builder.backends.DualAuthBackend'
+    backend = 'builder.backends.DualAuthBackend'
 
     @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_bad)
     def testAdminCascade(self):
@@ -103,3 +104,22 @@ class BackendTest(TestCase):
 
         # No Change in user table
         self.assertEqual(User.objects.count(), num_users)
+
+    @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_good)
+    def testDoNotRecreate(self):
+        """
+        It should not create a user that already exists.
+        """
+
+        kwargs = {
+            'username': 'super',
+            'password': 'secret'
+        }
+
+
+        num_users = User.objects.count()
+
+        try:
+            drupalUser = RemoteDrupalBackend().authenticate(**kwargs)
+        except IntegrityError:
+            raise Exception("Attempting to create current user account")
