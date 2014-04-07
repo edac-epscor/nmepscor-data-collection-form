@@ -164,6 +164,11 @@ def getLogDictSchema(stripColors=False):
                 #'level': 'WARN'
                 'level': 'DEBUG'
             },
+            'userprofiles': {
+                'handlers': ['console'],
+                'propagate': True,
+                'level': 'DEBUG'
+            },
             # django only logs msg
             'django.request': {
                 'handlers': ['badLog'],
