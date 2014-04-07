@@ -116,14 +116,6 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
         controller: 'longForm'
     });
 
-    // note that to minimize playground impact on app.js, we
-    // are including just this simple route with a parameterized
-    // partial value (see playground.js and playground.html)
-    $routeProvider.when('/playground/:widgetName', {
-        templateUrl:'static/builder/playground/playground.html',
-        controller:'PlaygroundCtrl'
-    });
-
     // by default, redirect to site root
     $routeProvider.otherwise({
         redirectTo:'/'
@@ -283,7 +275,7 @@ epscorForm.run(function (
         $rootScope.failNotifier = new NotificationManager($rootScope);
 
         if ( $rootScope.authService.numFails() > 0) {
-            $rootScope.failNotifier.notify('error', 'Failed Login: ' + 
+            $rootScope.failNotifier.notify('error', 'Failed Login: ' +
                 $rootScope.authService.failMsg()
             );
         }
@@ -295,8 +287,8 @@ epscorForm.run(function (
     $rootScope.$watch(
         // Listener
         function() {
-            return $location.path(); 
-        }, 
+            return $location.path();
+        },
         // Change handler
         function(newValue, oldValue) {
             if ( $rootScope.authService.isLoggedIn() === false && newValue != '/') {
