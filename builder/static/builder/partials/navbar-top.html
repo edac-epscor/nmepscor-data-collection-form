@@ -42,38 +42,6 @@
             </li>
         </ul>
 
-      <!--
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-gift glyphicon-white"></i>
-                    Widgets
-                    <b class="caret"></b>
-                </a>
-
-                <ul class="dropdown-menu">
-      -->
-                   <!-- <li><a href="#/playground/accordion">Accordion</a></li>  BROKE WITH Bootstrap 3 Upgrade -->
-      <!--
-                    <li><a href="#/playground/ace">Ace Editor</a></li>
-
-                    <li><a href="#/playground/codec">Codec Service</a></li>
-                    <li><a href="#/playground/configure">Configuration</a></li>
-                    <li><a href="#/playground/date">Date</a></li>
-                    <li><a href="#/playground/datagrid">Data grid</a></li>
-
-                    <li><a href="#/playground/pagination">Pagination</a></li>
-                    <li><a href="#/playground/portlet">Portlet</a></li>
-                    <li><a href="#/playground/progress">Progress bars</a></li>
-                    <li><a href="#/playground/retro">Retro</a></li>
-                    <li><a href="#/playground/tabs">Tabs</a></li>
-                    <li><a href="#/playground/tooltips">Tooltips</a></li>
-                    <li><a href="#/playground/tree">Tree</a></li>
-                </ul>
-            </li>
-        </ul>
-        -->
-
         <!--   Add in auth svc/button again now that we're isolating from epscor D7 install -->
         <div class="nav navbar-form pull-right">
             <div ng-show="!authService.isLoggedIn()">
@@ -98,9 +66,8 @@
 
                     <ul class="dropdown-menu">
                         <li><a href="#/step0">Show my datasets</a></li>
-                        <li><a href="#/userProfile/" target="_blank">Local User Profile</a></li>
+                        <li><a href="/users/profile/{{ authService.currentUser() }}" target="_blank">Local User Profile</a> </li>
                         <li><a href="https://nmepscor.org/users/{{ authService.currentUser() }}" target="_blank">Remote User Profile</a></li>
-                        <li><a href="https://nmepscor.org/users/1/edit" target="_blank">Change password</a></li>
                     </ul>
                 </li>
 
