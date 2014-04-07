@@ -1,5 +1,6 @@
-from django.db import models
 from datetime import datetime
+
+from django.db import models
 from django.core.exceptions import ValidationError
 
 import jsonfield
@@ -58,7 +59,6 @@ class metadataModel(models.Model):
     #   Also, this should be done by userid, not username... it's epscor
     #   generated id, but best we can do
     username = models.CharField(max_length=50, null=False, blank=False)
-    #finished = models.BooleanField(default=False, null=False, blank=False)
 
     started = models.DateTimeField(null=False, blank=False,
             default=datetime.now)
