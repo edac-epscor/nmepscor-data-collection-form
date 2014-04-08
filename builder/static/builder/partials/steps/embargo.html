@@ -82,7 +82,10 @@
       <div class="col-sm-10">
         <reset-button></reset-button>
         <quit-button></quit-button>
-        <a class="btn btn-primary" ng-click="nextStep(formData, '/publish')">Final Step</a>
+        <a class="btn btn-primary" 
+          ng-disabled="! formData.EMBARGO.hasReadDataPolicy"
+          ng-click="nextStep(formData, '/publish')"
+          >Final Step</a>
       </div>
     </div>
 
