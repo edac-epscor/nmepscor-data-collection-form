@@ -28,14 +28,29 @@
     <pre> form = {{profile | json}}</pre>
     -->
     <div class="col-md-12">
-      <span id="profile-firstname">First Name</span>
-      <input type="text" ng-model="profile.first" type="text" placeholder="Your First Name" name='firstname' required>
+      <form name="userProfileForm" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : userProfileForm.firstname.$invalid && !userProfileForm.firstname.$pristine }">
+          <label>First Name</label>
+          <input class="form-control" type="text" ng-model="profile.first" type="text" placeholder="Your First Name" name='firstname' required>
+          <p ng-show="userProfileForm.firstname.$invalid && !userForm.firstname.$pristine" class="help-block">
+            Your name is required.
+          </p>
+        </div>
 
-      <span id="profile-lastname">First Name</span>
-      <input type="text" ng-model="profile.last" type="text" placeholder="Your Last Name" name='lastname' required>
+        <div class="form-group" ng-class="{ 'has-error' : userProfileForm.lastname.$invalid && !userProfileForm.lastname.$pristine }">
+          <label>Last Name</label>
+          <input class="form-control" type="text" ng-model="profile.last" type="text" placeholder="Your Last Name" name='lastname' required>
+          <p ng-show="userProfileForm.lastname.$invalid && !userForm.lastname.$pristine" class="help-block">
+            Your name is required.
+          </p>
+        </div>
 
-      <span id="profile-firstname">E-Mail</span>
-      <input type="email" ng-model="profile.email" type="text" placeholder="Your EMail" name='email' required>
+        <div class="form-group" ng-class="{ 'has-error' : userProfileForm.lastname.$invalid && !userProfileForm.lastname.$pristine }">
+          <label>E-Mail</label>
+          <input class="form-control" type="email" ng-model="profile.email" type="text" placeholder="Your EMail" name='email' required>
+          <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
+      </form>
     </div>
 
 
@@ -118,7 +133,7 @@
       Cancel
     </button>
 
-    <button type="submit" ng-click="saveTable(); go2('/')" ng-disabled="piForm.$invalid" class="btn btn-primary">
+    <button type="submit" ng-click="saveTable(); go2('/')" ng-disabled="piForm.$invalid || userProfileForm.$invalid" class="btn btn-primary">
       Save
     </button>
   </div>
