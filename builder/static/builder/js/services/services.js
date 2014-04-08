@@ -122,10 +122,15 @@ epscorForm.factory('SubmissionService',
 // simple auth service that can use a lot of work...
 epscorForm.factory('AuthService',
     function ($http, $cookies, $rootScope, $location) {
+        var PREFIX = '/';
+        //var PREFIX = '/builder/';
+
+        // Django CSRF fix
+        $http.defaults.csrfCookieName = 'csrftoken';
+        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
         // Using $cookieStore not seeming to work according to docs, could be
         // old version.  $cookies is an object...so
-        //var PREFIX = '/builder/';
-        var PREFIX = '/';
 
         var currentUser = null;
         var loginMsg = null;
@@ -134,14 +139,13 @@ epscorForm.factory('AuthService',
 
         // Write to this and django will 500
         function getSignedCookie(cname) {
-            // Hope it don' have a ":" in it...
             return $cookies[cname].split(":")[0].slice(1);
         }
 
         $rootScope.authorized = false;
         // If the cookie is set true, we're authorized
         if (_.has($cookies, 'c_authenticated')) {
-            // Quote stripping with slice
+             // Quote stripping with slice
              $rootScope.authorized = getSignedCookie('c_authenticated') == "True";
              currentUser = getSignedCookie('c_username');
         }
@@ -149,11 +153,6 @@ epscorForm.factory('AuthService',
         // initMaybe it wasn't meant to work for mpm?ial state says we haven't logged in or out yet...
         // this tells us we are in public browsing
         var initialState = true;
-
-        // Django CSRF fix
-        $http.defaults.csrfCookieName = 'csrftoken';
-        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
 
         return {
             initialState:function () {
@@ -259,7 +258,7 @@ epscorForm.factory('ProfileService',
             listInstitutions: function(callback) {
                 return $http({
                     method: 'GET',
-                    url: PREFIX + '/institutions'
+                    url: PREFIX + '/institutions/list'
                 }).
                 success(function(data, status, headers, config) {
                     INSTITUTIONS = [];
@@ -295,10 +294,24 @@ epscorForm.factory('ProfileService',
                     data: form
                 }).success(function(data, status, headers, config) {
                     console.log("Server updated document");
+                    myProfile = data.profile;
                     callback(data);
                 }).
                 error(function (data, status, headers, config) {
                     console.log("Failed to update document");
+                });
+            },
+            deletePI: function(pid, callback) {
+                $http({
+                    method: 'POST',
+                    url: PREFIX + '/pis/delete',
+                    data: {'pid' : pid}
+                }).success(function(data, status, headers, config) {
+                    console.log("Server PI: " + pid);
+                    callback(data);
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("Failed to delete PI: " + pid);
                 });
             }
         };

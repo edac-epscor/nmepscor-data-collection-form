@@ -50,12 +50,20 @@
         };
 
         $scope.deleteRow = function(recIdx) {
+            var myID = $scope.profile.investigators[recIdx].id;
+            var needsXHR = myID !== null;
+            if (needsXHR) {
+                ProfileService.deletePI(myID);
+            }
             $scope.profile.investigators.splice(recIdx, 1);
-        };
+       };
 
         $scope.saveTable = function() {
             ProfileService.update($scope.profile, function(data) {
-                // Anything with success
+                // We'll get back an object with IDs, that we should
+                //  then replace the current table with, in case
+                //  they now wish to delete something
+                $scope.profile = angular.copy(ProfileService.getProfile() );
             });
         };
 
@@ -309,9 +317,6 @@
         $scope.addWorkflowDialog = function() {
             //todo: DIALOG TIME with a new controller...
             $scope.addingWorkflow = true;
-
-            // $modal.open isn't available and doesn't work.  No clue if it's a flaw in jQuery or angular.js
-            //  time to move on and find a fscking solution.
             $scope.resetNewWorkflow();
         };
 

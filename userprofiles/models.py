@@ -1,6 +1,5 @@
 import model_choices
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import signals
 from django.contrib.auth.models import User
@@ -31,8 +30,11 @@ class InvestigatorProfile(models.Model):
         verbose_name="Principle Investigator's EMail",
         blank=False,
         null=False,
-        unique=True,  # One PI per email
     )
+
+    class Meta:
+        # One PI per email per user
+        unique_together = ('email', 'name')
 
     # Reverse
     profile = models.ForeignKey(
@@ -49,12 +51,10 @@ class InvestigatorProfile(models.Model):
 
     def ajax(self):
         return {
-            'InvestigatorProfile': {
-                'id': self.id,
-                'name': self.name,
-                'institution': self.institution,
-                'email': self.email,
-            }
+            'id': self.id,
+            'name': self.name,
+            'institution': self.institution,
+            'email': self.email,
         }
 
 
@@ -64,8 +64,6 @@ class UserProfile(models.Model):
         primary_key=True
     )
     # has last_login, email already
-
-    #investigators = models.ManyToManyField(InvestigatorProfile)
 
     def __unicode__(self):
         return u"Profile for <%s>" % self.user.username
@@ -92,7 +90,7 @@ class UserProfile(models.Model):
 
         for investigator in js['investigators']:
             self.__jsonInvestigatorSave(
-                investigator['InvestigatorProfile']
+                investigator
             )
 
     def __jsonInvestigatorSave(self, investigator):
