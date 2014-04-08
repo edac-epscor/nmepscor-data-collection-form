@@ -29,13 +29,13 @@
     -->
     <div class="col-md-12">
       <span id="profile-firstname">First Name</span>
-      <input type="text" ng-model="profile.first" type="text" placeholder="Your First Name" name='username' required>
+      <input type="text" ng-model="profile.first" type="text" placeholder="Your First Name" name='firstname' required>
 
       <span id="profile-lastname">First Name</span>
-      <input type="text" ng-model="profile.last" type="text" placeholder="Your Last Name" name='username' required>
+      <input type="text" ng-model="profile.last" type="text" placeholder="Your Last Name" name='lastname' required>
 
       <span id="profile-firstname">E-Mail</span>
-      <input type="email" ng-model="profile.email" type="text" placeholder="Your EMail" name='username' required>
+      <input type="email" ng-model="profile.email" type="text" placeholder="Your EMail" name='email' required>
     </div>
 
 
@@ -113,7 +113,12 @@
          </div>
       </div>
     </div>
-    <button type="submit" ng-disabled="piForm.$invalid" class="btn btn-primary">
+
+    <button type="button" ng-click="piForm.$cancel(); go2('/')" class="btn btn-default">
+      Cancel
+    </button>
+
+    <button type="submit" ng-click="saveTable(); go2('/')" ng-disabled="piForm.$invalid" class="btn btn-primary">
       Save
     </button>
   </div>
