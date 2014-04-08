@@ -21,27 +21,21 @@ that can auth to the nm epscor portal
 ***
 
 * This should be split into a few apps
-  * Angular Enterprise Build
-  * NM EPSCoR Remote Auth
   * NM EPSCoR form collection widget
   * `needs` a submission/email utility
   * `needs` a way to obtain the PI
-* The enterprise seed should have angularjs brought forward
-* There are some local script sources that should probably be brought in via CDN
 * Should add django minifier to the css & js
-* It is very unclear if the NM EPSCoR site is willing to run or provide remote services or keep them updated
-  - Which has resulted in awkward session code in the builder module and to the user authentication system
-  - And highly indirect best-effort proxied authentication
-  - The builder code should be rewritten as a custom django authentication backend instead of what it is now
+* It is unclear if the NM EPSCoR site is willing to run or provide remote services or keep them updated
+  - Which has resulted custom authentication system
+  - And indirect best-effort proxied authentication
   - If the remote user name changes, we're in trouble.
 * The /admin portion could be rebound to the native user application
-  - And should probably have a few more fields locked.
 * Error Messaging
-* Testing
+* More Testing
+  - userprofiles module
 * Angular must have a better interstitial/overlay that can be bound to $http
   and jQuery with a timer and/or retry/error handler and/or event queue
-* The django debug toolbar isn't very useful in the JSON views
-* There's got to be a better django-crud-json framework available
+* There's got to be a better django-crud-ajax framework available
 
 
 # Next Steps
@@ -51,7 +45,9 @@ that can auth to the nm epscor portal
   - Unpin versions and move closer to trunks/stable
 * EMail
 * Content/Dialog Updates
-* Some way to obtain PI and/or account relationships
+* UserProfiles module
+  - Lets people submit PI relationships
+  - It might be nice to have a way to fetch or scrape it
 * More form validators
 
 
@@ -84,6 +80,7 @@ that can auth to the nm epscor portal
 * See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
   - Be sure debug is False
 * python manage.py bower_install (Gather proper JS versions, choose bootstrap 3.0.0)
+  - Note: this requires a fairly recent version of node and npm
 * python manage.py collectstatic (collect static files for serving outside of wsgi)
   - Add the folder this creates as an apache served folder
 * I believe this entire app is now 'rooted' within whatever folder it lies in
