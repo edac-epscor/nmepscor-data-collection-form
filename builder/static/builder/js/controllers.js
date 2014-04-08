@@ -16,6 +16,63 @@
         $rootScope.authService.keepalive();
     });
 
+
+    // User profile info.  
+    epscorForm.controller('userProfileController', function userProfileController(
+            $rootScope,
+            $scope,
+            $location,
+            $routeParams,
+            $filter,
+            ProfileService)
+    {
+        $rootScope.progressBar = 0;  // Not here..
+        // Not actually needed, but looks good
+        var userID = $routeParams.userID;
+
+        ProfileService.read(function(data) {
+            //callback
+            $scope.profile=angular.copy(ProfileService.getProfile());
+        });
+
+        ProfileService.listInstitutions(function(data) {
+            $scope.INSTITUTION_OPTIONS = ProfileService.getInstitutions();
+        });
+
+
+        $scope.addRow = function() {
+            $scope.profile.investigators.push({
+                'id': null,
+                'name': 'New Investigator',
+                'institution': 'UNM',  // default
+                'email': 'janedoe@example.com'
+            });
+        };
+
+        $scope.deleteRow = function(recIdx) {
+            $scope.profile.investigators.splice(recIdx, 1);
+        };
+
+        $scope.saveTable = function() {
+            ProfileService.update($scope.profile, function(data) {
+                // Anything with success
+            });
+        };
+
+        $scope.showInstitution = function(pi) {
+            var selected = [];
+            if(pi.institution) {
+                selected = $filter('filter')(
+                    $scope.INSTITUTION_OPTIONS, 
+                    {value: pi.institution}
+                );
+            }
+            return selected.length ? selected[0].text : 'Not Set';
+        };
+
+    });
+
+
     /*
      *  Given a DS id, load it into our rootform for editing
      */

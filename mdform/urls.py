@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^keepAlive$', 'builder.views.revalidate'),
     (r'^signin$', 'builder.views.authDrupal'),
     (r'^logout$', 'builder.views.signout'),
+    (r'^users/', include('userprofiles.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 )

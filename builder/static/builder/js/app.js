@@ -28,6 +28,7 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     var ROUTE_PREFIX = '/builder/static/builder';  // abs deploy
     var PARTIALS = ROUTE_PREFIX + '/partials';  // abs deploy
     var STEPS = PARTIALS + '/steps';  // abs deploy
+    var PROFILE = PARTIALS + '/profile';
     //var ROUTE_PREFIX = 'static/builder;  // relative
 
     // App Exploratory Routes
@@ -45,6 +46,11 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
         templateUrl: PARTIALS + '/faq.html'
     });
 
+    // Profile Routes
+    $routeProvider.when('/users/profile/:userID', {
+        templateUrl: PROFILE + '/userProfile.html',
+        controller: 'userProfileController'
+    });
 
     // Form Routes
     $routeProvider.when('/loadForm/:subID', {

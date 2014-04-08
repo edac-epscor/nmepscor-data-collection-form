@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'djangobower',
     'django_nose',
     'builder',
+    'userprofiles',
 )
 
 if DEBUG:

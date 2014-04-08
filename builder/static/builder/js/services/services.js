@@ -237,3 +237,70 @@ epscorForm.factory('AuthService',
         };
     }
 );
+
+
+epscorForm.factory('ProfileService',
+    function ($http, $cookies, $rootScope) {
+
+        var PREFIX = '/users';
+
+        // List does not change
+        var INSTITUTIONS = [];
+        var myProfile = null;
+
+
+        return {
+            getProfile: function() {
+                return myProfile;
+            },
+            getInstitutions: function(callback) {
+                return INSTITUTIONS;
+            },
+            listInstitutions: function(callback) {
+                return $http({
+                    method: 'GET',
+                    url: PREFIX + '/institutions'
+                }).
+                success(function(data, status, headers, config) {
+                    INSTITUTIONS = [];
+                    for(var loop=0;loop < data.length;loop++) {
+                        INSTITUTIONS.push({
+                            value: data[loop][0],
+                            text: data[loop][1]
+                        });
+                    }
+                    callback(data);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log("failed to list institutions");
+                });
+            },
+            read: function(callback) {
+                return $http({
+                    method: 'GET',
+                    url: PREFIX + '/read'
+                }).
+                success(function (data, status, headers, config) {
+                    myProfile = data.profile; // cache
+                    callback(data);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log("failed to list");
+                });
+            },
+            update: function(form, callback) {
+                $http({
+                    method: 'POST',
+                    url: PREFIX + '/update',
+                    data: form
+                }).success(function(data, status, headers, config) {
+                    console.log("Server updated document");
+                    callback(data);
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("Failed to update document");
+                });
+            }
+        };
+});
+
