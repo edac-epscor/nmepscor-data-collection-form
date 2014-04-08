@@ -58,6 +58,13 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
         controller:'loadController'
     });
 
+    // Dataset Submission Preview
+    $routeProvider.when('/preview/:subID', {
+        templateUrl: STEPS + '/preview.html',
+        controller:'previewController'
+    });
+
+
     $routeProvider.when('/step0', {
         templateUrl: STEPS + '/step0.html',
         controller: 'submissionsController'

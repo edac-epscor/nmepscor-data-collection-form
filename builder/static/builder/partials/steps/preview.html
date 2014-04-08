@@ -1,0 +1,116 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h2>NMEPSCoR Metadata Tool: <small>Collection Preview</small></h2>
+      </div>
+      <div>
+        <p>A preview of data going to the server</p>
+      </div>
+      <br><br>
+    </div>
+  </div>
+
+  <!-- should do this with a datagrid... -->
+  
+  <div class="row" ng-controller="longForm">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Built up JSON
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-bordered table-condensed span10">
+          <thead>
+            <tr>
+              <th colspan="3" class="text-center">
+                File Steps
+              </th>
+            </tr>
+            <tr>
+              <th>File Name </th>
+              <th>Title </th>
+              <th>Tab Name </th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="fileO in previewData.FILES.datatable">
+              <td>{{ fileO.file_name }} </td>
+              <td>{{ fileO.tabname }} </td>
+              <td>{{ fileO.title }} </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- dataset descriptions -->
+        <p>Abstract: {{ previewData.DATASET.abstract }} </p>
+        <p>Purpose: {{ previewData.DATASET.purpose }}</p>
+        <p>Funding Information: {{ previewData.DATASET.funding }}</p>
+        <p>Other: {{ previewData.DATASET.additional }}</p>
+
+        <!-- dataset tagging -->
+        <p> Tags: {{ previewData.TAGGING.tags }}</p>
+        <p> Places: {{ previewData.TAGGING.placenames }} </p>
+
+        <!-- Workflow -->
+        <table class="table table-striped table-bordered table-condensed span10">
+          <thead>
+            <tr>
+              <th colspan="4" class="text-center">
+                Workflow Steps
+              </th>
+            </tr>
+            <tr>
+              <th class="col-sm-1">#</th>
+              <th class="col-sm-3">Date Performed </th>
+              <th>Performed By </th>
+              <!-- name or inst if other... -->
+              <th>Description </th>
+            <tr>
+            <tbody>
+              <tr ng-repeat="step in previewData.WORKFLOW.steps">
+                <td> {{$index + 1}}
+                </td>
+                <td> {{step.date_performed | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                  {{selfOrOtherLabel(step) }}
+                </td>
+                <td> {{step.description|truncate:120}}
+                </td>
+
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+
+        <!-- Attributes -->
+        <table class="table table-striped table-bordered table-condensed span10">
+          <thead>
+            <tr>
+              <th colspan="10" class="text-center">
+                Attributes ({{ previewData.ATTRIBUTES.typeSelected }})
+              </th>
+            </tr>
+            <tr>
+              <th ng-repeat="attr in previewData.ATTRIBUTES.userTable[previewData.ATTRIBUTES.typeSelected][0]" >
+                {{ attr.label }} 
+              </th>
+            <tr>
+            <tbody>
+              <tr ng-repeat="row in previewData.ATTRIBUTES.userTable[previewData.ATTRIBUTES.typeSelected] ">
+                <td ng-repeat="record in row"> 
+                  {{ record.value }}
+                </td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+
+      </div>
+      <pre>{{previewData | json}}</pre>
+    </div>
+  </div>
+
+  <a class="btn btn-primary" href="#/">Home</a>
+</div>
+

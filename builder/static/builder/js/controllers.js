@@ -81,6 +81,39 @@
     });
 
 
+    epscorForm.controller('previewController', function previewController(
+            $rootScope,
+            $scope,
+            $location,
+            $routeParams,
+            SubmissionService)
+    {
+
+        var submissionID = $routeParams.subID;
+
+        /*
+         * wfStep: previewData.WORKFLOW.steps[i]
+         */
+        $scope.selfOrOtherLabel = function(wfStep) {
+            var performed = wfStep.performed_by.self;
+            if (performed === true) {
+                return 'myself';
+            }
+            var other = wfStep.performed_by.other;
+
+            return other.name + '( at ' + other.institution + ')';
+
+        };
+
+        SubmissionService.list($rootScope.authService.currentUser(), function(data) {
+            // callback
+            $scope.previewData = SubmissionService.getById(submissionID).fullForm;
+        });
+
+    });
+                
+
+
     /*
      *  Given a DS id, load it into our rootform for editing
      */
@@ -364,34 +397,8 @@
             "gridded"
         ];
 
-        var attributeFormConfig = {
-            "tabular": [
-                {"value": null, "name": "field", "label": "Field"},
-                {"value": null, "name": "description", "label": "Description"},
-                {"value": null, "name": "units", "label": "Units"},
-                {"value": null, "name": "frequency", "label": "Frequency"},
-                {"value": null, "name": "aggregation", "label": "Aggregation"},
-                {"value": null, "name": "nodata", "label": "NODATA"},
-                {"value": null, "name": "tabs", "label": "Tabs"}
-            ],
-            "matrix": [
-                {"value": null, "name": "dimension", "label": "Dimension"},
-                {"value": null, "name": "description", "label": "Description"},
-                {"value": null, "name": "units", "label": "Units"},
-                {"value": null, "name": "frequency", "label": "Frequency"},
-                {"value": null, "name": "aggregation", "label": "Aggregation"},
-                {"value": null, "name": "nodata", "label": "NODATA"}
-            ],
-            "gridded": [
-                {"value": null, "name": "band", "label": "Dimension/Band Identifier"},
-                {"value": null, "name": "name", "label": "Name"},
-                {"value": null, "name": "description", "label": "Description"},
-                {"value": null, "name": "units", "label": "Units"},
-                {"value": null, "name": "frequency", "label": "Frequency"},
-                {"value": null, "name": "aggregation", "label": "Aggregation"},
-                {"value": null, "name": "nodata", "label": "NODATA"}
-            ]
-        };
+        // alias
+        var attributeFormConfig = $rootScope.constants.attributeFormConfig;
 
         $scope.changeTableType = function(typ) {
             $scope.tableInfo = attributeFormConfig[$scope.formData.ATTRIBUTES.typeSelected];
