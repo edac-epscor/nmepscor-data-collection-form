@@ -87,6 +87,7 @@ class UserProfile(models.Model):
         user.first_name = js['first']
         user.last_name = js['last']
         user.email = js['email']
+        user.save()
 
         for investigator in js['investigators']:
             self.__jsonInvestigatorSave(
