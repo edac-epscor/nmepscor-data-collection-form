@@ -114,13 +114,15 @@
             <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
               <table class="table table-bordered table-hover table-condensed">
                 <thead>
-                  <th ng-repeat="column in tableInfo" >
-                    {{column.label}}
-                  </th>
+                  <tr ng-click="tableform.$show(); addRow()">
+                    <th ng-repeat="column in tableInfo" >
+                      {{column.label}}
+                    </th>
 
-                  <th ng-show="tableform.$visible"> 
-                    <span>Action</span>
-                  </th>
+                    <th ng-show="tableform.$visible"> 
+                      <span>Action</span>
+                    </th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="records in recordList">
