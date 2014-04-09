@@ -66,7 +66,7 @@
 
         <div class="panel-body">
           <!-- @see http://vitalets.github.io/angular-xeditable/#editable-table -->
-          <form editable-form name="piForm" onaftersave="saveTable()" oncancel="cancel()">
+          <form editable-form name="piForm" onaftersave="saveTable()" oncancel="cancel()" novalidate>
             <table class="table table-bordered table-hover table-condensed">
               <thead>
                 <th>Name</th>
@@ -81,21 +81,30 @@
 
                 <tr ng-repeat="pi in profile.investigators">
                   <td>
-                    <span editable-text="pi.name" e-form="piForm">
-                      {{pi.name || 'unknown' }}
+                    <span editable-text="pi.name" e-form="piForm" e-required e-placeholder="New Investigator">
+                      {{pi.name || 'enter name' }}
                     </span>
                   </td>
 
                   <td>
                     <span editable-select="pi.institution"
-                      e-ng-options="IO.value as IO.text for IO in INSTITUTION_OPTIONS">
+                      e-ng-options="IO.value as IO.text for IO in INSTITUTION_OPTIONS"
+                      e-form="piForm"
+                      e-required
+                    >
                       {{ showInstitution(pi) }}
                     </span>
                   </td>
 
+
                   <td>
-                    <span editable-email="pi.email" e-form="piForm" >
-                      {{pi.email || 'unknown' }}
+                    <span editable-email="pi.email" e-form="piForm" e-name="email"
+                      e-ng-blur="checkEmail($data, piForm)"
+                      e-required 
+                      e-placeholder="Enter Email"
+                      onbeforesave="checkEmail($data, piForm)"
+                    >
+                      {{pi.email || 'Investigator Email' }}
                     </span>
                   </td>
 
@@ -126,6 +135,11 @@
               <button type="button" ng-disabled="piForm.$waiting" ng-click="piForm.$cancel()" class="btn btn-default">
                 Cancel
               </button>
+
+              <button type="submit" ng-disabled="piForm.$invalid" class="btn btn-primary">
+                Save
+              </button>
+
             </div>
           </form>
 
@@ -138,7 +152,7 @@
     </button>
 
     <button type="submit" ng-click="saveTable(); go2('/')" ng-disabled="piForm.$invalid || userProfileForm.$invalid" class="btn btn-primary">
-      Save
+      Save Profile
     </button>
   </div>
 </div>

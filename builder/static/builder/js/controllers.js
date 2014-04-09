@@ -26,6 +26,12 @@
             $filter,
             ProfileService)
     {
+        // TODO:
+        //
+        //  Some big changes needed.  The profile needs to change to an event
+        //  queue, adduser, delete user with save/cancel relaying
+        //  corresponding events.
+
         $rootScope.progressBar = 0;  // Not here..
         // Not actually needed, but looks good
         var userID = $routeParams.userID;
@@ -43,17 +49,35 @@
         $scope.addRow = function() {
             $scope.profile.investigators.push({
                 'id': null,
-                'name': 'New Investigator',
+                'email': null,
                 'institution': 'UNM',  // default
-                'email': 'janedoe@example.com'
+                'name': null
             });
+        };
+
+        $scope.checkEmail = function(addr, form) {
+            // Reuse ngular email validator
+            var eName = 'email';
+            var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i;
+
+            if (EMAIL_REGEXP.test(addr)) {
+                form.$setError(eName, '');
+                return;
+            }
+            else {
+                var msg = 'Invalid email address';
+                form.$setError(eName,  msg);
+                return msg;
+            }
         };
 
         $scope.deleteRow = function(recIdx) {
             var myID = $scope.profile.investigators[recIdx].id;
             var needsXHR = myID !== null;
             if (needsXHR) {
-                ProfileService.deletePI(myID);
+                ProfileService.deletePI(myID, function(data) {
+                    pass;  // Notifier service?
+                });
             }
             $scope.profile.investigators.splice(recIdx, 1);
        };
