@@ -56,7 +56,8 @@
         };
 
         $scope.checkEmail = function(addr, form) {
-            // Reuse ngular email validator
+            // Reuse angular email validator via copy regex.  Need to find a
+            // way to call directly
             var eName = 'email';
             var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i;
 
@@ -112,6 +113,7 @@
             $routeParams,
             SubmissionService)
     {
+        // Todo: need a 'isComplete' to see if this is publishable
 
         var submissionID = $routeParams.subID;
 
@@ -126,7 +128,6 @@
             var other = wfStep.performed_by.other;
 
             return other.name + '( at ' + other.institution + ')';
-
         };
 
         SubmissionService.list($rootScope.authService.currentUser(), function(data) {
@@ -515,8 +516,27 @@
     });
 
 
-    epscorForm.controller('publishForm', function attributeForm($rootScope, $scope, $location, SubmissionService) {
+    epscorForm.controller('publishForm', function attributeForm(
+            $rootScope, 
+            $scope, 
+            $location, 
+            $routeParams,
+            SubmissionService) 
+    {
+
         $rootScope.progressBar = 95;
+
+        var submissionID = $routeParams.subID;
+
+        if (_.isNull(submissionID) && _.isNull(rootScope.formData.META.id)) {
+            $.location.path('/');  // Big trouble, log errors, warnings.
+        }
+        else if (_.isNull(rootScope.formData.META.id)) {
+            $rootScope.formData = SubmissionService.getById(submissionID).fullForm;
+        }
+
+        // And now... things should not be null...
+
         $scope.finalize = function(docID) {
             SubmissionService.finalize(docID, function(data) {
                 $rootScope.progressBar = 100;

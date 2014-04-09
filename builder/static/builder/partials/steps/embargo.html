@@ -84,11 +84,13 @@
         <quit-button></quit-button>
         <a class="btn btn-primary" 
           ng-disabled="! formData.EMBARGO.hasReadDataPolicy"
-          ng-click="nextStep(formData, '/publish')"
-          >Final Step</a>
+          ng-click="nextStep(formData, '/preview/' + formData.META.id)"
+          >Preview Collection</a>
       </div>
     </div>
 
+    <div class="row">
+    </div>
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title"> Patent Section </h3>

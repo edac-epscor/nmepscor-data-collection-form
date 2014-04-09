@@ -119,7 +119,7 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
         controller: 'embargoForm'
     });
 
-    $routeProvider.when('/publish', {
+    $routeProvider.when('/publish/:subID', {
         templateUrl: STEPS + '/publish.html',
         controller: 'publishForm'
     });
