@@ -13,15 +13,6 @@
 
     <!-- should do this with a datagrid... -->
 
-    <!--
-        "DATASET": {
-        "abstract": null,
-        "funding": null,
-        "purpose": null,
-        "additional": null
-
-    -->
-    
     <div class="row" ng-controller="s3Form">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -38,8 +29,10 @@
               specifically. This is similar to a poster abstract.
               </p>
               <label for="datasetAbstract" class="col-sm-2 control-label">Abstract</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="datasetAbstract" 
+              <div class="col-sm-10" 
+                ng-class="{ 'has-error' : step3_form.abstract.$invalid && !step3_form.abstract.$pristine }"
+              >
+                <textarea class="form-control" rows="3" id="datasetAbstract" name="abstract"
                   ng-model="formData.DATASET.abstract"
                   required>
                 </textarea>
@@ -51,8 +44,10 @@
               Provide a brief description of the purpose of your research. 
               </p>
               <label for="datasetPurpose" class="col-sm-2 control-label">Purpose</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="datasetPurpose" 
+              <div class="col-sm-10"
+                ng-class="{ 'has-error' : step3_form.purpose.$invalid && !step3_form.purpose.$pristine }"
+              >
+                <textarea class="form-control" rows="3" id="datasetPurpose" name="purpose"
                   ng-model="formData.DATASET.purpose"
                   required>
                 </textarea>
