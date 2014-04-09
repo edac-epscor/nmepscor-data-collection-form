@@ -26,7 +26,7 @@
         Tagging
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" role="form" name="step4_form">
+        <form class="form-horizontal" role="form" name="step4_form" novalidate>
           <div class="form-group">
             <p>
             Please include a list of terms to describe the collection.
@@ -36,9 +36,17 @@
             datasets. 
             </p>
             <label for="taggingTags" class="col-sm-2 control-label">Tags</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" rows="2" id="taggingTags" ng-model="formData.TAGGING.tags" 
-              ngMinLength=0 ngMaxLength=300 required></textarea>
+            <div class="col-sm-10"
+              ng-class="{ 'has-error' : step4_form.taglist.$invalid && !step4_form.taglist.$pristine }"
+            >
+              <textarea class="form-control" rows="2" id="taggingTags" name="taglist"
+                ng-model="formData.TAGGING.tags" 
+                ng-minlength=5
+                ng-maxlength=300
+                required
+              >
+              </textarea>
+              <!-- may be a good candidate for ng-pattern ... -->
             </div>
           </div>
 
@@ -55,7 +63,10 @@
               <a tooltip-placement="bottom" tooltip="Consider going from more specific (watershed) to less specific (state).  For example, Middle Rio Grande, Bernalilo County, New Mexico.">Placenames</a>
             </label>
             <div class="col-sm-10">
-              <textarea class="form-control" rows="3" id="datasetPlacenames" ng-model="formData.DATASET.placenames"></textarea>
+              <textarea class="form-control" rows="3" id="datasetPlacenames" 
+                ng-model="formData.DATASET.placenames"
+              >
+              </textarea>
             </div>
           </div>
         </form>
