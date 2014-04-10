@@ -3,6 +3,9 @@ from django.core.exceptions import PermissionDenied
 
 from util import SESSION
 
+import logging
+log = logging.getLogger(__name__)
+
 
 def sessionAuthed(func):
     """
@@ -17,9 +20,11 @@ def sessionAuthed(func):
                 return func(request, *args, **kwargs)
             else:
                 # They has a session, but not auth
+                log.warn("Unauthorized session denied")
                 raise PermissionDenied
         else:
             # No session, not allowed
+            log.warn("Sessionless request denied")
             raise PermissionDenied
 
     return wrapper
