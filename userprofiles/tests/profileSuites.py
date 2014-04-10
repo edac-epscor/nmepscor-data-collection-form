@@ -71,18 +71,19 @@ class ProfileEditing(TestCase):
     fixtures = ['profilesuite-users.xml']
 
     @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_good)
-    def testRead(self):
-        loggedIn = clientLogin(
+    def setUp(self):
+        """ Alice is a newly created remote drupal user... """
+        clientLogin(
             self.client,
             **ALICE
         )
 
-        # This does not refactor well into clientLogin
+        # With a good session
         session = self.client.session
         session['authenticated'] = True
         session.save()
 
-        self.assertEqual(loggedIn, True)
+    def testRead(self):
 
         response = self.client.get('/users/read')
         profile = loads(response.content)['profile']
@@ -90,14 +91,8 @@ class ProfileEditing(TestCase):
         self.assertEqual(profile['username'], 'alice1')
         self.assertEqual(profile['first'], 'alice')
 
-    @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_good)
     def testUpdateMyName(self):
         """ Alice changes her name"""
-        clientLogin(self.client, **ALICE)
-
-        session = self.client.session
-        session['authenticated'] = True
-        session.save()
 
         response = self.client.post('/users/update',
             content_type='application/json',
@@ -109,15 +104,8 @@ class ProfileEditing(TestCase):
         self.assertEqual(profile['first'], 'hello')
         self.assertEqual(profile['last'], 'world')
 
-    @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_good)
     def testAddPI(self):
         """ Alice adds her PI"""
-        clientLogin(self.client, **ALICE)
-
-        session = self.client.session
-        session['authenticated'] = True
-        session.save()
-
         response = self.client.post('/users/update',
             content_type='application/json',
             data=dumps(aliceDoes())
@@ -134,15 +122,8 @@ class ProfileEditing(TestCase):
 
         # get back...ids in investigators new names
 
-    @mock.patch("builder.util.remoteAuthenticate", fakeRemoteAuth_good)
     def testDeletePI(self):
         """ Alice changes PIs """
-        clientLogin(self.client, **ALICE)
-
-        session = self.client.session
-        session['authenticated'] = True
-        session.save()
-
         # Boss created
         self.client.post('/users/update',
             content_type='application/json',
