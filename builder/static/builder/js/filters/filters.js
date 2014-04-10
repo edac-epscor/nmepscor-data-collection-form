@@ -5,7 +5,7 @@
 filters.filter('interpolate', ['version', function (version) {
     return function (text) {
         return String(text).replace(/\%VERSION\%/mg, version);
-    }
+    };
 }])
 
 
@@ -18,7 +18,7 @@ filters.filter('interpolate', ['version', function (version) {
             end = "...";
 
         if (( text === undefined) || (text === null) )
-        	return text;
+            return text;
 
         if (text.length <= length || text.length - end.length <= length) {
             return text;
@@ -26,8 +26,15 @@ filters.filter('interpolate', ['version', function (version) {
         else {
             return String(text).substring(0, length - end.length) + end;
         }
+    };
+})
 
+.filter('yesNo', function () {
+    return function (bool) {
+        if( bool) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     };
 });
-
-

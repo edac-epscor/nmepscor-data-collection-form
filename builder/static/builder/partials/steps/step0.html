@@ -99,8 +99,13 @@
                     <td>
                        Not done yet
                     </td>
-                    <td>
-                      {{submission.finalized}}
+                    <td ng-if="submission.finalized">
+                      <a href="#/preview/{{submission.fullForm.META.id}}">
+                        {{submission.finalized | yesNo}}
+                      </a>
+                    </td>
+                    <td ng-if="! submission.finalized">
+                        {{submission.finalized | yesNo}}
                     </td>
                   </tr>
                 </tbody>
