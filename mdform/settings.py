@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'django_nose',
     'builder',
     'userprofiles',
+    'compressor',
 )
 
 if DEBUG:
@@ -130,7 +131,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_FINDERS = tuple(
     list(DEFAULT_SETTINGS.STATICFILES_FINDERS) +
-    ['djangobower.finders.BowerFinder'],
+    [
+        'djangobower.finders.BowerFinder',
+        'compressor.finders.CompressorFinder'
+    ],
 )
 
 ###########
@@ -195,3 +199,5 @@ BOWER_INSTALLED_APPS = (
     'noty#2.1.0',  # choose 3.0.0 in bower
     # somewhere the nucleus theme came into existence
 )
+
+#COMPRESS_ENABLED = True

@@ -1,4 +1,4 @@
-{% load cache staticfiles %}
+{% load cache staticfiles compress %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -25,6 +25,7 @@
         }
     </style>
 
+    {% compress css %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'builder/css/magic-bootstrap.css' %}"/>
     <!--
@@ -38,9 +39,12 @@
     <link rel="stylesheet" href="{% static 'angular-xeditable/dist/css/xeditable.css' %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'builder/css/app.css' %}"/>
+    {% endcompress %}
 
+    {% compress js %}
     <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
     <script type="text/javascript" src="{% static 'respond/respond.min.js' %}"></script>
+    {% endcompress %}
 
 </head>
 
@@ -61,11 +65,12 @@
   <!-- footer -->
   <div ng-include="'{% static 'builder/partials/navbar-bottom.html' %}'"></div>
 
-  <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
+  {% compress js %}
+  <script type="text/javascript" src="{% static 'jquery/jquery.js' %}"></script>
 
   <script type="text/javascript" src="{% static 'jqueryui/ui/jquery-ui.js' %}"></script>
 
-  <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
   <script type="text/javascript" src="{% static 'angular/angular.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'angular-cookies/angular-cookies.min.js' %}"></script>
@@ -79,38 +84,34 @@
 
   <!-- for ui notifications -->
   <script type="text/javascript" src="{% static 'builder/js/notificationManager.js' %}"></script>
+  {% endcompress %}
+
+  <!-- compressing this with other materials... breaks... -->
   <script type="text/javascript" src="{% static 'angular-sanitize/angular-sanitize.min.js' %}"></script>
-
-  <!-- angular strap -->
-  <script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
-
-  <!-- ACE Editor -->
-  <!--
-  <script type="text/javascript" src="{% static 'ace-builds/src-min/ace.js' %}"></script>
-  <script type="text/javascript" src="{% static 'angular-ui-ace/ui-ace.min.js' %}"></script>
-  -->
-
 
   <!-- TODO needed? -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js"></script>
 
+  <!-- angular strap -->
+  {% compress js %}
   <script type="text/javascript" src="{% static 'angular-strap/dist/angular-strap.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
   <script type="text/javascript" src="{% static 'bootstrap-timepicker/js/bootstrap-timepicker.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'angular-xeditable/dist/js/xeditable.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
 
 
   <!--  TODO compile/optimise these during build -->
-  <script src="{% static 'builder/js/app.js' %}"></script>
-  <script src="{% static 'builder/js/controllers.js' %}"></script>
-  <script src="{% static 'builder/js/services/services.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/app.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/controllers.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/services/services.js' %}"></script>
 
-  <script src="{% static 'builder/js/filters/filters.js' %}"></script>
-  <script src="{% static 'builder/js/directives/fadeInDirective.js' %}"></script>
-  <script src="{% static 'builder/js/directives/stopEventDirective.js' %}"></script>
-  <script src="{% static 'builder/js/directives/formButtons.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/filters/filters.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/fadeInDirective.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/stopEventDirective.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/formButtons.js' %}"></script>
 
-  <script src="{% static 'builder/js/directives/notifications/notyDirective.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/notifications/notyDirective.js' %}"></script>
 
 
   <!-- example area for ui elements (non-production) -->
@@ -120,6 +121,7 @@
 
   <!-- from... wheres? -->
   <script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/themes/nucleus.js' %}"></script>
+  {% endcompress %}
 
 </body>
 </html>
