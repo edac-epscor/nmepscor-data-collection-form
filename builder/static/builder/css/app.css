@@ -115,11 +115,11 @@ supports grid feature
 }
 
 /* angularOverlay */
-.overlayContainer { 
+.overlayContainer {
     display: none;
 }
 
-.overlayBackground { 
+.overlayBackground {
     top:0px;
     left:0px;
     padding-left:100px;
@@ -131,7 +131,7 @@ supports grid feature
     opacity:0.3;
 }
 
-.overlayContent { 
+.overlayContent {
     position:absolute;
     border: 1px solid #000;
     background-color:#fff;
@@ -141,3 +141,93 @@ supports grid feature
     z-index:1000;
     text-align:center;
 }
+
+
+/*
+* EPSCoR provided styles from chris  4/9/14
+*/
+
+/*
+* Ignore buttons in this preference
+*/
+/*
+a:link:not(.btn), a:visited:not(.btn){
+    color: #336666;
+    text-decoration: underline;
+}
+
+a:hover {
+    color:#761a17;
+    text-decoration: none;
+}
+
+body {
+    font-size: 13px;
+    line-height: 18px;
+    font-family:lucida grande, helvetica, arial;
+    background:#e6e6e6;
+    width:auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:helvetica, arial, sans-serif;
+    font-weight:bold;
+    color:#8e0c0d;
+    line-height:125%;
+}
+
+p.burgundy{
+    color:#8e0c0d;
+}
+p.teal{
+    color:#336666;
+}
+p.grey{
+    color:#ccc;
+}
+*/
+
+/*
+*  compat fix
+*/
+
+/*
+.navbar a:link {
+    text-decoration: none;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #336666;
+}
+
+.navbar li a {
+    text-decoration: none;
+    color: #336666;
+}
+*/
+
+.navbar {
+    border-top: 10px solid #336666;
+}
+
+/*
+.navbar-inverse .navbar-nav li a {
+    text-decoration: none;
+    color: #336666;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+    color: #336666;
+}
+
+*/
+/*
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #336666;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #96C3EB;
+}
+*/
