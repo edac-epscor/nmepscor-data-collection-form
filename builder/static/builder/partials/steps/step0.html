@@ -70,8 +70,9 @@
                 <thead>
                   <tr>
                     <th class="span4">Label</th>
-                    <th class="span3">Started</th>
-                    <th class="span3">Last Modified</th>
+                    <th class="span2">Type</th>
+                    <th class="span2">Started</th>
+                    <th class="span2">Last Modified</th>
                     <th class="span1">% Complete</th>
                     <th class="span1">Submitted ?</th>
                   </tr>
@@ -85,6 +86,9 @@
                       </a>
 
                       <span ng-show="submission.finalized"> {{submission.fullForm.META.label}} </span>
+                    </td>
+                    <td>
+                      {{submission.fullForm.DESCRIBE.choice}}
                     </td>
                     <td>
                       {{submission.started}}
