@@ -42,9 +42,18 @@
                 My collaborator's, PIs, advisors, and pet dog...
               </p>
               <ul ng-repeat="pi in profile.investigators">
-                <li>{{pi.name}} ({{pi.institution}}) : {{pi.email}}
+                <li>{{pi.name}}, {{pi.institution}}
                 </li>
               </ul>
+            </div>
+            <div class="panel-footer">
+              <nav class="navbar navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                  <li> 
+                    <a href="#/users/profile/{{authService.currentUser()}}" >Edit</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
