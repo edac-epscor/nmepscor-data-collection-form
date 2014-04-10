@@ -142,6 +142,9 @@ supports grid feature
     text-align:center;
 }
 
+.profile-nav {
+    margin-bottom: -10px;
+}
 
 /*
 * EPSCoR provided styles from chris  4/9/14
