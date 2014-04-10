@@ -17,6 +17,19 @@
     });
 
 
+    epscorForm.controller('userProfileReadController', function userProfileController(
+            $scope,
+            ProfileService)
+    {
+
+        ProfileService.read(function(data) {
+            //callback
+            $scope.profile=angular.copy(ProfileService.getProfile());
+        });
+
+    });
+
+
     // User profile info.  
     epscorForm.controller('userProfileController', function userProfileController(
             $rootScope,

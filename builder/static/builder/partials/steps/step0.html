@@ -1,9 +1,13 @@
 <div class="container" >
     <div class="row">
         <div class="col-md-12">
-            <div class="page-header">
-                <h2>NMEPSCoR Metadata Tool: <small>Options</small></h2>
-            </div>
+          <div class="page-header">
+            <h2>NMEPSCoR Metadata Tool: <small>Options</small></h2>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div>
               <p><strong>What is a documentation collection?</strong> </p>
               <p>
@@ -23,6 +27,26 @@
               </p>
             </div>
             <br><br>
+        </div>
+        <div class="col-md-6" ng-controller="userProfileReadController">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>{{profile.first}} {{profile.last}}'s Profile</h4>
+            </div>
+            <div class="panel-body">
+              <p>
+              EMail: <a href="mailto:{{profile.email}}?Subject=Why are you emailing yourself..."
+                target="_top">{{profile.email}}</a>
+              </p>
+              <p>
+                My collaborator's, PIs, advisors, and pet dog...
+              </p>
+              <ul ng-repeat="pi in profile.investigators">
+                <li>{{pi.name}} ({{pi.institution}}) : {{pi.email}}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
     </div>
 
