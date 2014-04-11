@@ -143,6 +143,10 @@
             return other.name + '( at ' + other.institution + ')';
         };
 
+        $scope.go2Publish = function() {
+            $location.path( '/publish/' + submissionID);
+        };
+
         SubmissionService.list($rootScope.authService.currentUser(), function(data) {
             // callback
             $scope.previewData = SubmissionService.getById(submissionID).fullForm;
@@ -529,7 +533,7 @@
     });
 
 
-    epscorForm.controller('publishForm', function attributeForm(
+    epscorForm.controller('publishForm', function publishForm(
             $rootScope, 
             $scope, 
             $location, 
@@ -541,11 +545,14 @@
 
         var submissionID = $routeParams.subID;
 
-        if (_.isNull(submissionID) && _.isNull(rootScope.formData.META.id)) {
+        if (_.isNull(submissionID) && _.isNull($rootScope.formData.META.id)) {
             $.location.path('/');  // Big trouble, log errors, warnings.
         }
-        else if (_.isNull(rootScope.formData.META.id)) {
-            $rootScope.formData = SubmissionService.getById(submissionID).fullForm;
+        else if (_.isNull($rootScope.formData.META.id)) {
+
+            SubmissionService.list($rootScope.authService.currentUser(), function(data) {
+                $rootScope.formData = SubmissionService.getById(submissionID).fullForm;
+            });
         }
 
         // And now... things should not be null...
