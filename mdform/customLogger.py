@@ -25,7 +25,7 @@ RCS Info:
 
 
 #####    Imports    #####
-from os import path
+from os import path, pardir
 from colorlog import ColoredFormatter
 
 import re
@@ -37,7 +37,12 @@ ansi_escape = re.compile(r'\x1b[^m]*m')
 
 # Recreate, cannot circular import from settings (careful about moving this
 # file)
-PROJECT_DIR = path.abspath(path.dirname(__file__))
+PROJECT_DIR = path.abspath(
+    path.join(
+        path.dirname(path.abspath(__file__)),
+        pardir
+    )
+)
 
 # port of django logger w/ enhancement
 
