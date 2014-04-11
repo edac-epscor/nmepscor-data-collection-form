@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container" ng-controller="previewController" >
   <div class="row">
     <div class="col-md-12">
       <div class="page-header">
@@ -10,7 +10,7 @@
 
   <!-- should do this with a datagrid... -->
   
-  <div class="row" ng-controller="longForm">
+  <div class="row" >
     <div class="panel panel-default">
       <div class="panel-heading">
         Collection Preview
@@ -109,7 +109,10 @@
     </div>
   </div>
 
-  <button class="btn btn-default" ng-click="go2('/')">Home</button>
-  <button class="btn btn-primary" ng-click="go2Publish()">Publish Collection</button>
+  <div class="row">
+    <button class="btn btn-default" ng-click="go2('/')">Home</button>
+    <button ng-hide="previewData.META.finalized" class="btn btn-primary" ng-click="go2Publish()">Publish Collection</button>
+  </div>
+  
 </div>
 

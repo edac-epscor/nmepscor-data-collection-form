@@ -129,9 +129,16 @@
         // Todo: need a 'isComplete' to see if this is publishable
 
         var submissionID = $routeParams.subID;
+        $scope.previewData = null;
+
+        SubmissionService.list($rootScope.authService.currentUser(), function(data) {
+            // callback
+            $scope.previewData = SubmissionService.getById(submissionID).fullForm;
+        });
 
         /*
          * wfStep: previewData.WORKFLOW.steps[i]
+         *   maybe make this a directive?
          */
         $scope.selfOrOtherLabel = function(wfStep) {
             var performed = wfStep.performed_by.self;
@@ -146,11 +153,6 @@
         $scope.go2Publish = function() {
             $location.path( '/publish/' + submissionID);
         };
-
-        SubmissionService.list($rootScope.authService.currentUser(), function(data) {
-            // callback
-            $scope.previewData = SubmissionService.getById(submissionID).fullForm;
-        });
 
     });
                 
