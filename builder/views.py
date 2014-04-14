@@ -208,6 +208,7 @@ def signout(request):
         content_type='application/json'
     )
     util.deAuth(request, result)
+    logout(request)
     return result
 
 
@@ -283,12 +284,17 @@ def authDrupal(request):
             'msg': 'Welcome, %(first)s %(last)s' % {
                 'first': user.first_name,
                 'last': user.last_name,
-            }
+            },
+            'csrf_token': request.META['CSRF_COOKIE']
         }
         result = HttpResponse(
             json.dumps(toRet),
             content_type='application/json'
         )
+
+        request.META["CSRF_COOKIE_USED"] = True
+        # Set CSRF token on this request
+
         util.authUser(request, result, PAYLOAD['username'])
         return result
 

@@ -125,17 +125,27 @@ epscorForm.factory('AuthService',
         var PREFIX = '/';
         //var PREFIX = '/builder/';
 
-        // Django CSRF fix
-        $http.defaults.csrfCookieName = 'csrftoken';
-        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-        // Using $cookieStore not seeming to work according to docs, could be
-        // old version.  $cookies is an object...so
 
         var currentUser = null;
         var loginMsg = null;
         var failMsg = null;
         var numFailures = 0;
+
+        function updateCSRF(value) {
+            // Django CSRF fix
+            if( typeof value === 'undefined') {
+                $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+            } else {
+                $http.defaults.headers.post['X-CSRFToken'] = value;
+            }
+
+            $http.defaults.csrfCookieName = 'csrftoken';
+            $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+            // Using $cookieStore not seeming to work according to docs, could be
+            // old version.  $cookies is an object...so
+        }
+
+        updateCSRF();
 
         // Write to this and django will 500
         function getSignedCookie(cname) {
@@ -172,6 +182,9 @@ epscorForm.factory('AuthService',
                     currentUser = name;
 
                     if (data.status === true) {
+
+                        updateCSRF(data.csrf_token);
+
                         $rootScope.authorized = true;
                         console.log("Logged in as " + name);
                         loginMsg = data.msg;
