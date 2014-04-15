@@ -1,0 +1,104 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>NMEPSCoR Metadata Tool: <small>Required for all Datasets</small></h2>
+            </div>
+            <div>
+                <p>We're now gathering some basic descriptive information about your project.  This will assist our staff when we communicate with you.  This information may or may not be incorporated into generated metadata.</p>
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+    <!-- should do this with a datagrid... -->
+
+    <div class="row" ng-controller="s3Form">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+            Datasets you have created
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" role="form" name="step3_form">
+            <div class="form-group">
+              <p> 
+              Provide a brief description of the data in this collection
+              and the project. EDAC includes information regarding NM
+              EPSCoR funding and the overall state project automatically,
+              so this should be used to describe your component
+              specifically. This is similar to a poster abstract.
+              </p>
+              <label for="datasetAbstract" class="col-sm-2 control-label">Abstract</label>
+              <div class="col-sm-10" 
+                ng-class="{ 'has-error' : step3_form.abstract.$invalid && !step3_form.abstract.$pristine }"
+              >
+                <textarea class="form-control" rows="3" id="datasetAbstract" name="abstract"
+                  ng-model="formData.DATASET.abstract"
+                  required>
+                </textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <p> 
+              Provide a brief description of the purpose of your research. 
+              </p>
+              <label for="datasetPurpose" class="col-sm-2 control-label">Purpose</label>
+              <div class="col-sm-10"
+                ng-class="{ 'has-error' : step3_form.purpose.$invalid && !step3_form.purpose.$pristine }"
+              >
+                <textarea class="form-control" rows="3" id="datasetPurpose" name="purpose"
+                  ng-model="formData.DATASET.purpose"
+                  required>
+                </textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <p> 
+              If you received additional funding for the data in this
+              collection, please provide the funding agency and, where
+              possible, the grant number. Enter these as agency, number
+              with multiple entities separated by a line break.
+              </p>
+              <label for="datasetFunding" class="col-sm-2 control-label">Funding: Agency, Number</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="datasetFunding" ng-model="formData.DATASET.funding"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <p> 
+              Is there any additional information you would like to
+              provide to us about these data? For example, an
+              acknowledgment for an outside group?
+              </p>
+              <label for="datasetAdditional" class="col-sm-2 control-label">Anything Else?</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="datasetAdditional" ng-model="formData.DATASET.additional"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <p>Please describe the format.  Include the software if appropriate.  Please also indicate if you would
+              expect the data to be made available through the additional features of the portal, for example as 
+              CUAHSI WaterOneFlow services.</p>
+              <label for="datasetProprietary" class="col-sm-2 control-label">Proprietary Information: Conditional Hide Later</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="datasetProprietary" ng-model="formData.DATASET.proprietary"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10">
+          <reset-button></reset-button>
+          <a class="btn btn-primary" ng-click="nextStep(formData, '/step4')"
+            ng-disabled="step3_form.$invalid"
+            >Next Step</a>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+          <div class="page-header">
+            <h2>NMEPSCoR Metadata Tool: <small>Options</small></h2>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+              <p><strong>What is a documentation collection?</strong> </p>
+              <p>
+                A documentation collection is a logically and structurally consistent set of data files.
+              </p> <p>
+                  Each collection requires different documentation information so you may have to complete this form more than once.
+              </p> <p>
+                  What about documents and images?  You could document these as
+                  a single collection; however, we ask that you provide a brief
+                  description of each collection.  This will be used across the
+                  collection.  In the case of documents and images, this
+                  description servers a similar role as a poster or paper
+                  abstract.  We strongly encourage you to provide a separate
+                  collection for each document.
+              </p><p>
+                  You can create new collections and edit existing, unsubmitted collections here.
+              </p>
+            </div>
+            <br><br>
+        </div>
+        <div class="col-md-6" ng-controller="userProfileReadController">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>{{profile.first}} {{profile.last}}'s Profile</h4>
+            </div>
+            <div class="panel-body">
+              <p>
+              EMail: <a href="mailto:{{profile.email}}?Subject=Why are you emailing yourself..."
+                target="_top">{{profile.email}}</a>
+              </p>
+              <p>
+                My collaborator's, PIs, advisors, and pet dog...
+              </p>
+              <ul ng-repeat="pi in profile.investigators">
+                <li>{{pi.name}}, {{pi.institution}}
+                </li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <nav class="navbar navbar-collapse profile-nav" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                  <li> 
+                    <a href="#/users/profile/{{authService.currentUser()}}" >Edit</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- should do this with a datagrid... -->
+
+    <div class="row" ng-controller="submissionsController">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Documentation Collections
+            </div>
+            <table class="table table-striped table-bordered table-hover span10 submissionsTable">
+                <thead>
+                  <tr>
+                    <th class="span4">Label</th>
+                    <th class="span2">Type</th>
+                    <th class="span2">Started</th>
+                    <th class="span2">Last Modified</th>
+                    <th class="span1">% Complete</th>
+                    <th class="span1">Submitted ?</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr ng-repeat="submission in submissionsList | orderBy:'fullForm.submissionId'">
+                    <td>
+                      <a ng-hide="submission.finalized" href="#/loadForm/{{submission.fullForm.META.id}}">
+                        {{submission.fullForm.META.label}}
+                      </a>
+
+                      <span ng-show="submission.finalized"> {{submission.fullForm.META.label}} </span>
+                    </td>
+                    <td>
+                      {{submission.fullForm.DESCRIBE.choice}}
+                    </td>
+                    <td>
+                      {{submission.started}}
+                    </td>
+                    <td>
+                      {{submission.modified}}
+                    </td>
+                    <td>
+                       Not done yet
+                    </td>
+                    <td ng-if="submission.finalized">
+                      <a href="#/preview/{{submission.fullForm.META.id}}">
+                        {{submission.finalized | yesNo}}
+                      </a>
+                    </td>
+                    <td ng-if="! submission.finalized">
+                        {{submission.finalized | yesNo}}
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="#/step1">Create New Collection</a>
+
+</div>
+
+
+<!-- Notifications -->
+<!--
+<div noty ng-repeat="n in notifications"/>
+-->

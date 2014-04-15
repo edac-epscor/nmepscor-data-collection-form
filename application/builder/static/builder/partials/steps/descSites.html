@@ -1,0 +1,131 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>NMEPSCoR Metadata Tool: <small>Describe Sites</small></h2>
+            </div>
+            <div>
+                <p>
+                  You will be describing the XY(Z) coordinate information of any sites in your dataset.
+                </p>
+            <br><br>
+        </div>
+        <div class="panel panel-danger">
+          I still need a file upload dialog
+        </div>
+    </div>
+    
+    <div class="row" ng-controller="siteForm">
+      
+      <!--
+      <div class="collapse in">
+        <pre> form = {{formData | json}}
+        </pre>
+      </div>
+      -->
+      
+       <div class="panel panel-primary">
+          <div class="panel-heading">
+              Sites to Document
+          </div>
+          <div class="panel-body span10">
+            <form novalidate class="simple-form">
+              <br/>
+              <label for="chooseElevation">Elevation Units</label>
+              <select id="chooseElevation" ng-model="formData.SITES.elevation_units" ng-options="e for e in ELEVATION_UNITS"></select>
+              <br/>
+              <label for="chooseProjection">Projection</label>
+              <select id="chooseProjection" ng-model="formData.SITES.projection" ng-options="p for p in PROJECTIONS"></select>
+              
+            </form>
+            <table class="table table-striped table-bordered table-hover span10 filesTable">              
+                <thead>
+                  <tr>
+                    <th class="col-sm-2">Site ID</th>
+                    <th class="col-sm-4">Site Description</th>
+                    <th class="col-sm-2">X (Longitude)</th>
+                    <th class="col-sm-2">Y (Latitude)</th>
+                    <th class="col-sm-2">Z (Elevation)</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- if you use orderby, careful of impact on delete methods... -->
+                  <tr ng-repeat="site in formData.SITES.features">
+                    <td>
+                      <button type="button" class="btn btn-xs" ng-click="delSite($index)">
+                        <span class="glyphicon glyphicon-remove-sign"></span> 
+                      </button>
+
+                      <a ng-click="editSite(
+                        site.geometry.coordinates[0], site.geometry.coordinates[1], site.geometry.coordinates[2],
+                         site.properties.id,
+                          site.properties.description)">
+                        {{site.properties.id}}
+                      </a>
+                    </td>
+                    <!-- make me a loop -->
+                    <td>
+                      {{site.properties.description}}
+                    </td>
+                    <td>
+                      {{site.geometry.coordinates[0]}}
+                    </td>
+                    <td>
+                      {{site.geometry.coordinates[1]}}
+                    </td>
+                    <td>
+                      {{site.geometry.coordinates[2]}}
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="panel-footer">
+            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="addSiteDialog()">
+              <span class="glyphicon glyphicon-plus-sign"></span> 
+            </button>
+          </div>
+        </div>
+        
+
+        <!-- THIS should be a modal form, but $modal doesn't work in this angular-ui build...? -->
+        <div class="panel panel-default" ng-show="addingSite">
+          <div class="panel-heading">
+            New Site Dialog
+          </div>
+
+          <div class="panel-body" >
+            <form novalidate class="simple-form">
+              <div class="form-group"> This will be added to the above table</div>
+                <br/>
+                <label for="addSiteID">Site ID</label>
+                <input type="text" id="addSiteID" ng-model="newSite.properties.id" maxlength="10" size="10" />
+                <br/>
+                <label for="addSiteDesc">Description</label>
+                <input type="text" id="addSiteDesc" ng-model="newSite.properties.description" maxlength="50" size="50"  />
+                <br/>
+                <label for="addSiteLong">Longitude</label>
+                <input type="text" id="addSiteLong" ng-model="newSite.geometry.coordinates[0]" maxlength="50" size="50" />
+                <br/>
+                <label for="addSiteLat">Latitude</label>
+                <input type="text" id="addSiteLat" ng-model="newSite.geometry.coordinates[1]" maxlength="50" size="50" />
+                <label for="addSiteElevation">Elevation</label>
+                <input type="text" id="addSiteElevation" ng-model="newSite.geometry.coordinates[2]" maxlength="50" size="50" />
+
+                <button class="btn btn-danger" ng-click="cancelAddSite()"> Cancel</button>
+                <button class="btn btn-primary" ng-click="addSite()">Add This Site</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+        <!-- Always Onto Workflow -->
+          <reset-button></reset-button>
+          <quit-button></quit-button>
+          <a class="btn btn-primary" ng-click="nextStep(formData, '/descWorkflow')">Next Step</a>
+        </div>
+      </div>
+    </div> 
+  </div>
+

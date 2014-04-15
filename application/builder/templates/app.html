@@ -1,0 +1,127 @@
+{% load cache staticfiles compress %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>EPSCoR Data Documentation Tool</title>
+    <link REL="SHORTCUT ICON" HREF="favicon.png">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        body {
+            padding-top: 55px;
+            padding-bottom: 75px;
+        }
+    </style>
+
+    {% compress css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'builder/css/magic-bootstrap.css' %}"/>
+    <!--
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+    -->
+
+    <link rel="stylesheet" href="{% static 'ng-grid/ng-grid.css' %}">
+
+    <link rel="stylesheet" href="{% static 'angular-strap/vendor/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'angular-strap/vendor/bootstrap-timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'angular-xeditable/dist/css/xeditable.css' %}"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'builder/css/app.css' %}"/>
+    {% endcompress %}
+
+    {% compress js %}
+    <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'respond/respond.min.js' %}"></script>
+    {% endcompress %}
+
+</head>
+
+<body ng-app="epscorForm">
+
+  <!-- bootstrap navbar -->
+  <div ng-include="'{% static 'builder/partials/navbar-top.html' %}'"></div>
+
+  <!-- fake modal/overlay -->
+  <div ng-include="'{% static 'builder/partials/modalOverlay.html' %}'"></div>
+
+  <!-- ng routes hook -->
+  <div ng-view></div>
+
+  <!-- progressbar -->
+  <div ng-include="'{% static 'builder/partials/progbar-bottom.html' %}'"></div>
+
+  <!-- footer -->
+  <div ng-include="'{% static 'builder/partials/navbar-bottom.html' %}'"></div>
+
+  {% compress js %}
+  <script type="text/javascript" src="{% static 'jquery/jquery.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'jqueryui/ui/jquery-ui.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'angular/angular.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'angular-cookies/angular-cookies.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'angular-route/angular-route.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'angular-ui/build/angular-ui.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'ng-grid/ng-grid-2.0.3.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js' %}"></script>
+
+  <!-- for ui notifications -->
+  <script type="text/javascript" src="{% static 'builder/js/notificationManager.js' %}"></script>
+  {% endcompress %}
+
+  <!-- compressing this with other materials... breaks... -->
+  <script type="text/javascript" src="{% static 'angular-sanitize/angular-sanitize.min.js' %}"></script>
+
+  <!-- TODO needed? -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js"></script>
+
+  <!-- angular strap -->
+  {% compress js %}
+  <script type="text/javascript" src="{% static 'angular-strap/dist/angular-strap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap-timepicker/js/bootstrap-timepicker.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'angular-xeditable/dist/js/xeditable.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
+
+
+  <!--  TODO compile/optimise these during build -->
+  <script type="text/javascript" src="{% static 'builder/js/app.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/controllers.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/services/services.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'builder/js/filters/filters.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/fadeInDirective.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/stopEventDirective.js' %}"></script>
+  <script type="text/javascript" src="{% static 'builder/js/directives/formButtons.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'builder/js/directives/notifications/notyDirective.js' %}"></script>
+
+
+  <!-- example area for ui elements (non-production) -->
+
+  <script type="text/javascript" src="{% static 'noty/js/noty/jquery.noty.js' %}"></script>
+  <script type="text/javascript" src="{% static 'noty/js/noty/layouts/bottomRight.js' %}"></script>
+
+  <!-- from... wheres? -->
+  <script type="text/javascript" src="{% static 'builder/js/vendor/noty-2.1.0/js/noty/themes/nucleus.js' %}"></script>
+  {% endcompress %}
+
+</body>
+</html>
