@@ -40,7 +40,8 @@ ansi_escape = re.compile(r'\x1b[^m]*m')
 PROJECT_DIR = path.abspath(
     path.join(
         path.dirname(path.abspath(__file__)),
-        pardir
+        pardir,
+        pardir,  # up two folders
     )
 )
 
@@ -157,7 +158,7 @@ def getLogDictSchema(stripColors=False):
                 'propagate': True,
                 'level': 'DEBUG'
             },
-            'mdform': {
+            'base': {
                 'handlers': ['console'],
                 'propagate': True,
                 #'level': 'WARN'
