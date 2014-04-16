@@ -75,7 +75,8 @@ that can auth to the nm epscor portal
   - Be sure debug is False
 * python manage.py bower_install (Gather proper JS versions, choose bootstrap 3.0.0)
   - Note: this requires a fairly recent version of node and npm
-* python manage.py collectstatic (collect static files for serving outside of wsgi)
+* python manage.py ompcress (aggregate minified js/css)
+* python manage.py collectstatic (collect static files for serving outside of wsgi by server)
   - Add the folder this creates as an apache served folder
 * I believe this entire app is now 'rooted' within whatever folder it lies in
   - Therefore it can be mod-rewritten into folders of Apache
