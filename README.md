@@ -8,7 +8,7 @@ that can auth to the nm epscor portal
 
 # Usage
 
-## As Django app.  No real database configured given expected load
+## As Django app.
 
 ## Known Stack
 
@@ -34,6 +34,7 @@ that can auth to the nm epscor portal
 # Next Steps
 
 ***
+* Convert sqlite db to real db if userbase will ever expand
 * Finish bowerizing CSS which has minor mismatch in versions.
   - Unpin(?) versions and move closer to trunks/stable
 * EMail job/task
