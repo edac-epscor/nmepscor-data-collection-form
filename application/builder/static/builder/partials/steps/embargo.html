@@ -8,10 +8,9 @@
               <p> Congrats, you're finally at the last step. </p>
               <p> We'd like your data, but understand you may require that it be embargoed.  We can't do it forever, But we might be able to keep it offline as late as 4/31/2015<p>
               <p> The author has no clue if this is true<p>
-            </div></li>
+            </div>
             <br><br>
         </div>
-        
     </div>
     
     <div class="panel panel-primary" ng-controller="embargoForm">
@@ -31,11 +30,7 @@
               ng-change="resetRequest()"
             >
             I have read and understood the NM EPSCoR <a href="http://nmepscor.org/cyberinfrastructure/data-policy" target="_blank"> data policy,</a>
-            and agree to release my data under the Creative Commons CC BY 4.0 or later licensing scheme. 
-             <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">
-               <img alt="CC license picture" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
-             </a>
-            </input>
+            and agree to release my data. 
           </div>
 
           I am requesting that the dataset(s) documented here be embargoed for
@@ -82,10 +77,11 @@
       <div class="col-sm-10">
         <reset-button></reset-button>
         <quit-button></quit-button>
-        <a class="btn btn-primary" 
+        <button type="button" class="btn btn-primary" 
           ng-disabled="! formData.EMBARGO.hasReadDataPolicy"
           ng-click="nextStep(formData, '/preview/' + formData.META.id)"
-          >Preview Collection</a>
+        >Preview Collection
+        </button>
       </div>
     </div>
 

@@ -25,6 +25,43 @@
           "required": false,
           "type": "string",
           "id": "http: //jsonschema.net/EMBARGO/longer"
+        },
+        "hasReadDataPolicy": {
+            "required": false,
+            "type": "boolean",
+            "id": "http: //jsonschema.net/EMBARGO/hasReadDataPolicy"
+        },
+        "hasReadCircumstances": {
+            "required": false,
+            "type": "boolean",
+            "id": "http: //jsonschema.net/EMBARGO/hasReadDataPolicy"
+        }
+      }
+    },
+    "LICENSE":{
+      "required": false,
+      "type": "object",
+      "id": "http: //jsonschema.net/LICENSE",
+      "properties": {
+        "hasReadDataPolicy": {
+            "required": false,
+            "type": "boolean",
+            "id": "http: //jsonschema.net/LICENSE/hasReadDataPolicy"
+        },
+        "hasReadCircumstances": {
+            "required": false,
+            "type": "boolean",
+            "id": "http: //jsonschema.net/LICENSE/hasReadDataPolicy"
+        },
+        "choice": {
+            "required": false,
+            "type": "string",
+            "id": "http: //jsonschema.net/LICENSE/choice"
+        },
+        "alternate": {
+            "required": false,
+            "type": "string",
+            "id": "http: //jsonschema.net/LICENSE/alternate"
         }
       }
     },

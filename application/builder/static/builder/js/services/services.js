@@ -10,7 +10,7 @@ epscorForm.factory('RESTService', function ($http) {
                     //console.log(data.json);
                 }).
                 error(function (data, status, headers, config) {
-                    console.log("failed to retrieve data");
+                    console.log("failed to retrieve data: " + url);
                 });
         }
     };

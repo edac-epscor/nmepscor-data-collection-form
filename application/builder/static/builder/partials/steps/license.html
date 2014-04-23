@@ -1,0 +1,110 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>NMEPSCoR Metadata Tool: <small>License Information</small></h2>
+            </div>
+            <div>
+              <p> Congrats, you're almost done. </p>
+              <p> We'd like your data, but understand <i>some</i> data sets
+                may have licensing requirements different from the data plan.
+                This is your chance to tell us.
+              <p>
+            </div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="panel panel-primary" ng-controller="licenseForm">
+      <!--
+      <pre> form = {{formData.LICENSE | json}}</pre>
+      -->
+      <form novalidate class="simple-form" >
+        <div class="panel-heading">
+          <h3 class="panel-title">License Needs</h3>
+        </div>
+
+        <div class="panel-body">
+
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" 
+                ng-model="formData.LICENSE.hasReadDataPolicy"
+                ng-change="resetRequest()"
+              >
+              I have read and understood the NM EPSCoR <a href="http://nmepscor.org/cyberinfrastructure/data-policy" target="_blank">data policy,</a>
+             </input>
+           </label>
+          </div>
+
+          <div class="form-group radio">
+            <label>
+              <input type="radio" value="CCBY_4" 
+                ng-model="formData.LICENSE.choice"
+                ng-disabled="! formData.LICENSE.hasReadDataPolicy"
+              />
+              I agree to release my data under the Creative Commons CC BY 4.0 or later licensing scheme. 
+              <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">
+                <img alt="CC license picture" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+              </a>
+            </label>
+
+            <br/> OR <br/>
+
+            <label>
+              <input type="radio" value="other" 
+                ng-model="formData.LICENSE.choice" 
+                ng-disabled="! formData.LICENSE.hasReadDataPolicy"
+              />
+              I am requesting approval for the dataset(s) documented here be
+              released under an alternate license.
+            </label>
+            <br/>
+          </div>
+
+         <div class="form-group" ng-show="formData.LICENSE.choice=='other'">
+           <input type="checkbox" ng-model="formData.LICENSE.hasReadCircumstances"
+             ng-disabled="! formData.LICENSE.hasReadDataPolicy"
+             ng-change="resetRequest()"
+           >
+              I understand that exceptions are only provided in rare
+              circumstances and have done my best to meet the data policies as
+              laid out by NM EPSCoR.  
+           </input>
+         </div>
+
+         <div class="form-group" ng-show="formData.LICENSE.choice=='other'">
+            <label for="altLicense" class="col-sm-2 control-label">Provide Detailed Explanation</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="6" id="altLicense" 
+                ng-model="formData.LICENSE.alternate"
+                ng-disabled="! formData.LICENSE.hasReadDataPolicy || ! formData.LICENSE.hasReadCircumstances"
+                placeholder="Provide a link to the desired license and a detailed explanation here"
+                ng-minlength="30"
+                >
+              </textarea>
+            </div>
+          </div>
+          <p>
+          Confirmation of this request will be sent to the email you provided,
+          to NM EPSCoR, to EDAC, and to your listed PI. 
+          </p>
+        </div>
+
+      </form>
+    </div> 
+
+    <div class="row">
+      <div class="col-sm-10">
+        <reset-button></reset-button>
+        <quit-button></quit-button>
+        <button type="button" class="btn btn-primary" 
+          ng-disabled="! canSubmit()"
+          ng-click="nextStep(formData, '/embargo/' + formData.META.id)"
+        >Next Step: Embargo
+        </button>
+      </div>
+    </div>
+
+  </div>
+

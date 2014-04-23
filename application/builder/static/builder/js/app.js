@@ -114,6 +114,11 @@ epscorForm.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
         controller: 'timeForm'
     });
 
+    $routeProvider.when('/license', {
+        templateUrl: STEPS + '/license.html',
+        controller: 'licenseForm'
+    });
+
     $routeProvider.when('/embargo', {
         templateUrl: STEPS + '/embargo.html',
         controller: 'embargoForm'

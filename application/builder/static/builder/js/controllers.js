@@ -406,6 +406,47 @@
         };
     });
 
+
+    epscorForm.controller('licenseForm', function licenseForm($rootScope, $scope, $location) {
+        $rootScope.progressBar = 85;
+
+        // If the user clears either checkbox we change the request on
+        // them back to the default
+        $scope.resetRequest = function() {
+            if ($rootScope.formData.LICENSE.hasReadCircumstances === false) {
+                //unset circumstance we unset your text
+                $rootScope.formData.LICENSE.alternate = '';
+            }
+            if ($rootScope.formData.LICENSE.hasReadDataPolicy === false) {
+                // Unset data policy, we unset your everything
+                $rootScope.formData.LICENSE.choice = null;
+            }
+        };
+
+        $scope.canSubmit = function() {
+            var form = $rootScope.formData.LICENSE;
+
+            if (! form.hasReadDataPolicy) {
+                return false;
+            }
+            // form.choice == true...
+            if(form.choice == 'CCBY_4') {
+                return true;
+            }
+            else if (form.choice == 'other' &&  form.hasReadCircumstances) {
+                // Other must agree to circumstances
+                if (form.alternate.length > 30) {
+                    return true;
+                }
+                return false;
+            }
+            else {
+                return false;
+            }
+        };
+    });
+
+
     epscorForm.controller('embargoForm', function embargoForm($rootScope, $scope, $location) {
         $scope.EMBARGO_DURATIONS = [
             "Do Not Embargo"

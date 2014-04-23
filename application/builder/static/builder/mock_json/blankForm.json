@@ -16,6 +16,12 @@
         "hasReadDataPolicy": false,
         "hasReadCircumstances": false
     },
+    "LICENSE": {
+        "hasReadDataPolicy": false,
+        "hasReadCircumstances": false,
+        "choice": null,
+        "alternate": ""
+    },
     "SITES": {
         "elevation_units": "meters",
         "projection": "WGS84",
@@ -40,14 +46,14 @@
         "choice": "basic"
     },
     "DATASET": {
-        "abstract": '',
-        "purpose": '',
-        "funding": '',
-        "additional": '',
-        "proprietary": ''
+        "abstract": "",
+        "purpose": "",
+        "funding": "",
+        "additional": "",
+        "proprietary": ""
     },
     "TAGGING": {
-        "placenames": '',
+        "placenames": "",
         "tags": null
     }
 }
