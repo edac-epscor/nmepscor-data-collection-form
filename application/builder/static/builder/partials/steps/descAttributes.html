@@ -11,9 +11,10 @@
               <div class="panel-body">
                 <p>
                   You may pick the type of attribute you're anotating to
-                  explore them, but once you begin editing it, will not be able
-                  to change to another type.  This choice will be fixed forever
-                  for this dataset.  When you do commit, <i>all</i> changes you
+                  explore them, and even after editing them.  However, once
+                  you <i>commit</i> the attribute, you will be unable to change
+                  to another type.  This choice will be fixed forever for this
+                  dataset.  When you do commit, <i>all</i> changes you
                   have made to the other types will be lost forever.
                 </p>
               </div>
@@ -133,7 +134,10 @@
                     </td>
                     <td ng-show="tableform.$visible">
                       <button type="button" ng-show="tableform.$visible" ng-click="deleteAttr($index)" 
-                        class="btn btn-danger pull-right"> Del
+                        class="btn btn-danger pull-right"> 
+                        <span class="glyphicon glyphicon-minus-sign">
+                          Del
+                        </span>
                       </button>
                     </td>
                   </tr>
@@ -155,11 +159,17 @@
                 </span>
                 </button>
                 
-                <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">
-                  Cancel
+                <button type="submit" class="btn btn-primary btn-lg"
+                  ng-disabled="tableform.$waiting" 
+                >
+                  <span class="glyphicon glyphicon-ok"></span>
                 </button>
-                <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">
-                  Save
+
+                <button type="button" class="btn btn-default btn-lg"
+                  ng-disabled="tableform.$waiting" 
+                  ng-click="tableform.$cancel()" 
+                >
+                  <span class="glyphicon glyphicon-remove"></span>
                 </button>
    
               </div>
@@ -170,13 +180,21 @@
         </div>
       
         <div class="row">
-        <!-- We always follow with step 2; files to document -->
-          <button class="btn btn-primary" ng-click="nextStep(formData, '/embargo')">Next Step</button>
-
-          <!--
-          <a class="btn btn-danger" href="#/quit" tooltip="Save my work, I'm done for now">Quit</a>
-             Not until they've done something
-          -->
+          <div style="display:inline-block;"
+            class="input-xxlarge"
+            tooltip="{{
+              tableform.$visible || !committed ? 
+              'You can only advance after committing to a style' :
+              'Good to go'
+            }}"
+          >
+            <!-- No click event, it's disabled but tooltipped-->
+            <button class="btn btn-primary" 
+              ng-disabled="tableform.$visible || !committed"
+              ng-click="nextStep(formData, '/embargo')"
+            >Next Step
+            </button>
+          </div>
         </div>
 
       </div>
