@@ -62,10 +62,14 @@
             
             <div class="form-group">
               <label for="workflowDescription" class="col-sm-2 control-label">Description</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="10" id="workflowDescription" 
+              <div class="col-sm-10"
+                ng-class="{ 'has-error' : form_workflow.workflowDescription.$invalid && !form_workflow.workflowDescription.$pristine }"
+              >
+                <textarea class="form-control" rows="10" id="workflowDescription" name="workflowDescription"
                   ng-model="newWorkflow.description" 
-                  ngMinLength=20 
+                  ng-minlength=20 
+                  placeholder="Collected water samples from sites in Place X. We used Procedure A."
+                  required
                 >
                 </textarea>
               </div>
@@ -74,7 +78,6 @@
             <div class="form-group">                
               <label for="workflowDate" class="col-sm-2 control-label">Date Performed</label>
               <div class="col-sm-4 well">
-
                 <a style="margin-right: 0px; margin-bottom: .5em;" class="btn btn-primary glyphicon glyphicon-calendar"
                    data-toggle="datepicker" /> 
                 </a>
@@ -82,6 +85,7 @@
                   style="width: 12em; margin-left: 0px;" 
                   type="text" ng-model="newWorkflow.date_performed"
                   data-date-format="mm/dd/yyyy" bs-datepicker class="form-control" 
+                  required
                 />
               </div>
             </div>
@@ -91,34 +95,54 @@
                 <div class="col-sm-2">
                   <div class="radio">
                     <label class="control-label">
-                      <input type="radio" ng-value="true" ng-model="newWorkflow.performed_by.self" /> 
+                      <input type="radio" 
+                        ng-change="checkedSelf(true)"
+                        ng-value="true" 
+                        ng-model="newWorkflow.performed_by.self" 
+                      /> 
                       I performed this step
                       <br/>
                     </label>
 
                     <label class="control-label">
-                      <input type="radio" ng-value="false" ng-model="newWorkflow.performed_by.self" ng-selected="newWorkflow.performed_by.self"/> 
+                      <input type="radio" 
+                        ng-value="false" 
+                        ng-model="newWorkflow.performed_by.self" 
+                        ng-selected="newWorkflow.performed_by.self"
+                      /> 
                       Someone else performed this step
                       <br/>
                     </label>
                   </div>
                 </div>
               
-                <div class="col-sm-offset-2 col-sm-8" ng-hide="newWorkflow.performed_by.self">
+                <div class="col-sm-offset-2 col-sm-8 form-group" ng-hide="newWorkflow.performed_by.self">
 
-                  <div class="row">
-                    <label for="wf-name" class="control-label col-sm-2">Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" id="wf-name" ng-model="newWorkflow.performed_by.other.name"
-                 maxlength="50" size="50"/>
+                  <div class="row" >
+                    <label for="wfName" class="control-label col-sm-2">Name</label>
+                    <div class="col-sm-10"
+                      ng-class="{ 'has-error' : form_workflow.wfName.$invalid && !form_workflow.wfName.$pristine }"
+                    >
+                      <input class="form-control" type="text" id="wfName" name="wfName"
+                      maxlength="50" size="50"
+                      ng-minlength="3"
+                      ng-model="newWorkflow.performed_by.other.name"
+                      ng-required="! newWorkflow.performed_by.self"
+                      />
                     </div>
                   </div>
                   
-                  <div class="row">  
-                    <label for="wf-institution" class="control-label col-sm-2">Institution</label>
-                    <div class="col-sm-10">
-                      <input type="text" id="wf-institution" ng-model="newWorkflow.performed_by.other.institution"
-                 maxlength="50" size="50"/>
+                  <div class="row" >  
+                    <label for="wfInstitution" class="control-label col-sm-2">Institution</label>
+                    <div class="col-sm-10"
+                      ng-class="{ 'has-error' : form_workflow.wfInstitution.$invalid && !form_workflow.wfInstitution.$pristine }"
+                    >
+                      <input class="form-control" type="text" id="wfInstitution" name="wfInstitution"
+                      maxlength="50" size="50" 
+                      ng-minlength="3"
+                      ng-model="newWorkflow.performed_by.other.institution"
+                      ng-required="! newWorkflow.performed_by.self"
+                      />
                     </div>
                   </div>
                 </div>
@@ -126,8 +150,20 @@
             </div>
 
             <br/>
-            <button class="btn btn-primary" ng-click="addWorkflow()">Add This Step</button>
-            <button class="btn btn-danger" ng-click="cancelAddWorkflow()"> Cancel</button>
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="addWorkflow()"
+              ng-disabled="form_workflow.$invalid"
+            >
+              <!--
+              Add This Step
+              -->
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-lg" ng-click="cancelAddWorkflow()">
+              <!--
+              Cancel
+              -->
+             <span class="glyphicon glyphicon-remove"></span>
+            </button>
           </form>
         </div>
       </div> <!-- close add panel -->

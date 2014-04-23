@@ -64,7 +64,7 @@
           </div>
           <div class="panel-body span10">
             <!-- angular x-editable -->
-            <form editable-form name="fileform" onaftersave="" oncancel="cancel()">
+            <form editable-form name="fileform">
               <table class="table table-striped table-bordered table-hover table-condensed span10 filesTable">
                 <thead>
                   <tr ng-click="fileform.$show()">
@@ -83,18 +83,26 @@
                   <!-- if you use orderby, careful of impact on delete methods... -->
                   <tr ng-repeat="fileO in formData.FILES.datatable">
                     
-                    <td ><span editable-text="fileO.file_name"
-                        e-form="fileform" e-required>
-                      {{fileO.file_name || 'empty'}}
+                    <td >
+                      <span editable-text="fileO.file_name"
+                        e-form="fileform" e-required e-title="file name"
+                        e-placeholder="Your file name"
+                        >
+                      {{fileO.file_name || 'File Name Required'}}
                     </span></td>
                     
-                    <td> <span editable-text="fileO.title" e-form="fileform" e-required>
-                      {{fileO.title || 'empty'}}
+                    <td> 
+                      <span editable-text="fileO.title" e-form="fileform" e-required
+                        e-placeholder="Title"
+                        >
+                      {{fileO.title || 'Default Title Required'}}
                     </span></td>
                     
                     <td ng-hide="hideTableInfo"> 
-                      <span editable-text="fileO.tabname" e-form="fileform">
-                        {{fileO.tabname || 'empty'}}
+                      <span editable-text="fileO.tabname" e-form="fileform" 
+                        e-placeholder="What Tab?"
+                      >
+                        {{fileO.tabname || 'No Tab given'}}
                       </span> 
                     </td>
 
@@ -124,17 +132,22 @@
               </div>
 
               <div class="btn-form" ng-show="fileform.$visible">
-                <button type="button" ng-disabled="fileform.$waiting" ng-click="addFile()" class="btn btn-default pull-right btn-lg"> 
-                  <span class="glyphicon glyphicon-plus-sign">Add Row
-                  </span> 
-                </button>
-                
-                <button type="submit" ng-disabled="fileform.$waiting" class="btn btn-primary">
-                  Save
-                </button>
-                <button type="button" ng-disabled="fileform.$waiting" ng-click="fileform.$cancel()" class="btn btn-default">
-                  Cancel
-                </button>
+                <span class="editable-buttons pull-right">
+                  <button type="button" ng-disabled="fileform.$waiting" ng-click="addFile()" class="btn btn-default pull-right btn-lg"> 
+                    <span class="glyphicon glyphicon-plus-sign">Add Row </span> 
+                  </button>
+                </span>
+
+                <span class="editable-buttons">
+                  
+                  <button type="submit" ng-disabled="fileform.$waiting || fileform.$invalid" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                  <button type="button" ng-disabled="fileform.$waiting" ng-click="fileform.$cancel()" class="btn btn-default btn-lg">
+                    
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                </span>  
               </div>
 
             </form>

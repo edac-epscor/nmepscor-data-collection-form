@@ -240,9 +240,9 @@
         $scope.addFile = function() {
             //hide
             $rootScope.formData.FILES.datatable.push({
-                "file_name": "default.file.name.csv",
-                "tabname": "DEFAULT_TAB",
-                "title": "DEFAULT_FILE_TITLE"
+                "file_name": '',
+                "tabname": '',
+                "title": ''
             });
         };
 
@@ -363,12 +363,20 @@
                 "performed_by": {
                     "self": true,
                     "other": {
-                        "name": null,
-                        "institution": null
+                        "name": '',
+                        "institution": ''
                     }
                 },
-                "description": null
+                "description": ''
             };
+        };
+
+        // Clear other info when they hit 'self'
+        $scope.checkedSelf = function(value) {
+            if(value === true) {
+                $scope.newWorkflow.performed_by.other.name = '';
+                $scope.newWorkflow.performed_by.other.institution = '';
+            }
         };
 
         // Delete a file from datatable
@@ -396,7 +404,6 @@
             $scope.addingWorkflow = true;
             $scope.resetNewWorkflow();
         };
-
     });
 
     epscorForm.controller('embargoForm', function embargoForm($rootScope, $scope, $location) {
