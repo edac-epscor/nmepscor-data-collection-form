@@ -40,14 +40,14 @@
         "choice": "basic"
     },
     "DATASET": {
-        "abstract": null,
-        "purpose": null,
-        "funding": null,
-        "additional": null,
-        "proprietary": null
+        "abstract": '',
+        "purpose": '',
+        "funding": '',
+        "additional": '',
+        "proprietary": ''
     },
     "TAGGING": {
-        "placenames": null,
+        "placenames": '',
         "tags": null
     }
 }
