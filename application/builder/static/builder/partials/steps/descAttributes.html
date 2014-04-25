@@ -184,14 +184,12 @@
             tooltip="{{
               tableform.$visible || ! formData.ATTRIBUTES.committed ? 
               'You can only advance after committing to a style' :
-              'You can only advance after committing to a style' :
               'Good to go'
             }}"
           >
             <!-- No click event, it's disabled but tooltipped-->
             <button class="btn btn-primary" 
               ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
-
               ng-click="nextStep(formData, '/license')"
             >Next Step
             </button>
