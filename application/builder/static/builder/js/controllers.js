@@ -483,42 +483,75 @@
 
     epscorForm.controller('attributeForm', function attributeForm($rootScope, $scope, $location) {
 
+        // Dropdown population
         $scope.ATTRIBUTE_TYPES = [
             "tabular",
             "matrix",
             "gridded"
         ];
 
+        // Blank/New Rows to clone
+        var ATTRIBUTE_CONFIG = $rootScope.constants.attributeFormConfig;
+
         // alias
-        var attributeFormConfig = $rootScope.constants.attributeFormConfig;
 
         $scope.changeTableType = function(typ) {
-            $scope.tableInfo = attributeFormConfig[$scope.formData.ATTRIBUTES.typeSelected];
+            var typeSelected = $scope.formData.ATTRIBUTES.typeSelected;
+            $scope.tableInfo = ATTRIBUTE_CONFIG[typeSelected];
             $scope.recordList = $rootScope.formData.ATTRIBUTES.userTable[
-                $scope.formData.ATTRIBUTES.typeSelected
+                typeSelected
             ];
         };
 
-        // Blank Row
+        // Blank Row copied into table model
         $scope.addRow = function() {
+            var typeSelected = $scope.formData.ATTRIBUTES.typeSelected;
             $scope.inserted = angular.copy(
-                attributeFormConfig[$scope.formData.ATTRIBUTES.typeSelected]
+                ATTRIBUTE_CONFIG[typeSelected]
             );
-
-            //records aliases to appropriate master
-            $scope.recordList = $rootScope.formData.ATTRIBUTES.userTable[
-                $scope.formData.ATTRIBUTES.typeSelected
-            ];
-
             $scope.recordList.push($scope.inserted);
         };
 
+        // TODO: refactor pruner into generating prototype
         $scope.saveTable= function() {
+            var cellVal, found;
+
+            var table = $scope.recordList;
+
+            // clear out empty last row
+            var wipeRows = [];
+
+            for ( var row = 0; row < table.length; row ++) {
+                found = false;
+                for(var col = 0; col < table[row].length; col ++) {
+                    cellVal = table[row][col].value;
+                    if (cellVal !== null && cellVal !== '') {
+                        found = true;
+                        break;
+                    }
+                }
+                if(! found) {
+                    wipeRows.push(row);
+                    // blank row
+                }
+            }
+            wipeRows.reverse();  // Procede from tail to not change indices
+
+            // Purged
+            _.each(wipeRows, function(rowIdx) {
+                $scope.deleteAttr(rowIdx);
+            });
+
             $rootScope.save($rootScope.formData); // Changes pushed to server on mini save
         };
 
         // User is irrecovably committed to this combination
         $scope.commitChoice = function() {
+            if ( $scope.formData.ATTRIBUTES.committed) {
+                console.log("User doubly committed attribute choice");
+            }
+
+            // TODO: check if...we're already finalized.
             var choice = $scope.formData.ATTRIBUTES.typeSelected;
             //tabular, matrix, gridded
             switch (choice) {
@@ -535,7 +568,7 @@
                     $scope.formData.ATTRIBUTES.userTable.matrix = [];
                     break;
             }
-            $scope.committed = true;
+            $scope.formData.ATTRIBUTES.committed = true;
         };
 
         // Purge out an entire row
@@ -545,10 +578,7 @@
         };
 
         $scope.changeTableType("tabular"); // default loaded
-        $scope.committed = false;
-
         $rootScope.progressBar = 60;
-
     });
 
 

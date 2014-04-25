@@ -83,9 +83,8 @@
     </div>
     
     <div class="panel panel-basic" ng-controller="attributeForm">
-      <!--
+
       <pre> form = {{formData.ATTRIBUTES | json}}</pre>
-      -->
       
       <div class="panel-body">
         
@@ -96,11 +95,11 @@
             <select id="attributeType" 
               ng-model="formData.ATTRIBUTES.typeSelected"
               ng-options="a for a in ATTRIBUTE_TYPES"
-              ng-disabled="committed"
+              ng-disabled="formData.ATTRIBUTES.committed"
               ng-change="changeTableType()">
             </select>
 
-            <button type="button" class="btn btn-danger col-sm-offset-2" ng-click="commitChoice()" ng-disabled="committed"> Commit Forever
+            <button type="button" class="btn btn-danger col-sm-offset-2" ng-click="commitChoice()" ng-disabled="formData.ATTRIBUTES.committed"> Commit Forever
             </button>
           </div>
         </form>
@@ -183,14 +182,14 @@
           <div style="display:inline-block;"
             class="input-xxlarge"
             tooltip="{{
-              tableform.$visible || !committed ? 
+              tableform.$visible || ! formData.ATTRIBUTES.committed ? 
               'You can only advance after committing to a style' :
               'Good to go'
             }}"
           >
             <!-- No click event, it's disabled but tooltipped-->
             <button class="btn btn-primary" 
-              ng-disabled="tableform.$visible || !committed"
+              ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
               ng-click="nextStep(formData, '/license')"
             >Next Step
             </button>

@@ -35,6 +35,7 @@
         "rows": []
     },
     "ATTRIBUTES": {
+        "committed": "false",
         "typeSelected": "tabular",
         "userTable": {
             "tabular": [],
