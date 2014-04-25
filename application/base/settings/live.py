@@ -2,3 +2,6 @@ from .default import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True

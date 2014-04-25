@@ -199,5 +199,3 @@ BOWER_INSTALLED_APPS = (
     'noty#2.1.0',  # choose 3.0.0 in bower
     # somewhere the nucleus theme came into existence
 )
-
-COMPRESS_ENABLED = False
