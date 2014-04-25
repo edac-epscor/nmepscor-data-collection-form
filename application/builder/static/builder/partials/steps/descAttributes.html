@@ -83,14 +83,14 @@
     </div>
     
     <div class="panel panel-basic" ng-controller="attributeForm">
-
+      <!--
       <pre> form = {{formData.ATTRIBUTES | json}}</pre>
+      -->
       
       <div class="panel-body">
         
         <form novalidate editable-form class="simple-form">
 
-          <div class="row form-group col-sm-12">
             <label for="attributeType" class="col-sm-4 control-label">What kind of attribute are you annotating?</label>
             <select id="attributeType" 
               ng-model="formData.ATTRIBUTES.typeSelected"
@@ -184,12 +184,14 @@
             tooltip="{{
               tableform.$visible || ! formData.ATTRIBUTES.committed ? 
               'You can only advance after committing to a style' :
+              'You can only advance after committing to a style' :
               'Good to go'
             }}"
           >
             <!-- No click event, it's disabled but tooltipped-->
             <button class="btn btn-primary" 
               ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
+
               ng-click="nextStep(formData, '/license')"
             >Next Step
             </button>
