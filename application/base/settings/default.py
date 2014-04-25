@@ -136,12 +136,6 @@ STATICFILES_FINDERS = tuple(
 )
 
 ###########
-# LOGGING #
-###########
-
-LOGGING = getLogDictSchema(stripColors=not DEBUG)
-
-###########
 # TESTING #
 ###########
 
