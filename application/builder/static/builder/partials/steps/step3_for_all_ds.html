@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h2>NMEPSCoR Data Documentation Tool: <small>Required for all Datasets</small></h2>
+                <h2>NMEPSCoR Data Documentation Tool: <small>Required for all Collections</small></h2>
             </div>
             <div>
                 <p>We're now gathering some basic descriptive information about your project.  This will assist our staff when we communicate with you.  This information may or may not be incorporated into generated metadata.</p>
@@ -16,7 +16,7 @@
     <div class="row" ng-controller="s3Form">
       <div class="panel panel-primary">
         <div class="panel-heading">
-            Datasets you have created
+            Collections you have created
         </div>
         <div class="panel-body">
           <form class="form-horizontal" role="form" name="step3_form">
@@ -33,7 +33,7 @@
                 ng-class="{ 'has-error' : step3_form.abstract.$invalid && !step3_form.abstract.$pristine }"
               >
                 <textarea class="form-control" rows="3" id="datasetAbstract" name="abstract"
-                  ng-model="formData.DATASET.abstract"
+                  ng-model="formData.COLLECTION.abstract"
                   required>
                 </textarea>
               </div>
@@ -48,7 +48,7 @@
                 ng-class="{ 'has-error' : step3_form.purpose.$invalid && !step3_form.purpose.$pristine }"
               >
                 <textarea class="form-control" rows="3" id="datasetPurpose" name="purpose"
-                  ng-model="formData.DATASET.purpose"
+                  ng-model="formData.COLLECTION.purpose"
                   required>
                 </textarea>
               </div>
@@ -63,7 +63,7 @@
               </p>
               <label for="datasetFunding" class="col-sm-2 control-label">Funding: Agency, Number</label>
               <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="datasetFunding" ng-model="formData.DATASET.funding"></textarea>
+                <textarea class="form-control" rows="3" id="datasetFunding" ng-model="formData.COLLECTION.funding"></textarea>
               </div>
             </div>
 
@@ -75,7 +75,7 @@
               </p>
               <label for="datasetAdditional" class="col-sm-2 control-label">Anything Else?</label>
               <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="datasetAdditional" ng-model="formData.DATASET.additional"></textarea>
+                <textarea class="form-control" rows="3" id="datasetAdditional" ng-model="formData.COLLECTION.additional"></textarea>
               </div>
             </div>
 
@@ -85,7 +85,7 @@
               CUAHSI WaterOneFlow services.</p>
               <label for="datasetProprietary" class="col-sm-2 control-label">Proprietary Information: Conditional Hide Later</label>
               <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="datasetProprietary" ng-model="formData.DATASET.proprietary"></textarea>
+                <textarea class="form-control" rows="3" id="datasetProprietary" ng-model="formData.COLLECTION.proprietary"></textarea>
               </div>
             </div>
           </form>

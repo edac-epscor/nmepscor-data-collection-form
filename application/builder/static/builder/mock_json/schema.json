@@ -153,30 +153,30 @@
         }
       }
     },
-    "DATASET": {
+    "COLLECTION": {
       "required": true,
       "type": "object",
-      "id": "http: //jsonschema.net/DATASET",
+      "id": "http: //jsonschema.net/COLLECTION",
       "properties": {
         "abstract": {
           "required": true,
           "type": "string",
-          "id": "http: //jsonschema.net/DATASET/abstract"
+          "id": "http: //jsonschema.net/COLLECTION/abstract"
         },
         "funding": {
           "required": false,
           "type": "string",
-          "id": "http: //jsonschema.net/DATASET/funding"
+          "id": "http: //jsonschema.net/COLLECTION/funding"
         },
         "additional": {
           "required": true,
           "type": "string",
-          "id": "http: //jsonschema.net/DATASET/additional"
+          "id": "http: //jsonschema.net/COLLECTION/additional"
         },
         "purpose": {
           "required": false,
           "type": "string",
-          "id": "http: //jsonschema.net/DATASET/purpose"
+          "id": "http: //jsonschema.net/COLLECTION/purpose"
         }
       }
     },

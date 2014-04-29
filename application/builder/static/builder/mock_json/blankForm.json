@@ -46,7 +46,7 @@
     "DESCRIBE": {
         "choice": "basic"
     },
-    "DATASET": {
+    "COLLECTION": {
         "abstract": "",
         "purpose": "",
         "funding": "",
