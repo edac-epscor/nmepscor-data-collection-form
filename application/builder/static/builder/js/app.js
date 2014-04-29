@@ -309,7 +309,8 @@ epscorForm.run(function (
         },
         // Change handler
         function(newValue, oldValue) {
-            if ( $rootScope.authService.isLoggedIn() === false && newValue != '/') {
+            var allowedPaths = ['/', '/contact', '/about', '/faq'];
+            if ( $rootScope.authService.isLoggedIn() === false && ! _.contains(allowedPaths, newValue)) {
                 $location.path('/');
             }
         }
