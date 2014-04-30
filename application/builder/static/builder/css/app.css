@@ -234,3 +234,7 @@ p.grey{
     background-color: #96C3EB;
 }
 */
+
+#side-nav .nav li a{
+    padding: 5px 15px;
+}

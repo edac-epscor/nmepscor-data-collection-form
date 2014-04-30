@@ -50,20 +50,41 @@
 
 <body ng-app="epscorForm">
 
-  <!-- bootstrap navbar -->
-  <div ng-include="'{% static 'builder/partials/navbar-top.html' %}'"></div>
+  <!-- bootstrap header/navbar -->
+  <div class="row" ng-include="'{% static 'builder/partials/navbar-top.html' %}'"></div>
 
   <!-- fake modal/overlay -->
   <div ng-include="'{% static 'builder/partials/modalOverlay.html' %}'"></div>
 
+  <!-- karl's sidebar -->
+  <div id="side-nav" class="col-md-3 col-lg-3 hidden-sm hidden-xs"> 
+    <div style="padding-top: 2em;">
+      <div class="panel panel-default" >
+        <div class="panel-heading">
+          <h4>Steps to Edit</h4>
+        </div>
+        <div class="panel-body">
+          <div class="navbar-collapse collapse">
+            <ul class="nav nav-stacked"
+              ng-include="'builder/static/builder/partials/nav-steps.html'">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ng routes hook -->
-  <div ng-view></div>
+  <div class="col-md-9 col-lg-9" ng-view >
+  </div>
 
   <!-- progressbar -->
-  <div ng-include="'{% static 'builder/partials/progbar-bottom.html' %}'"></div>
+  <div class="row col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9" 
+    ng-include="'{% static 'builder/partials/progbar-bottom.html' %}'">
+  </div>
 
   <!-- footer -->
-  <div ng-include="'{% static 'builder/partials/navbar-bottom.html' %}'"></div>
+  <div class="row" ng-include="'{% static 'builder/partials/navbar-bottom.html' %}'"></div>
 
   {% compress js %}
   <script type="text/javascript" src="{% static 'jquery/jquery.js' %}"></script>
