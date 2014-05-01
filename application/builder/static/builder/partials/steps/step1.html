@@ -10,31 +10,6 @@
                 (Remember, if the data files are structurally different, you need to create
                 multiple collections for documentation.)
               </p>
-              <ul>
-                <li> Documents (PDF, Word, RTF, etc), Images (PNG, Tiff, JPEG, etc), Videos (URLs) </li>
-                <li> 
-                  Spreadsheets (Excel, ODF, etc), CSV, TSV, 
-                  <a tooltip="
-* DAT files can be some form of structured text files, such as
-CSV or TSV, or in a proprietary or binary/hex format. This option is only
-available for the text-based, non-proprietary formats. ">DAT*,</a>
-                </li>
-                <li> Shapefiles, KML or other vector format </li>
-                <li> Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5 </li>
-                <li> All other formats - <a tooltip="
-              ** For these purposes, MATLAB, SPSS, SAS, etc, formats are not
-proprietary. Please export your data as CSV, TSV, etc, before delivering it to
-EDAC if you are using any of these or similar software. Proprietary formats
-will only be accepted if no valid export option is possible. For example, Lab
-Equipment Awesome software only provides .HMD files that can’t be converted to
-an appropriate text format.">proprietary data formats**</a>,
-                model executables, 
-                  <a  tooltip="
- *** Please choose this option for 2D/3D matrices even if provided
-as Excel or or some other spreadsheet format.">2D/3D matrices***</a>,
-                   database (geodatabase, MS Access, SQLite, etc), web services
-               </li>
-              </ul>
               <p> 
                 If you are documenting an ongoing data collection process,
                 i.e. field collection or monthly modeling outputs, etc, select the
@@ -42,9 +17,7 @@ as Excel or or some other spreadsheet format.">2D/3D matrices***</a>,
                 delivery options.
               </p>
             </div>
-            <br><br>
         </div>
-
     </div>
 
     <div class="row" ng-controller="s1Form">
@@ -63,27 +36,79 @@ as Excel or or some other spreadsheet format.">2D/3D matrices***</a>,
            />
            <span class="error" ng-show="form_step1.label.$error.required">*</span>
         </div>
-        <div class="form-group radio">
-          <label>
-            <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Document
-            <br/>
-          </label>
+        <!-- 2x check bootstrap doesn't seem to be rendering a default style -->
+        <fieldset>
+          <div class="form-group radio">
+            <!-- dl-horizontal class hides radio button, 2x check override -->
+            <legend class="control-label"> Collection Type </legend>
+            <dl >
+              <label>
+                <dt>
+                  <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Document
+                </dt>
+                <dd>
+                  <ul>
+                    <li>
+                      Documents (PDF, Word, RTF, etc), Images (PNG, Tiff, JPEG, etc), Videos (URLs)
+                    </li>
+                    <li> All other formats - <a tooltip="
+                  ** For these purposes, MATLAB, SPSS, SAS, etc, formats are not
+  propriet  ary. Please export your data as CSV, TSV, etc, before delivering it to
+  EDAC if   you are using any of these or similar software. Proprietary formats
+  will onl  y be accepted if no valid export option is possible. For example, Lab
+  Equipmen  t Awesome software only provides .HMD files that can’t be converted to
+  an appro  priate text format.">proprietary data formats**</a>,
+                    model executables, 
+                      <a  tooltip="
+   *** Ple  ase choose this option for 2D/3D matrices even if provided
+  as Excel   or or some other spreadsheet format.">2D/3D matrices***</a>,
+                       database (geodatabase, MS Access, SQLite, etc), web services
+                   </li>
+                  </ul>
+                </dd>
+                <br/>
+              </label>
 
-          <label>
-            <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Basic Table
-            <br/>
-          </label>
+              <label>
+                <dt>
+                  <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Basic Table
+                </dt>
+                <dd>
+                  <ul>
+                   <li>
+                     Spreadsheets (Excel, ODF, etc), CSV, TSV, 
+                      <a tooltip="
+* DAT file  s can be some form of structured text files, such as
+CSV or TSV  , or in a proprietary or binary/hex format. This option is only
+available   for the text-based, non-proprietary formats. ">DAT*,</a>
+                   </li>
+                   <li> Shapefiles, KML or other vector format </li>
+                  </ul>
+                </dd>
+                <br/>
+              </label>
 
-          <label>
-            <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
-            <br/>
-          </label>
+              <label>
+                <dt>
+                  <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
+                </dt>
+                <dd>
+                </dd>
+                <br/>
+              </label>
 
-          <label>
-            <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
-            <br/>
-          </label>
-        </div>
+              <label>
+                <dt>
+                  <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
+                </dt>
+                <dd>
+                  Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
+                </dd>
+                  <br/>
+              </label>
+            </dl>
+          </div>
+        </fieldset>
 
 
         <div class="row">
