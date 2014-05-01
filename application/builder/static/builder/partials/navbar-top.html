@@ -1,81 +1,81 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">NMEPSCoR Data Documentation Tool</a>
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">NMEPSCoR Data Documentation Tool</a>
 
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+
+  <div id="top-nav" class="navbar-collapse collapse" >
+    <!--  Karl wants sidenav, I want this to work and flow right. -->
+    <ul class="nav navbar-nav visible-xs visible-sm">
+      <li class="dropdown" ng-show="authService.isLoggedIn()">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-list glyphicon-white"></i>
+        Step Navigator
+        <b class="caret"></b>
+      </a>
+
+      <ul class="dropdown-menu" 
+        ng-include="'builder/static/builder/partials/nav-steps.html'">
+      </ul>
+      </li>
+    </ul>
+
+    <!--   Add in auth svc/button again now that we're isolating from epscor D7 install -->
+    <div class="nav navbar-form pull-right">
+      <div ng-show="!authService.isLoggedIn()">
+        <a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">
+          <i class="glyphicon glyphicon-user glyphicon-white"></i> Sign in</a>
+      </div>
+      <div ng-show="authService.isLoggedIn()">
+        <a class="btn btn-primary" ng-click="authService.logout()">
+          <i class="glyphicon glyphicon-off glyphicon-white"></i> Sign out</a>
+      </div>
     </div>
 
-    <div id="top-nav" class="navbar-collapse collapse" >
-        <!--  Karl wants sidenav, I want this to work and flow right. -->
-        <ul class="nav navbar-nav visible-xs visible-sm">
-          <li class="dropdown" ng-show="authService.isLoggedIn()">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-list glyphicon-white"></i>
-              Step Navigator
-              <b class="caret"></b>
-            </a>
+    <div ng-show="authService.isLoggedIn()" class="hidden-xs hidden-sm">
+      <ul class="nav navbar-nav pull-right">
+        <li ng-show="authService.isLoggedIn()" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="glyphicon glyphicon-user glyphicon-white"></i>
+          <b class="caret"></b>
+        </a>
 
-            <ul class="dropdown-menu" 
-              ng-include="'builder/static/builder/partials/nav-steps.html'">
-            </ul>
-          </li>
+        <ul class="dropdown-menu">
+          <li><a href="#/step0">Show my collections</a></li>
+          <li><a href="#/users/profile/{{ authService.currentUser() }}" >Local User Profile</a> </li>
+          <li><a href="https://nmepscor.org/users/{{ authService.currentUser() }}" target="_blank">Remote User Profile</a></li>
         </ul>
-
-        <!--   Add in auth svc/button again now that we're isolating from epscor D7 install -->
-        <div class="nav navbar-form pull-right">
-            <div ng-show="!authService.isLoggedIn()">
-                <a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">
-                    <i class="glyphicon glyphicon-user glyphicon-white"></i> Sign in</a>
-            </div>
-            <div ng-show="authService.isLoggedIn()">
-                <a class="btn btn-primary" ng-click="authService.logout()">
-                    <i class="glyphicon glyphicon-off glyphicon-white"></i> Sign out</a>
-            </div>
-        </div>
-
-        <div ng-show="authService.isLoggedIn()" class="hidden-xs hidden-sm">
-            <ul class="nav navbar-nav pull-right">
-                <li ng-show="authService.isLoggedIn()" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="glyphicon glyphicon-user glyphicon-white"></i>
-                        <b class="caret"></b>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="#/step0">Show my collections</a></li>
-                        <li><a href="#/users/profile/{{ authService.currentUser() }}" >Local User Profile</a> </li>
-                        <li><a href="https://nmepscor.org/users/{{ authService.currentUser() }}" target="_blank">Remote User Profile</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <div class="modal" id="loginModal" fade-in>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Login</h4>
-            </div>
-            <div class="modal-body">
-                <span id="login-email">Username</span>
-                <input ng-model="loginInput" type="text" placeholder="Your NM EPSCoR Username" name='username'>
-                <span id="login-password">Password</span>
-                <!--
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <span id="login-email">Username</span>
+        <input ng-model="loginInput" type="text" placeholder="Your NM EPSCoR Username" name='username'>
+        <span id="login-password">Password</span>
+        <!--
                 <a href="#">Forgot password?</a>
                 -->
-                <input ng-model="passwordInput" type="password" placeholder="Password" name='password'>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" data-dismiss="modal" ng-click="authService.login(loginInput, passwordInput)">
-                    <i class="glyphicon glyphicon-user glyphicon-white"></i>Log in</a>
-            </div>
-        </div>
+        <input ng-model="passwordInput" type="password" placeholder="Password" name='password'>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" ng-click="authService.login(loginInput, passwordInput)">
+          <i class="glyphicon glyphicon-user glyphicon-white"></i>Log in</button>
+      </div>
     </div>
+  </div>
 </div>
