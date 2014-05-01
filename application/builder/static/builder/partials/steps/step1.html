@@ -1,126 +1,126 @@
 <div class="container" >
-    <div class="row">
-        <div class="col-md-12">
-            <div class="page-header">
-                <h2>NMEPSCoR Data Documentation Tool: <small>Describe Your Data</small></h2>
-            </div>
-            <div>
-              <p>
-                What kind of data files are described by this collection?
-                (Remember, if the data files are structurally different, you need to create
-                multiple collections for documentation.)
-              </p>
-              <p> 
-                If you are documenting an ongoing data collection process,
-                i.e. field collection or monthly modeling outputs, etc, select the
-                corresponding data file format from the list. We will ask later about data
-                delivery options.
-              </p>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h2>NMEPSCoR Data Documentation Tool: <small>Describe Your Data</small></h2>
+      </div>
+      <div>
+        <p>
+        What kind of data files are described by this collection?
+        (Remember, if the data files are structurally different, you need to create
+        multiple collections for documentation.)
+        </p>
+        <p> 
+        If you are documenting an ongoing data collection process,
+        i.e. field collection or monthly modeling outputs, etc, select the
+        corresponding data file format from the list. We will ask later about data
+        delivery options.
+        </p>
+      </div>
     </div>
+  </div>
 
-    <div class="row" ng-controller="s1Form">
-      <!--
+  <div class="row" ng-controller="s1Form">
+    <!--
       <pre> form = {{formData | json}}</pre>
       -->
-      <form name="form_step1" class="simple-form">
-        <div class="form-group">
+    <form name="form_step1" class="simple-form">
+      <div class="form-group">
         Give the project (this bit of documentation) a name so that you can save it and return later.
         <br/>
-          <label for="ds-label">
-            Collection Name
-          </label>
-          <input name="label" type="text" id="ds-label" placeholder="Enter the name of this collection" ng-model="formData.META.label" required
-             maxlength="50" size="50"
-           />
-           <span class="error" ng-show="form_step1.label.$error.required">*</span>
-        </div>
-        <!-- 2x check bootstrap doesn't seem to be rendering a default style -->
-        <fieldset>
-          <div class="form-group radio">
-            <!-- dl-horizontal class hides radio button, 2x check override -->
-            <legend class="control-label"> Collection Type </legend>
-            <dl >
-              <label>
-                <dt>
-                  <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Document
-                </dt>
-                <dd>
-                  <ul>
-                    <li>
-                      Documents (PDF, Word, RTF, etc), Images (PNG, Tiff, JPEG, etc), Videos (URLs)
-                    </li>
-                    <li> All other formats - <a tooltip="
+        <label for="ds-label">
+          Collection Name
+        </label>
+        <input name="label" type="text" id="ds-label" placeholder="Enter the name of this collection" ng-model="formData.META.label" required
+        maxlength="50" size="50"
+        />
+        <span class="error" ng-show="form_step1.label.$error.required">*</span>
+      </div>
+      <!-- 2x check bootstrap doesn't seem to be rendering a default style -->
+      <fieldset>
+        <div class="form-group radio">
+          <!-- dl-horizontal class hides radio button, 2x check override -->
+          <legend class="control-label"> Collection Type </legend>
+          <dl >
+            <label>
+              <dt>
+              <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Document
+              </dt>
+              <dd>
+              <ul>
+                <li>
+                Documents (PDF, Word, RTF, etc), Images (PNG, Tiff, JPEG, etc), Videos (URLs)
+                </li>
+                <li> All other formats - <a tooltip="
                   ** For these purposes, MATLAB, SPSS, SAS, etc, formats are not
-  propriet  ary. Please export your data as CSV, TSV, etc, before delivering it to
-  EDAC if   you are using any of these or similar software. Proprietary formats
-  will onl  y be accepted if no valid export option is possible. For example, Lab
-  Equipmen  t Awesome software only provides .HMD files that can’t be converted to
-  an appro  priate text format.">proprietary data formats**</a>,
-                    model executables, 
-                      <a  tooltip="
-   *** Ple  ase choose this option for 2D/3D matrices even if provided
-  as Excel   or or some other spreadsheet format.">2D/3D matrices***</a>,
-                       database (geodatabase, MS Access, SQLite, etc), web services
-                   </li>
-                  </ul>
-                </dd>
-                <br/>
-              </label>
+                  propriet  ary. Please export your data as CSV, TSV, etc, before delivering it to
+                  EDAC if   you are using any of these or similar software. Proprietary formats
+                  will onl  y be accepted if no valid export option is possible. For example, Lab
+                  Equipmen  t Awesome software only provides .HMD files that can’t be converted to
+                  an appro  priate text format.">proprietary data formats**</a>,
+                model executables, 
+                <a  tooltip="
+                  *** Ple  ase choose this option for 2D/3D matrices even if provided
+                  as Excel   or or some other spreadsheet format.">2D/3D matrices***</a>,
+                database (geodatabase, MS Access, SQLite, etc), web services
+                </li>
+              </ul>
+              </dd>
+              <br/>
+            </label>
 
-              <label>
-                <dt>
-                  <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Basic Table
-                </dt>
-                <dd>
-                  <ul>
-                   <li>
-                     Spreadsheets (Excel, ODF, etc), CSV, TSV, 
-                      <a tooltip="
-* DAT file  s can be some form of structured text files, such as
-CSV or TSV  , or in a proprietary or binary/hex format. This option is only
-available   for the text-based, non-proprietary formats. ">DAT*,</a>
-                   </li>
-                   <li> Shapefiles, KML or other vector format </li>
-                  </ul>
-                </dd>
-                <br/>
-              </label>
+            <label>
+              <dt>
+              <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Basic Table
+              </dt>
+              <dd>
+              <ul>
+                <li>
+                Spreadsheets (Excel, ODF, etc), CSV, TSV, 
+                <a tooltip="
+                  * DAT file  s can be some form of structured text files, such as
+                  CSV or TSV  , or in a proprietary or binary/hex format. This option is only
+                  available   for the text-based, non-proprietary formats. ">DAT*,</a>
+                </li>
+                <li> Shapefiles, KML or other vector format </li>
+              </ul>
+              </dd>
+              <br/>
+            </label>
 
-              <label>
-                <dt>
-                  <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
-                </dt>
-                <dd>
-                </dd>
-                <br/>
-              </label>
+            <label>
+              <dt>
+              <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
+              </dt>
+              <dd>
+              </dd>
+              <br/>
+            </label>
 
-              <label>
-                <dt>
-                  <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
-                </dt>
-                <dd>
-                  Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
-                </dd>
-                  <br/>
-              </label>
-            </dl>
-          </div>
-        </fieldset>
+            <label>
+              <dt>
+              <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
+              </dt>
+              <dd>
+              Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
+              </dd>
+              <br/>
+            </label>
+          </dl>
+        </div>
+      </fieldset>
 
 
-        <div class="row">
+      <div class="row">
         <!-- We always follow with step 2; files to document -->
         <button type="button" class="btn btn-danger" ng-click="reset()" tooltip="Behave as if you just entered this page">Reset this step</button>
 
         <button type="button" class="btn btn-primary" ng-click="newDocument()" ng-disabled="form_step1.$invalid" >Create</button>
 
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
+</div>
 
 <!-- Notifications -->
 <!--
