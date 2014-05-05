@@ -64,6 +64,8 @@
                   as Excel   or or some other spreadsheet format.">2D/3D matrices***</a>,
                 database (geodatabase, MS Access, SQLite, etc), web services
                 </li>
+                <li>Proprietary data files from a piece of equipment</li>
+                <li>A database from a geologic survey</li>
               </ul>
               </dd>
               <br/>
@@ -83,6 +85,7 @@
                   available   for the text-based, non-proprietary formats. ">DAT*,</a>
                 </li>
                 <li> Shapefiles, KML or other vector format </li>
+                <li>Spreadsheets from a survey</li>
               </ul>
               </dd>
               <br/>
@@ -93,6 +96,10 @@
               <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
               </dt>
               <dd>
+                <ul>
+                  <li>Text files from a logger</li>
+                  <li>Text files from a piece of lab equipment</li>
+                </ul>
               </dd>
               <br/>
             </label>
@@ -102,7 +109,12 @@
               <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
               </dt>
               <dd>
-              Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
+                <ul>
+                  <li>
+                    Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
+                  </li>
+                  <li>Raster outputs from a model</li>
+                </ul>
               </dd>
               <br/>
             </label>
