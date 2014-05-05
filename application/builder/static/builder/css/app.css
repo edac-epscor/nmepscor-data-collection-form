@@ -238,3 +238,7 @@ p.grey{
 #side-nav .nav li a{
     padding: 5px 15px;
 }
+
+#side-nav div .navbar-collapse {
+    display: inline-block;
+}
