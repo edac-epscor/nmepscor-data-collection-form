@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h2>NMEPSCoR Data Documentation Tool: <small>Required for all Collections</small></h2>
+                <h2>NMEPSCoR Data Documentation Tool: <small>General Information</small></h2>
             </div>
             <div>
                 <p>We're now gathering some basic descriptive information about your project.  This will assist our staff when we communicate with you.  This information may or may not be incorporated into generated metadata.</p>
@@ -16,17 +16,16 @@
     <div class="row" ng-controller="s3Form">
       <div class="panel panel-primary">
         <div class="panel-heading">
-            Collections you have created
+            General Information
         </div>
         <div class="panel-body">
           <form class="form-horizontal" role="form" name="step3_form">
             <div class="form-group">
               <p> 
-              Provide a brief description of the data in this collection
-              and the project. EDAC includes information regarding NM
-              EPSCoR funding and the overall state project automatically,
-              so this should be used to describe your component
-              specifically. This is similar to a poster abstract.
+              Provide a brief description of the project and the research contained
+              in this collection. EDAC includes information regarding NM
+              EPSCoR funding and the overall state project automatically. 
+              This is similar to a poster abstract.
               </p>
               <label for="datasetAbstract" class="col-sm-2 control-label">Abstract</label>
               <div class="col-sm-10" 
@@ -70,8 +69,9 @@
             <div class="form-group">
               <p> 
               Is there any additional information you would like to
-              provide to us about these data? For example, an
-              acknowledgment for an outside group?
+              provide to us about these data? This can include any acknowledgements 
+              you would like to make or details regarding a proprietary data format such
+              as software requirements.
               </p>
               <label for="datasetAdditional" class="col-sm-2 control-label">Anything Else?</label>
               <div class="col-sm-10">
@@ -80,9 +80,7 @@
             </div>
 
             <div class="form-group">
-              <p>Please describe the format.  Include the software if appropriate.  Please also indicate if you would
-              expect the data to be made available through the additional features of the portal, for example as 
-              CUAHSI WaterOneFlow services.</p>
+              <p>WE SHOULD JUST CHUCK THIS FOR NOW.</p>
               <label for="datasetProprietary" class="col-sm-2 control-label">Proprietary Information: Conditional Hide Later</label>
               <div class="col-sm-10">
                 <textarea class="form-control" rows="3" id="datasetProprietary" ng-model="formData.COLLECTION.proprietary"></textarea>
