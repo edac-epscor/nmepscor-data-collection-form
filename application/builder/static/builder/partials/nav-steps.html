@@ -1,19 +1,69 @@
 <!-- navbar step list template -->
+<!--
 <li ng-show="formData.META.id">
   <a href="#/dumpData">Debug: Dump Data</a>
 </li>
-<li><a href="#/step0">Show my collections</a></li>
-<li><a href="#/">Rest of this list is fake right now</a></li>
+-->
 
-<li><a ng-show="formData.META.id" href="#/step2">Step 2: Files To Document</a></li>
-<li><a ng-show="formData.META.id" href="#/step3">Step 3: Abstract/Purpose</a></li>
-<li><a ng-show="formData.META.id" href="#/step4">Step 4: Tagging</a></li>
-<li><a ng-show="formData.META.id" href="#/descSites">Step ?: Describe Sites</a></li>
-<li><a ng-show="formData.META.id" href="#/descWorkflow">Step ?: Describe Workflow</a></li>
-<li><a ng-show="formData.META.id" href="#/descAttributes">Step ?: Describe Attributes</a></li>
-<li><a ng-show="formData.META.id" href="#/timeInfo">Step ?: Time Information</a></li>
-<li><a ng-show="formData.META.id" href="#/license">Step ?: License Information</a></li>
-<li><a ng-show="formData.META.id" href="#/embargo">Step ?: Embargo Requests</a></li>
-<li><a ng-show="formData.META.id" href="#/preview/{{formData.META.id}}">Step ?: Preview Report</a></li>
-<li><a ng-show="formData.META.id" href="#/publish/{{formData.META.id}}">Final Step: Submit Collection</a></li>
+<!--  Show regardless of form state -->
+<li><a href="#/step0">Show My Collections</a></li>
+
+<!--  omit for demo
+<li><a href="#/">Rest of this list is fake right now</a></li>
+-->
+
+<step-list record="{{formData.META.id}}" next="#/step2"
+mypath="#{{location.path()}}"
+txt="Step 2: Files To Document"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/step3"
+  mypath="#{{location.path()}}" 
+  txt="Step 3: Abstract/Purpose"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/step4"
+  mypath="#{{location.path()}}" 
+  txt="Step 4: Tagging"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/descSites"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Describe Sites"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/descWorkflow"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Describe Workflow"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/descAttributes"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Describe Attributes"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/timeInfo"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Time Information"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/license"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: License Information"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/embargo"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Embargo Requests"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/preview/{{formData.META.id}}"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Preview Report"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/publish/{{formData.META.id}}"
+  mypath="#{{location.path()}}" 
+  Final Step: Submit Collection
+> </step-list>
 

@@ -242,3 +242,18 @@ p.grey{
 #side-nav div .navbar-collapse {
     display: inline-block;
 }
+
+/* 
+ * Angular strap, directive creates new element structure hurting hover on our
+ * dropdown links
+ */
+
+#side-nav .nav li > a:hover, #side-nav .nav li > a:focus {
+    text-decoration: none;
+    background-color: #eeeeee;
+}
+
+#side-nav .nav li {
+    /* not sure what rule was causing our elements to be smaller */
+    height: 30px;
+}

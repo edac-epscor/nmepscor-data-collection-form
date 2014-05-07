@@ -199,6 +199,8 @@ epscorForm.run(function (
         $location.path(path);
     };
 
+    $rootScope.location = $location; //make available to templates
+
     // Update
     $rootScope.save = function(updated) {
         // Save our step for base reset
@@ -313,6 +315,8 @@ epscorForm.run(function (
             if ( $rootScope.authService.isLoggedIn() === false && ! _.contains(allowedPaths, newValue)) {
                 $location.path('/');
             }
+
+            $rootScope.path = $location.path();
         }
     );
 });
