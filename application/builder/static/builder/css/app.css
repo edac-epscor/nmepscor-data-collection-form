@@ -258,30 +258,35 @@ p.grey{
     height: 30px;
 }
 
-
-/*  Rules for mobile... */
-@media (max-width: 767px)
-    #top-nav .navbar-inverse .navbar-nav .open .dropdown-menu li > a {
-    /*color: #999999;*/
-    color: #ffffff;
-}
-
-@media (max-width: 767px)
-    #top-nav .navbar-nav .open .dropdown-menu li > a {
-    line-height: 20px;
-}
-
-@media (max-width: 767px)
-    #top-nav .navbar-nav .open .dropdown-menu li > a, .navbar-nav .open .dropdown-menu .dropdown-header {
-    padding: 5px 15px 5px 25px;
-}
-
 #top-nav .dropdown-menu li > a {
     display: block;
     padding: 3px 20px;
     clear: both;
     font-weight: normal;
     line-height: 1.428571429;
-    color: #ffffff;
+    color: #333333;
     white-space: nowrap;
 }
+
+/*  Rules for mobile... */
+
+@media (max-width: 767px) {
+
+    #top-nav .navbar-inverse .navbar-nav .open .dropdown-menu li > a {
+        /*color: #999999;*/
+        color: #ffffff;
+    }
+
+    #top-nav .navbar-nav .open .dropdown-menu li > a {
+        line-height: 20px;
+    }
+
+    #top-nav .navbar-nav .open .dropdown-menu li.well {
+        background-color: #080808;
+    }
+
+    #top-nav .navbar-nav .open .dropdown-menu li > a, .navbar-nav .open .dropdown-menu .dropdown-header {
+        padding: 5px 15px 5px 25px;
+    }
+}
+

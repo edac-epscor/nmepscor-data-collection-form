@@ -25,8 +25,7 @@ directives.directive('stepList', function() {
             next: '@',  // copy & update when parent changes, as text/string
             mypath: '@',
             // Below should really be...not needed
-            content: '@txt',
-            myLoc: '@'
+            content: '@txt'
         }
         //link: function(scope, element, attrs) {
         //    var record = attrs.record;
