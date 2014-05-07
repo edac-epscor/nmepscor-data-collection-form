@@ -1,5 +1,9 @@
 'use strict';
 
+/*
+ *  Buttons for utilization in form.  Reusable grammar/template
+ */
+
 directives.directive('quitButton', function () {
     return {
         restrict:'E',
