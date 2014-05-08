@@ -25,12 +25,14 @@
         <div class="panel-body">
 
           <div class="form-group">
-            <input type="checkbox" 
-              ng-model="formData.EMBARGO.hasReadDataPolicy"
-              ng-change="resetRequest()"
-            >
-            I have read and understood the NM EPSCoR <a href="http://nmepscor.org/cyberinfrastructure/data-policy" target="_blank"> data policy,</a>
-            and agree to release my data. 
+            <label class="checkboxdialog">
+              <input type="checkbox" 
+                ng-model="formData.EMBARGO.hasReadDataPolicy"
+                ng-change="resetRequest()"
+              >
+              I have read and understood the NM EPSCoR <a href="http://nmepscor.org/cyberinfrastructure/data-policy" target="_blank"> data policy,</a>
+              and agree to release my data. 
+            </label>
           </div>
 
           I am requesting that the dataset(s) documented here be embargoed for
@@ -44,14 +46,16 @@
          <p> I require a longer embargo because:<p>
 
          <div class="form-group">
-           <input type="checkbox" ng-model="formData.EMBARGO.hasReadCircumstances"
-             ng-disabled="! formData.EMBARGO.hasReadDataPolicy"
-             ng-change="resetRequest()"
-           >
-              I understand that extensions are only provided in rare
-              circumstances and have done my best to meet the data policies as
-              laid out by NM EPSCoR.  
-           </input>
+           <label class="checkboxdialog">
+             <input type="checkbox" ng-model="formData.EMBARGO.hasReadCircumstances"
+               ng-disabled="! formData.EMBARGO.hasReadDataPolicy"
+               ng-change="resetRequest()"
+             >
+                I understand that extensions are only provided in rare
+                circumstances and have done my best to meet the data policies as
+                laid out by NM EPSCoR.  
+             </input>
+           </label>
          </div>
 
          <div class="form-group">

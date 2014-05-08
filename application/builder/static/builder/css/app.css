@@ -19,6 +19,10 @@ a {
     display: none !important;
 }
 
+label.checkboxdialog {
+    font-weight: normal;
+}
+
 /** **
 supports grid feature
 **/
