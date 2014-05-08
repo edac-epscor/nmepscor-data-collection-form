@@ -94,7 +94,7 @@
             var needsXHR = myID !== null;
             if (needsXHR) {
                 ProfileService.deletePI(myID, function(data) {
-                    pass;  // Notifier service?
+                    ;  // Notifier service?
                 });
             }
             $scope.profile.investigators.splice(recIdx, 1);
@@ -494,34 +494,33 @@
         $rootScope.master = angular.copy($rootScope.formData);
     });
 
-
     epscorForm.controller('attributeForm', function attributeForm($rootScope, $scope, $location) {
-
-        // Dropdown population
-        $scope.ATTRIBUTE_TYPES = [
-            "tabular",
-            "matrix",
-            "gridded"
-        ];
 
         // Blank/New Rows to clone
         var ATTRIBUTE_CONFIG = $rootScope.constants.attributeFormConfig;
+        var TYPE_SELECTED = $scope.formData.DESCRIBE.choice;
 
-        // alias
+        if (TYPE_SELECTED == 'basic') {
+            // Should never really happen though...
+            console.log("Setting model type to 'basic' in attribute editor");
+            TYPE_SELECTED = 'table';
+        }
 
-        $scope.changeTableType = function(typ) {
-            var typeSelected = $scope.formData.ATTRIBUTES.typeSelected;
-            $scope.tableInfo = ATTRIBUTE_CONFIG[typeSelected];
+        // Need to keep you and set you on load...
+        function changeTableType(typ) {
+            $scope.tableInfo = ATTRIBUTE_CONFIG[TYPE_SELECTED];
             $scope.recordList = $rootScope.formData.ATTRIBUTES.userTable[
-                typeSelected
+                TYPE_SELECTED
             ];
-        };
+        }
+
+        changeTableType(TYPE_SELECTED); // default loaded
+        $rootScope.progressBar = 60;
 
         // Blank Row copied into table model
         $scope.addRow = function() {
-            var typeSelected = $scope.formData.ATTRIBUTES.typeSelected;
             $scope.inserted = angular.copy(
-                ATTRIBUTE_CONFIG[typeSelected]
+                ATTRIBUTE_CONFIG[TYPE_SELECTED]
             );
             $scope.recordList.push($scope.inserted);
         };
@@ -559,40 +558,12 @@
             $rootScope.save($rootScope.formData); // Changes pushed to server on mini save
         };
 
-        // User is irrecovably committed to this combination
-        $scope.commitChoice = function() {
-            if ( $scope.formData.ATTRIBUTES.committed) {
-                console.log("User doubly committed attribute choice");
-            }
-
-            // TODO: check if...we're already finalized.
-            var choice = $scope.formData.ATTRIBUTES.typeSelected;
-            //tabular, matrix, gridded
-            switch (choice) {
-                case 'tabular':
-                    $scope.formData.ATTRIBUTES.userTable.matrix = [];
-                    $scope.formData.ATTRIBUTES.userTable.gridded = [];
-                    break;
-                case 'matrix':
-                    $scope.formData.ATTRIBUTES.userTable.tabular = [];
-                    $scope.formData.ATTRIBUTES.userTable.gridded = [];
-                    break;
-                case 'gridded':
-                    $scope.formData.ATTRIBUTES.userTable.tabular = [];
-                    $scope.formData.ATTRIBUTES.userTable.matrix = [];
-                    break;
-            }
-            $scope.formData.ATTRIBUTES.committed = true;
-        };
-
         // Purge out an entire row
         $scope.deleteAttr = function(recIdx) {
             // find match in recordlist
              $scope.recordList.splice(recIdx, 1);
         };
 
-        $scope.changeTableType("tabular"); // default loaded
-        $rootScope.progressBar = 60;
     });
 
 

@@ -8,7 +8,7 @@
     "landing_section_3":"Seed",
   
     "attributeFormConfig": {
-      "tabular": [
+      "table": [
         {"value": null, "name": "field", "label": "Field"},
         {"value": null, "name": "description", "label": "Description"},
         {"value": null, "name": "units", "label": "Units"},
@@ -25,7 +25,7 @@
         {"value": null, "name": "aggregation", "label": "Aggregation"},
         {"value": null, "name": "nodata", "label": "NODATA"}
       ],
-      "gridded": [
+      "rastermodel": [
         {"value": null, "name": "band", "label": "Dimension/Band Identifier"},
         {"value": null, "name": "name", "label": "Name"},
         {"value": null, "name": "description", "label": "Description"},

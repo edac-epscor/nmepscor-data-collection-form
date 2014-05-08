@@ -35,12 +35,10 @@
         "rows": []
     },
     "ATTRIBUTES": {
-        "committed": "false",
-        "typeSelected": "tabular",
         "userTable": {
-            "tabular": [],
-            "matrix": [],
-            "gridded": []
+            "table": [],
+            "rastermodel": [],
+            "matrix": []
         }
     },
     "DESCRIBE": {

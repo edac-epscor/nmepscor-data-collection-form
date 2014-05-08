@@ -23,7 +23,7 @@
   <div class="row" ng-controller="s1Form">
     <!--
       <pre> form = {{formData | json}}</pre>
-      -->
+    -->
     <form name="form_step1" class="simple-form">
       <div class="form-group">
         Give the project (this bit of documentation) a name so that you can save it and return later.
@@ -44,7 +44,7 @@
           <dl >
             <label>
               <dt>
-              <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Document
+                <input type="radio" value="basic" ng-model="formData.DESCRIBE.choice" /> Basic Documents
               </dt>
               <dd>
               <ul>
@@ -58,11 +58,8 @@
                   will only be accepted if no valid export option is possible. For example, Lab
                   Equipment Awesome software only provides .HMD files that can’t be converted to
                   an appropriate text format.">proprietary data formats**</a>,
-                model executables, 
-                <a  tooltip="
-                  *** Please choose this option for 2D/3D matrices even if provided
-                  as Excel or or some other spreadsheet format.">2D/3D matrices***</a>,
-                database (geodatabase, MS Access, SQLite, etc), web services
+                  model executables, database (geodatabase, MS Access, SQLite,
+                  etc), web services
                 </li>
                 <li>Proprietary data files from a piece of equipment</li>
                 <li>A database from a geologic survey</li>
@@ -73,30 +70,19 @@
 
             <label>
               <dt>
-              <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Basic Table
-              </dt>
-              <dd>
-              <ul>
-                <li>
-                Spreadsheets (Excel, ODF, etc), CSV, TSV, 
-                <a tooltip="
-                  * DAT files can be some form of structured text files, such as
-                  CSV or TSV, or in a proprietary or binary/hex format. This option is only
-                  available for the text-based, non-proprietary formats. ">DAT*,</a>
-                </li>
-                <li> Shapefiles, KML or other vector format </li>
-                <li>Spreadsheets from a survey</li>
-              </ul>
-              </dd>
-              <br/>
-            </label>
-
-            <label>
-              <dt>
-              <input type="radio" value="fieldcollection" ng-model="formData.DESCRIBE.choice" /> Basic Field Collection
+                <input type="radio" value="table" ng-model="formData.DESCRIBE.choice" /> Tabular or Vector data
               </dt>
               <dd>
                 <ul>
+                  <li>
+                  Spreadsheets (Excel, ODF, etc), CSV, TSV, 
+                  <a tooltip="
+                    * DAT files can be some form of structured text files, such as
+                    CSV or TSV, or in a proprietary or binary/hex format. This option is only
+                    available for the text-based, non-proprietary formats. ">DAT*,</a>
+                  </li>
+                  <li>Shapefiles, KML or other vector format </li>
+                  <li>Spreadsheets from a survey</li>
                   <li>Text files from a logger</li>
                   <li>Text files from a piece of lab equipment</li>
                 </ul>
@@ -106,7 +92,7 @@
 
             <label>
               <dt>
-              <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Basic Raster/Model Output
+                <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Raster Data/Model Output
               </dt>
               <dd>
                 <ul>
@@ -118,6 +104,22 @@
               </dd>
               <br/>
             </label>
+
+            <label>
+              <dt>
+                <input type="radio" value="matrix" ng-model="formData.DESCRIBE.choice" /> 2D/3D Matrices
+              </dt>
+              <dd>
+                <ul>
+                  <li>
+                    <a  tooltip="*** Please choose this option for 2D/3D matrices even if provided
+                  as Excel or or some other spreadsheet format.">2D/3D matrices***</a>
+                  </li>
+                </ul>
+              </dd>
+              <br/>
+            </label>
+
           </dl>
         </div>
       </fieldset>

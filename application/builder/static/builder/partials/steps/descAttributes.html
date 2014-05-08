@@ -89,23 +89,6 @@
       <pre> form = {{formData.ATTRIBUTES | json}}</pre>
     -->
 
-    <div class="panel-body">
-
-      <form novalidate editable-form class="simple-form">
-
-        <label for="attributeType" class="col-sm-4 control-label">What kind of attribute are you annotating?</label>
-        <select id="attributeType" 
-          ng-model="formData.ATTRIBUTES.typeSelected"
-          ng-options="a for a in ATTRIBUTE_TYPES"
-          ng-disabled="formData.ATTRIBUTES.committed"
-          ng-change="changeTableType()">
-        </select>
-
-        <button type="button" class="btn btn-danger col-sm-offset-2" ng-click="commitChoice()" ng-disabled="formData.ATTRIBUTES.committed"> Commit Forever
-        </button>
-      </form>
-    </div>
-
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3>Table|Matrix|Raster/Model Output</h3>
@@ -179,21 +162,12 @@
     </div>
 
     <div class="row">
-      <div style="display:inline-block;"
-        class="input-xxlarge"
-        tooltip="{{
-        tableform.$visible || ! formData.ATTRIBUTES.committed ? 
-        'You can only advance after committing to a style' :
-        'Good to go'
-        }}"
-        >
-        <!-- No click event, it's disabled but tooltipped-->
-        <button class="btn btn-primary" 
-          ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
-          ng-click="nextStep(formData, '/license')"
-          >Next Step
-        </button>
-      </div>
+      <!-- No click event, it's disabled but tooltipped-->
+      <button class="btn btn-primary" 
+        ng-disabled="tableform.$visible"
+        ng-click="nextStep(formData, '/license')"
+        >Next Step
+      </button>
     </div>
   </div>
 </div> 
