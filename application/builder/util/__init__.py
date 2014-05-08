@@ -75,6 +75,10 @@ def remoteAuthenticate(**kwargs):
     """
 
     URL = 'http://%s/user/login' % settings.SECRET_EPSCOR_SERVER
+    HEADERS = {
+        'User-Agent': 'nmepscor-data-collection-form.git'
+    }
+
     PAYLOAD = {
         'form_id': 'user_login',  # stupid drupal
         'name': kwargs['username'],
@@ -82,7 +86,8 @@ def remoteAuthenticate(**kwargs):
         #'op': 'Log in',
     }  # no chance of ever sending epscor server other params
 
-    response = requests.post(URL, data=PAYLOAD, timeout=8.0)  # 2s
+    response = requests.post(URL, headers=HEADERS,
+        data=PAYLOAD, timeout=8.0)  # 2s
 
     #  If we come back without a history/302
     if len(response.history) == 0:
