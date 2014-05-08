@@ -1,203 +1,199 @@
 <div class="container" >
-    <div class="row">
-        <div class="col-md-12">
-            <div class="page-header">
-                <h2>NMEPSCoR Data Documentation Tool: <small>Describe Attributes</small></h2>
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h2>NMEPSCoR Data Documentation Tool: <small>Describe Attributes</small></h2>
+      </div>
 
-            <!--
-            <div class="panel panel-warning">
-              <div class="panel-heading"> Caution
-              </div>
-              <div class="panel-body">
-                <p>
-                  You may pick the type of attribute you're anotating to
-                  explore them, and even after editing them.  However, once
-                  you <i>commit</i> the attribute, you will be unable to change
-                  to another type.  This choice will be fixed forever for this
-                  dataset.  When you do commit, <i>all</i> changes you
-                  have made to the other types will be lost forever.
-                </p>
-              </div>
-            </div>
-            -->
-
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                Instructions
-              </div>
-              <div class="panel-body"> 
-                <p>
-                Please describe the structure of the data files. Remember, the
-                files need to be structurally consistent, i.e. all files have the
-                same fields and field definitions.  
-                </p><p>
-                For each field, enter a new row. The Field, Description and Units
-                fields are required.
-                </p><p>
-                  <dl class="dl-horizontal">
-                    <dt>Field</dt>
-                    <dd>
-                      Provide the field name as it appears in the file(s). 
-                    </dd>
-
-                    <dt>Description</dt>
-                    <dd>
-                    Include a brief description of the field. This
-                    is important if your field names are abbreviations or
-                    truncated in some way. For example, you have a field named
-                    “T_Max_C”. A good description of that field would be “Maximum
-                    Air Temperature, degrees Celsius”.
-                    </dd>
-
-                    <dt>Units</dt>
-                    <dd>
-                    If the field is associated with a measurement,
-                    include the units. This can be either the abbreviation (mg/L)
-                    or a text description (milligrams per Liter). 
-                    </dd>
-
-                    <dt>Frequency</dt>
-                    <dd>  ---some stuff here---
-                    </dd>
-
-                    <dt>Aggregation</dt>
-                    <dd>
-                    If the data values in the field are aggregated
-                    in some way, include an aggregation descriptor. For example,
-                    the value represents the average temperature at the
-                    timestamp. Enter “Average” in the Aggregation field. 
-                    </dd>
-
-                    <dt>NODATA</dt>
-                    <dd>
-                    Enter the NODATA value you used, if any. If none is provided,
-                    we will use a default of -9999 (or other similar value if
-                    that is within the range of the data). 
-                    </dd>
-
-                  </dl>
-                </p>
-              </div>
-            </div>
-            <br>
-        </div>
-    </div>
-    
-    <div class="panel panel-basic" ng-controller="attributeForm">
       <!--
-      <pre> form = {{formData.ATTRIBUTES | json}}</pre>
+      <div class="panel panel-warning">
+        <div class="panel-heading"> Caution
+        </div>
+        <div class="panel-body">
+          <p>
+          You may pick the type of attribute you're anotating to
+          explore them, and even after editing them.  However, once
+          you <i>commit</i> the attribute, you will be unable to change
+          to another type.  This choice will be fixed forever for this
+          dataset.  When you do commit, <i>all</i> changes you
+          have made to the other types will be lost forever.
+          </p>
+        </div>
+      </div>
       -->
-      
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Instructions
+        </div>
+        <div class="panel-body"> 
+          <p>
+          Please describe the structure of the data files. Remember, the
+          files need to be structurally consistent, i.e. all files have the
+          same fields and field definitions.  
+          </p><p>
+          For each field, enter a new row. The Field, Description and Units
+          fields are required.
+          </p><p>
+          <dl class="dl-horizontal">
+            <dt>Field</dt>
+            <dd>
+            Provide the field name as it appears in the file(s). 
+            </dd>
+
+            <dt>Description</dt>
+            <dd>
+            Include a brief description of the field. This
+            is important if your field names are abbreviations or
+            truncated in some way. For example, you have a field named
+            “T_Max_C”. A good description of that field would be “Maximum
+            Air Temperature, degrees Celsius”.
+            </dd>
+
+            <dt>Units</dt>
+            <dd>
+            If the field is associated with a measurement,
+            include the units. This can be either the abbreviation (mg/L)
+            or a text description (milligrams per Liter). 
+            </dd>
+
+            <dt>Frequency</dt>
+            <dd>  ---some stuff here---
+            </dd>
+
+            <dt>Aggregation</dt>
+            <dd>
+            If the data values in the field are aggregated
+            in some way, include an aggregation descriptor. For example,
+            the value represents the average temperature at the
+            timestamp. Enter “Average” in the Aggregation field. 
+            </dd>
+
+            <dt>NODATA</dt>
+            <dd>
+            Enter the NODATA value you used, if any. If none is provided,
+            we will use a default of -9999 (or other similar value if
+            that is within the range of the data). 
+            </dd>
+
+          </dl>
+          </p>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="panel panel-basic" ng-controller="attributeForm">
+    <!--
+      <pre> form = {{formData.ATTRIBUTES | json}}</pre>
+    -->
+
+    <div class="panel-body">
+
+      <form novalidate editable-form class="simple-form">
+
+        <label for="attributeType" class="col-sm-4 control-label">What kind of attribute are you annotating?</label>
+        <select id="attributeType" 
+          ng-model="formData.ATTRIBUTES.typeSelected"
+          ng-options="a for a in ATTRIBUTE_TYPES"
+          ng-disabled="formData.ATTRIBUTES.committed"
+          ng-change="changeTableType()">
+        </select>
+
+        <button type="button" class="btn btn-danger col-sm-offset-2" ng-click="commitChoice()" ng-disabled="formData.ATTRIBUTES.committed"> Commit Forever
+        </button>
+      </form>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Table|Matrix|Raster/Model Output</h3>
+      </div>
+
       <div class="panel-body">
-        
-        <form novalidate editable-form class="simple-form">
+        <!-- @see http://vitalets.github.io/angular-xeditable/#editable-table -->
+        <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
+          <table class="table table-bordered table-hover table-condensed">
+            <thead>
+              <tr ng-click="tableform.$show(); addRow()">
+                <th ng-repeat="column in tableInfo" >
+                  {{column.label}}
+                </th>
 
-            <label for="attributeType" class="col-sm-4 control-label">What kind of attribute are you annotating?</label>
-            <select id="attributeType" 
-              ng-model="formData.ATTRIBUTES.typeSelected"
-              ng-options="a for a in ATTRIBUTE_TYPES"
-              ng-disabled="formData.ATTRIBUTES.committed"
-              ng-change="changeTableType()">
-            </select>
+                <th ng-show="tableform.$visible"> 
+                  <span>Action</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="records in recordList">
+                <td ng-repeat="record in records">
+                  <span editable-text="record.value" e-form="tableform" >
+                    {{record.value || 'empty' }}
+                  </span>
+                </td>
+                <td ng-show="tableform.$visible">
+                  <button type="button" ng-show="tableform.$visible" ng-click="deleteAttr($index)" 
+                    class="btn btn-danger pull-right"> 
+                    <span class="glyphicon glyphicon-minus-sign">
+                      Del
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
 
-            <button type="button" class="btn btn-danger col-sm-offset-2" ng-click="commitChoice()" ng-disabled="formData.ATTRIBUTES.committed"> Commit Forever
+          </table>
+          <!-- buttons -->
+          <div class="btn-edit">
+            <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+              Edit
             </button>
+          </div>
+
+          <div class="btn-form" ng-show="tableform.$visible">
+            <button type="button" ng-disabled="tableform.$waiting" 
+              ng-click="addRow()" class="btn btn-default pull-right">
+              <span class="glyphicon glyphicon-plus-sign"> 
+                Add Row
+              </span>
+            </button>
+
+            <button type="submit" class="btn btn-primary btn-lg"
+              ng-disabled="tableform.$waiting" 
+              >
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-lg"
+              ng-disabled="tableform.$waiting" 
+              ng-click="tableform.$cancel()" 
+              >
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+
           </div>
         </form>
-
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3>Table|Matrix|Raster/Model Output</h3>
-          </div>
-
-          <div class="panel-body">
-            <!-- @see http://vitalets.github.io/angular-xeditable/#editable-table -->
-            <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
-              <table class="table table-bordered table-hover table-condensed">
-                <thead>
-                  <tr ng-click="tableform.$show(); addRow()">
-                    <th ng-repeat="column in tableInfo" >
-                      {{column.label}}
-                    </th>
-
-                    <th ng-show="tableform.$visible"> 
-                      <span>Action</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="records in recordList">
-                    <td ng-repeat="record in records">
-                      <span editable-text="record.value" e-form="tableform" >
-                        {{record.value || 'empty' }}
-                      </span>
-                    </td>
-                    <td ng-show="tableform.$visible">
-                      <button type="button" ng-show="tableform.$visible" ng-click="deleteAttr($index)" 
-                        class="btn btn-danger pull-right"> 
-                        <span class="glyphicon glyphicon-minus-sign">
-                          Del
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-
-              </table>
-              <!-- buttons -->
-              <div class="btn-edit">
-                <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
-                  Edit
-                </button>
-              </div>
-
-              <div class="btn-form" ng-show="tableform.$visible">
-                <button type="button" ng-disabled="tableform.$waiting" 
-                  ng-click="addRow()" class="btn btn-default pull-right">
-                  <span class="glyphicon glyphicon-plus-sign"> 
-                    Add Row
-                </span>
-                </button>
-                
-                <button type="submit" class="btn btn-primary btn-lg"
-                  ng-disabled="tableform.$waiting" 
-                >
-                  <span class="glyphicon glyphicon-ok"></span>
-                </button>
-
-                <button type="button" class="btn btn-default btn-lg"
-                  ng-disabled="tableform.$waiting" 
-                  ng-click="tableform.$cancel()" 
-                >
-                  <span class="glyphicon glyphicon-remove"></span>
-                </button>
-   
-              </div>
-            </form>
-
-           </div>
-
-        </div>
-      
-        <div class="row">
-          <div style="display:inline-block;"
-            class="input-xxlarge"
-            tooltip="{{
-              tableform.$visible || ! formData.ATTRIBUTES.committed ? 
-              'You can only advance after committing to a style' :
-              'Good to go'
-            }}"
-          >
-            <!-- No click event, it's disabled but tooltipped-->
-            <button class="btn btn-primary" 
-              ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
-              ng-click="nextStep(formData, '/license')"
-            >Next Step
-            </button>
-          </div>
-        </div>
-
       </div>
-    </div> 
+    </div>
+
+    <div class="row">
+      <div style="display:inline-block;"
+        class="input-xxlarge"
+        tooltip="{{
+        tableform.$visible || ! formData.ATTRIBUTES.committed ? 
+        'You can only advance after committing to a style' :
+        'Good to go'
+        }}"
+        >
+        <!-- No click event, it's disabled but tooltipped-->
+        <button class="btn btn-primary" 
+          ng-disabled="tableform.$visible || ! formData.ATTRIBUTES.committed"
+          ng-click="nextStep(formData, '/license')"
+          >Next Step
+        </button>
+      </div>
+    </div>
   </div>
+</div> 
