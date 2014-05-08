@@ -37,7 +37,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class InvestigatorProfileAdmin(admin.ModelAdmin):
     model = InvestigatorProfile
-    verbose_name_plural = "My PIs"
+    verbose_name_plural = "My Supervisors"
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(InvestigatorProfile, InvestigatorProfileAdmin)

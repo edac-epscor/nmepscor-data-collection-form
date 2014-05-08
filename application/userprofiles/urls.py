@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 
     # /users/institutions
     url(r'^institutions/list$', views.getInstitutions),
+    # /users/components
+    url(r'^components/list$', views.getComponents),
 
     # /users/pis/list
     # url(r'^pis/list$', views.getInstitutions),

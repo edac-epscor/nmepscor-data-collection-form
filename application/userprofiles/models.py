@@ -11,15 +11,16 @@ log = logging.getLogger(__name__)
 # Create your models here.
 
 class InvestigatorProfile(models.Model):
+    LABEL = "Supervisor's "
     name = models.CharField(
-        verbose_name="Principle Investigator's Name",
+        verbose_name=LABEL + "Name",
         max_length=50,
         blank=False,
         null=False,
     )
 
     institution = models.CharField(
-        verbose_name="Principle Investigator's Institution",
+        verbose_name=LABEL + "Institution",
         choices=model_choices.INSTITUTIONS,
         max_length=50,
         blank=False,
@@ -27,7 +28,15 @@ class InvestigatorProfile(models.Model):
     )
 
     email = models.EmailField(
-        verbose_name="Principle Investigator's EMail",
+        verbose_name=LABEL + "EMail",
+        blank=False,
+        null=False,
+    )
+
+    component = models.CharField(
+        verbose_name="NM EPSCoR Component",
+        choices=model_choices.COMPONENTS,
+        max_length=25,
         blank=False,
         null=False,
     )
@@ -55,6 +64,7 @@ class InvestigatorProfile(models.Model):
             'name': self.name,
             'institution': self.institution,
             'email': self.email,
+            'component': self.component,
         }
 
 
@@ -64,6 +74,15 @@ class UserProfile(models.Model):
         primary_key=True
     )
     # has last_login, email already
+
+    component = models.CharField(
+        verbose_name="NM EPSCoR Component",
+        choices=model_choices.COMPONENTS,
+        max_length=25,
+        blank=False,
+        null=False,
+        default=model_choices.COMPONENTS[0]
+    )
 
     def __unicode__(self):
         return u"Profile for <%s>" % self.user.username
@@ -76,6 +95,7 @@ class UserProfile(models.Model):
                 'first': user.first_name,
                 'last': user.last_name,
                 'email': user.email,
+                'component': self.component,
                 'investigators': [i.ajax() for i in
                     self.investigators.select_related()]
             }
@@ -87,12 +107,14 @@ class UserProfile(models.Model):
         user.first_name = js['first']
         user.last_name = js['last']
         user.email = js['email']
+        self.component = js['component']
         user.save()
 
         for investigator in js['investigators']:
             self.__jsonInvestigatorSave(
                 investigator
             )
+        self.save()
 
     def __jsonInvestigatorSave(self, investigator):
         """
@@ -109,6 +131,7 @@ class UserProfile(models.Model):
         updatedPI.name = investigator['name']
         updatedPI.institution = investigator['institution']
         updatedPI.email = investigator['email']
+        updatedPI.component = investigator['component']
         updatedPI.save()
 
 

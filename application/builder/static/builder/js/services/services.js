@@ -257,6 +257,7 @@ epscorForm.factory('ProfileService',
         var PREFIX = '/users';
 
         // List does not change
+        var COMPONENTS = [];
         var INSTITUTIONS = [];
         var myProfile = null;
 
@@ -264,6 +265,28 @@ epscorForm.factory('ProfileService',
         return {
             getProfile: function() {
                 return myProfile;
+            },
+            getComponents: function(callback) {
+                return COMPONENTS;
+            },
+            listComponents: function(callback) {
+                return $http({
+                    method: 'GET',
+                    url: PREFIX + '/components/list'
+                }).
+                success(function(data, status, headers, config) {
+                    COMPONENTS = [];
+                    for(var loop=0;loop < data.length;loop++) {
+                        COMPONENTS.push({
+                            value: data[loop][0],
+                            text: data[loop][1]
+                        });
+                    }
+                    callback(data);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log("failed to list components");
+                });
             },
             getInstitutions: function(callback) {
                 return INSTITUTIONS;

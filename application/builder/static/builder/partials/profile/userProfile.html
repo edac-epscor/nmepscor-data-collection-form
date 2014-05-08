@@ -14,7 +14,7 @@
       <div class="col-sm-4">
         <form name="userProfileForm" novalidate>
           <div class="form-group" ng-class="{ 'has-error' : userProfileForm.firstname.$invalid && !userProfileForm.firstname.$pristine }">
-            <label>First Name</label>
+            <label>First (Given) Name</label>
             <input class="form-control" type="text" ng-model="profile.first" type="text" placeholder="Your First Name" name='firstname' required>
             <p ng-show="userProfileForm.firstname.$invalid && !userForm.firstname.$pristine" class="help-block">
               Your name is required.
@@ -22,7 +22,7 @@
           </div>
 
           <div class="form-group" ng-class="{ 'has-error' : userProfileForm.lastname.$invalid && !userProfileForm.lastname.$pristine }">
-            <label>Last Name</label>
+            <label>Last (Family) Name</label>
             <input class="form-control" type="text" ng-model="profile.last" type="text" placeholder="Your Last Name" name='lastname' required>
             <p ng-show="userProfileForm.lastname.$invalid && !userForm.lastname.$pristine" class="help-block">
               Your name is required.
@@ -34,6 +34,16 @@
             <input class="form-control" type="email" ng-model="profile.email" type="text" placeholder="Your EMail" name='email' required>
             <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
           </div>
+
+          <div class="form-group" ng-class="{ 'has-error' : userProfileForm.component.$invalid && !userProfileForm.component.$pristine }">
+            <label>Your Primary Component</label>
+            <select ng-model="profile.component"
+              name="component"
+              ng-options = "IO.value as IO.text for IO in COMPONENT_OPTIONS"
+            >
+            </select>
+          </div>
+
         </form>
       </div>
 
@@ -46,7 +56,7 @@
             <li>Please supply your name and contact email.</li>
             <li>Then click edit to add or change your PIs.
               <ul>
-                <li>Please add contact information for any PI you work with.</li>
+                <li>Please add contact information for any PI/Supervisor you work with.</li>
                 <li>Please do not reuse or add any shared email addresses, every PI
                 should have one unique contact address, preferrably their official
                 (university) account. </li>
@@ -61,7 +71,7 @@
     <div class="panel-body">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3>My Principle Investigators: <small>Contact Information</small></h3>
+          <h3>My Supervisors: <small>Contact Information</small></h3>
         </div>
 
         <div class="panel-body">
@@ -72,6 +82,7 @@
                 <th>Name</th>
                 <th>Institution</th>
                 <th>Email</th>
+                <th>Component</th>
 
                 <th ng-show="piForm.$visible">
                   <span>Action</span>
@@ -82,7 +93,7 @@
                 <tr ng-repeat="pi in profile.investigators">
                   <td>
                     <span editable-text="pi.name" e-form="piForm" e-required e-placeholder="New Investigator">
-                      {{pi.name || 'enter name' }}
+                      {{pi.name || 'Enter Name' }}
                     </span>
                   </td>
 
@@ -96,7 +107,6 @@
                     </span>
                   </td>
 
-
                   <td>
                     <span editable-email="pi.email" e-form="piForm" e-name="email"
                       e-ng-blur="checkEmail($data, piForm)"
@@ -104,8 +114,19 @@
                       e-placeholder="Enter Email"
                       onbeforesave="checkEmail($data, piForm)"
                     >
-                      {{pi.email || 'Investigator Email' }}
+                      {{pi.email || "Supervisor's Email" }}
                     </span>
+                  </td>
+
+                  <td>
+                    <span editable-select="pi.component"
+                      e-ng-options="IO.value as IO.text for IO in COMPONENT_OPTIONS"
+                      e-form="piForm"
+                      e-required
+                    >
+                      {{ showComponent(pi) || "Supervisor's Component" }}
+                    </span>
+
                   </td>
 
                   <td ng-show="piForm.$visible">

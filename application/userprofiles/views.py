@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from userprofiles.models import UserProfile, InvestigatorProfile
 from builder.decorators import sessionAuthed
-from model_choices import INSTITUTIONS
+from model_choices import COMPONENTS, INSTITUTIONS
 
 import json
 
@@ -13,6 +13,15 @@ log = logging.getLogger(__name__)
 
 
 # Public Requests
+
+@ajax_request
+@csrf_protect
+def getComponents(request):
+    """
+    List of institutions for form
+    """
+    return COMPONENTS
+
 
 @ajax_request
 @csrf_protect

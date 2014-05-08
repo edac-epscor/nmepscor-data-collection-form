@@ -22,4 +22,16 @@ INSTITUTIONS = (
     ('NMSU', 'New Mexico State University'),
     ('SFI', 'Santa Fe Institute'),
     ('SFCC', 'Santa Fe Community College'),
+    ('UNLISTED', 'My Institution Not in List'),
+)
+
+COMPONENTS = (
+    ('UNKNOWN', 'I do not know my component'),
+    ('BIOALGAL', 'BioAlgal Energy'),
+    ('GEOTHERMAL', 'Geothermal'),
+    ('OSMOTIC', 'Osmotic Power'),
+    ('SOLAR', 'Solar Energy'),
+    ('SOCIAL', 'Social/Science Nexus'),
+    ('URANIUM', 'Uranium'),
+    ('WAVE', 'WC-Wave'),
 )

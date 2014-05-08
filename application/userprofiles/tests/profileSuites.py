@@ -15,11 +15,13 @@ def aliceDoes():
         u'email': u'alice@example.com',
         u'first': u'hello',
         u'last': u'world',
+        u'component': u'SOLAR',  # Alice has a main component
         u'investigators': [{
             u'email': u'alice_boss@example.com',
             u'id': None,
             u'institution': u'UNM',
-            u'name': u'New Investigator'
+            u'component': u'SOLAR',
+            u'name': u'New Investigator' #So does her boss
         }],
         u'username': u'alice1'
     }

@@ -58,6 +58,10 @@
             $scope.INSTITUTION_OPTIONS = ProfileService.getInstitutions();
         });
 
+        ProfileService.listComponents(function(data) {
+            $scope.COMPONENT_OPTIONS = ProfileService.getComponents();
+        });
+
 
         $scope.addRow = function() {
             $scope.profile.investigators.push({
@@ -116,6 +120,16 @@
             return selected.length ? selected[0].text : 'Not Set';
         };
 
+        $scope.showComponent = function(pi) {
+            var selected = [];
+            if(pi.component) {
+                selected = $filter('filter')(
+                    $scope.COMPONENT_OPTIONS, 
+                    {value: pi.component}
+                );
+            }
+            return selected.length ? selected[0].text : 'Not Set';
+        };
     });
 
 
