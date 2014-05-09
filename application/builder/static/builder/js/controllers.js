@@ -450,7 +450,7 @@
             }
             else if (form.choice == 'other' &&  form.hasReadCircumstances) {
                 // Other must agree to circumstances
-                if (form.alternate.length > 30) {
+                if (form.alternate && form.alternate.length > 30) {
                     return true;
                 }
                 return false;
