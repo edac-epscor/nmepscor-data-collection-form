@@ -68,7 +68,8 @@
                 'id': null,
                 'email': null,
                 'institution': 'UNM',  // default
-                'name': null
+                'name': null,
+                'component': 'UNKNOWN' // default
             });
         };
 
