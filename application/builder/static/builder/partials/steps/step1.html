@@ -51,18 +51,17 @@
                 <li>
                 Documents (PDF, Word, RTF, etc), Images (PNG, Tiff, JPEG, etc), Videos (URLs)
                 </li>
-                <li> All other formats - <a tooltip="
+                <li>Databases or geodatabases</li>
+                <li>Model executables</li>
+                <li>URLs to hosted web services</li>
+                <li>Any other<a tooltip="
                   ** For these purposes, MATLAB, SPSS, SAS, etc, formats are not
                   proprietary. Please export your data as CSV, TSV, etc, before delivering it to
                   EDAC if you are using any of these or similar software. Proprietary formats
                   will only be accepted if no valid export option is possible. For example, Lab
                   Equipment Awesome software only provides .HMD files that can’t be converted to
-                  an appropriate text format.">proprietary data formats**</a>,
-                  model executables, database (geodatabase, MS Access, SQLite,
-                  etc), web services
+                  an appropriate text format.">proprietary data formats</a>
                 </li>
-                <li>Proprietary data files from a piece of equipment</li>
-                <li>A database from a geologic survey</li>
               </ul>
               </dd>
               <br/>
@@ -79,12 +78,10 @@
                   <a tooltip="
                     * DAT files can be some form of structured text files, such as
                     CSV or TSV, or in a proprietary or binary/hex format. This option is only
-                    available for the text-based, non-proprietary formats. ">DAT*,</a>
+                    available for the text-based, non-proprietary formats. ">DAT</a>
                   </li>
                   <li>Shapefiles, KML or other vector format </li>
-                  <li>Spreadsheets from a survey</li>
-                  <li>Text files from a logger</li>
-                  <li>Text files from a piece of lab equipment</li>
+                  <li>Text files, or other data files, from a logger that include XY coordinates</li>
                 </ul>
               </dd>
               <br/>
@@ -92,14 +89,13 @@
 
             <label>
               <dt>
-                <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Raster Data/Model Output
+                <input type="radio" value="rastermodel" ng-model="formData.DESCRIBE.choice" /> Raster Data
               </dt>
               <dd>
                 <ul>
                   <li>
                     Rasters (GeoTiff, MrSID, ASCII), NetCDF, HDF 4 or 5
                   </li>
-                  <li>Raster outputs from a model</li>
                 </ul>
               </dd>
               <br/>
@@ -113,7 +109,7 @@
                 <ul>
                   <li>
                     <a  tooltip="*** Please choose this option for 2D/3D matrices even if provided
-                  as Excel or or some other spreadsheet format.">2D/3D matrices***</a>
+                  as Excel or or some other spreadsheet format.">2D/3D matrices</a>
                   </li>
                 </ul>
               </dd>
