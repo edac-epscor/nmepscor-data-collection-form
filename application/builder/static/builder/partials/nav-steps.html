@@ -37,14 +37,14 @@ txt="Step 2: Files To Document"
   txt="Step ?: Describe Workflow"
 > </step-list>
 
-<step-list record="{{formData.META.id}}" next="#/descAttributes"
-  mypath="#{{location.path()}}" 
-  txt="Step ?: Describe Attributes"
-> </step-list>
-
 <step-list record="{{formData.META.id}}" next="#/timeInfo"
   mypath="#{{location.path()}}" 
   txt="Step ?: Time Information"
+> </step-list>
+
+<step-list record="{{formData.META.id}}" next="#/descAttributes"
+  mypath="#{{location.path()}}" 
+  txt="Step ?: Describe Attributes"
 > </step-list>
 
 <step-list record="{{formData.META.id}}" next="#/license"
