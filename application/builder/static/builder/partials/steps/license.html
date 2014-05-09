@@ -62,15 +62,17 @@
             <br/>
           </div>
 
-         <div class="form-group" ng-show="formData.LICENSE.choice=='other'">
-           <input type="checkbox" ng-model="formData.LICENSE.hasReadCircumstances"
-             ng-disabled="! formData.LICENSE.hasReadDataPolicy"
-             ng-change="resetRequest()"
-           >
-              I understand that exceptions are only provided in rare
-              circumstances and have done my best to meet the data policies as
-              laid out by NM EPSCoR.  
-           </input>
+         <div class="form-group checkbox" ng-show="formData.LICENSE.choice=='other'">
+           <label>
+             <input type="checkbox" ng-model="formData.LICENSE.hasReadCircumstances"
+               ng-disabled="! formData.LICENSE.hasReadDataPolicy"
+               ng-change="resetRequest()"
+             >
+                I understand that exceptions are only provided in rare
+                circumstances and have done my best to meet the data policies as
+                laid out by NM EPSCoR.  
+             </input>
+           </label>
          </div>
 
          <div class="form-group" ng-show="formData.LICENSE.choice=='other'">
