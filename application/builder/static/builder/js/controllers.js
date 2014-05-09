@@ -462,7 +462,13 @@
     });
 
 
-    epscorForm.controller('embargoForm', function embargoForm($rootScope, $scope, $location) {
+    epscorForm.controller('embargoForm', function embargoForm(
+        $rootScope, 
+        $scope, 
+        $location,
+        $routeParams,
+        SubmissionService) 
+    {
         $scope.EMBARGO_DURATIONS = [
             "Do Not Embargo"
         ];
@@ -470,6 +476,10 @@
         for(var i=1; i<=12; i++) {
             $scope.EMBARGO_DURATIONS.push(i + " Months");
         }
+
+        var submissionID = $routeParams.subID;
+        // Load if needed
+        $rootScope.formData = SubmissionService.getById(submissionID).fullForm;
 
         $rootScope.progressBar = 90;
 
