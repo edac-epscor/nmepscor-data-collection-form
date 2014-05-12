@@ -17,12 +17,12 @@ TODO:
 # TODO: Sort by membership size
 INSTITUTIONS = (
     ('UNM', 'University of New Mexico'),
-    ('TECH', 'NM Tech'),
+    ('TECH', 'New Mexico Tech'),
     ('ENM', 'Eastern New Mexico University'),
     ('NMSU', 'New Mexico State University'),
     ('SFI', 'Santa Fe Institute'),
     ('SFCC', 'Santa Fe Community College'),
-    ('UNLISTED', 'My Institution Not in List'),
+    ('UNLISTED', 'Not listed'),
 )
 
 COMPONENTS = (
@@ -33,5 +33,5 @@ COMPONENTS = (
     ('SOLAR', 'Solar Energy'),
     ('SOCIAL', 'Social/Science Nexus'),
     ('URANIUM', 'Uranium'),
-    ('WAVE', 'WC-Wave'),
+    ('WORKFORCE', 'Workforce Development'),
 )
