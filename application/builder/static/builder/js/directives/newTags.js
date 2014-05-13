@@ -17,9 +17,10 @@
 // a step-list tag. (partials/nav-steps)
 //directives.directive('stepList', ['$location', function($location) {
 directives.directive('stepList', function() {
+    var PREFIX = '/builder/';
     return {
         restrict:'E',
-        templateUrl: 'builder/static/builder/js/directives/step-list.html',
+        templateUrl: PREFIX + 'static/builder/js/directives/step-list.html',
         scope: {
             record: '@',
             next: '@',  // copy & update when parent changes, as text/string
