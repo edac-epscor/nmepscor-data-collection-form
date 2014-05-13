@@ -141,7 +141,7 @@ def getLogDictSchema(stripColors=False):
                 'backupCount': 0,  # forever
             },
             'console': {
-                'level': 'DEBUG',
+                'level': 'WARN',
                 'class': 'logging.StreamHandler',  # stderr
                 'formatter': 'verbose'
             },
