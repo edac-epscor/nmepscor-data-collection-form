@@ -7,9 +7,9 @@ __pycache__/
 
 # Distribution / packaging
 bin/
-build/
+#build/   bower/angularui
 develop-eggs/
-#dist/
+#dist/    bower/ ...
 eggs/
 lib/
 lib64/
