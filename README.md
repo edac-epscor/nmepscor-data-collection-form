@@ -74,8 +74,9 @@ that can auth to the nm epscor portal
 * See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
   - Be sure debug is False
 * python manage.py bower_install (Gather proper JS versions, choose bootstrap 3.0.0)
-  - Note: this requires a fairly recent version of node and npm
-* python manage.py ompcress (aggregate minified js/css)
+  - This may no longer be needed as long as 'dist' is not in .gitignore
+  - Note: this requires a fairly recent version of node and npm beyond those that ship in core ubuntu
+* python manage.py compress (aggregate minified js/css)
 * python manage.py collectstatic (collect static files for serving outside of wsgi by server)
   - Add the folder this creates as an apache served folder
 * I believe this entire app is now 'rooted' within whatever folder it lies in

@@ -9,7 +9,7 @@ __pycache__/
 bin/
 build/
 develop-eggs/
-dist/
+#dist/
 eggs/
 lib/
 lib64/
@@ -33,7 +33,8 @@ coverage.xml
 coverage/
 
 # Bower
-vendor_components/
+#  Removed 5/14/2014 to bring vendor elements into VC
+#vendor_components/
 
 # Translations
 *.mo
