@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-6">
             <div>
               <p><strong>What is a documentation collection?</strong> </p>
               <p>
@@ -26,10 +26,10 @@
             </div>
             <br><br>
         </div>
-        <div class="col-md-6" ng-controller="userProfileReadController">
+        <div class="profile-block col-md-6 col-lg-6" ng-controller="userProfileReadController">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>{{profile.first}} {{profile.last}}'s Profile</h4>
+              {{profile.first}} {{profile.last}}'s Profile <a class="btn btn-secondary" href="#/users/profile/{{authService.currentUser()}}" >Edit</a>
             </div>
             <div class="panel-body">
               <p>
@@ -37,21 +37,12 @@
                 target="_top">{{profile.email}}</a>
               </p>
               <p>
-                My collaborator's, PIs, advisors &hellip;
+                My PI(s), advisor(s), or collaborator(s):
               </p>
               <ul ng-repeat="pi in profile.investigators">
-                <li>{{pi.name}}, {{pi.institution}}
+                <li>{{pi.name}} ({{pi.institution}})
                 </li>
               </ul>
-            </div>
-            <div class="panel-footer">
-              <nav class="navbar navbar-collapse profile-nav" role="navigation">
-                <ul class="nav navbar-nav navbar-right">
-                  <li> 
-                    <a href="#/users/profile/{{authService.currentUser()}}" >Edit</a>
-                  </li>
-                </ul>
-              </nav>
             </div>
           </div>
         </div>
