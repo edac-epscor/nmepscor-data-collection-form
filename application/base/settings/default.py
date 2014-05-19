@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.admindocs',
+    'south',
     'djangobower',
     'django_nose',
     'builder',
