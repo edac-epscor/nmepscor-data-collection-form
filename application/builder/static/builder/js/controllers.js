@@ -210,6 +210,7 @@
     epscorForm.controller('submissionsController', function submissionsController(
                 $rootScope, $scope, $location, SubmissionService) {
 
+        $rootScope.progressBar = 0;
         $scope.submissionsList = [];
 
         SubmissionService.list($rootScope.authService.currentUser(),
@@ -636,7 +637,8 @@
         $scope.finalize = function(docID) {
             SubmissionService.finalize(docID, function(data) {
                 $rootScope.progressBar = 100;
-                // returns ?
+                $.location.path('/step0');  // Back to home
+                $rootScope.progressBar = 0;
             });
         };
     });
