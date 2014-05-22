@@ -202,11 +202,21 @@ epscorForm.run(function (
     $rootScope.location = $location; //make available to templates
 
     // Update
-    $rootScope.save = function(updated) {
-        // Save our step for base reset
-        $rootScope.master = angular.copy(updated);
-        // Save our form model
+    // @param updated : json dictionary of element
+    // @param backup  : bool.  default true, backup will
+    //    make a 'restore point' for reset(), intended
+    //    to be utilized between 'page views' on the form
+    $rootScope.save = function(updated, backup) {
 
+        if (typeof(backup) == 'undefined') {
+            backup = true;
+        }
+        // Save our step for base reset
+        if(backup) {
+            $rootScope.master = angular.copy(updated);
+        }
+
+        // Save our form model
         SubmissionService.update(updated, function(data) {
             // This doesn't return anything, but the times
             // are changed...
@@ -217,6 +227,7 @@ epscorForm.run(function (
         });
     };
 
+
     // Save and go2 next step
     $rootScope.nextStep = function(updated, newPage) {
         // Modal the dialog
@@ -224,6 +235,14 @@ epscorForm.run(function (
         $rootScope.save(updated);
         $rootScope.go2(newPage);
         // Must unmodal later
+    };
+
+    // Save & Quit
+    $rootScope.quit = function(updated) {
+        $rootScope.spinnerOn();
+        $rootScope.save(updated);
+        $rootScope.go2('#/quit');
+        $rootScope.spinnerOff();
     };
 
     // Reset this step

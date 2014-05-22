@@ -193,6 +193,10 @@
         // Load provided ID
         $rootScope.formData = SubmissionService.getById(sentID).fullForm;
 
+        // And copy this into the 'master' so reset will work just in 
+        // case they ...try to reset before saving
+        $rootScope.master = angular.copy($rootScope.formData);
+
         // Step 1 lets you create a new item...
         $location.path('/step2');
 
@@ -508,74 +512,129 @@
 
     epscorForm.controller('attributeForm', function attributeForm($rootScope, $scope, $location) {
 
+        $rootScope.progressBar = 60;
+
         // Blank/New Rows to clone
+        
         var ATTRIBUTE_CONFIG = $rootScope.constants.attributeFormConfig;
+
+        // safe alias, choice should never change 
         var TYPE_SELECTED = $scope.formData.DESCRIBE.choice;
 
-        if (TYPE_SELECTED == 'basic') {
+        // Handy to F5 the table without loading document.  Should never
+        // happen in prod.
+        if (TYPE_SELECTED === 'undefined') {
             // Should never really happen though...
             console.log("Setting model type to 'basic' in attribute editor");
-            TYPE_SELECTED = 'table';
+            TYPE_SELECTED = 'basic';
         }
 
-        // Need to keep you and set you on load...
-        function changeTableType(typ) {
-            $scope.tableInfo = ATTRIBUTE_CONFIG[TYPE_SELECTED];
-            $scope.recordList = $rootScope.formData.ATTRIBUTES.userTable[
+        // A quick way to get a reference to the current table
+        function getTableAlias() {
+            return $rootScope.formData.ATTRIBUTES.userTable[
                 TYPE_SELECTED
             ];
         }
 
-        changeTableType(TYPE_SELECTED); // default loaded
-        $rootScope.progressBar = 60;
+        // Once was change table when selectable, now we just build on page load
+        // scope.recordList IS the table on the page, but it is a reference
+        // here.  Watch that it stays in sync with rootscope.formdata
+        function buildTable(typ) {
+            $scope.tableInfo = ATTRIBUTE_CONFIG[TYPE_SELECTED];
+            $scope.recordList = getTableAlias();
+        }
+
+        // default table loaded.  
+        buildTable(TYPE_SELECTED); 
+
+        // Filter viewable rows to ones that aren't deleted
+        $scope.notDeleted = function(row) {
+            return row.isDeleted !== true;
+        };
 
         // Blank Row copied into table model
         $scope.addRow = function() {
             $scope.inserted = angular.copy(
                 ATTRIBUTE_CONFIG[TYPE_SELECTED]
             );
+            $scope.inserted.isNew = true;
             $scope.recordList.push($scope.inserted);
         };
 
-        // TODO: refactor pruner into generating prototype
-        $scope.saveTable= function() {
-            var cellVal, found;
+        $scope.localReset = function() {
+            $rootScope.reset(); 
+            $scope.recordList = getTableAlias();
+        };
 
-            var table = $scope.recordList;
+        // Cancel button (x), not reset.
+        $scope.cancel = function() {
+            // Remove all new elements (including new & deleted)
+            //    e.g. while non-zero...
+            for (var idx= $scope.recordList.length; idx--;) {
+                var row = $scope.recordList[idx];
 
-            // clear out empty last row
-            var wipeRows = [];
-
-            for ( var row = 0; row < table.length; row ++) {
-                found = false;
-                for(var col = 0; col < table[row].length; col ++) {
-                    cellVal = table[row][col].value;
-                    if (cellVal !== null && cellVal !== '') {
-                        found = true;
-                        break;
-                    }
+                // undelete
+                if (row.isDeleted) {
+                    delete row.isDeleted;
                 }
-                if(! found) {
-                    wipeRows.push(row);
-                    // blank row
+                // un-add
+                if (row.isNew) {
+                    $scope.recordList.splice(idx, 1); // cull
                 }
             }
-            wipeRows.reverse();  // Procede from tail to not change indices
+        };
 
-            // Purged
-            _.each(wipeRows, function(rowIdx) {
-                $scope.deleteAttr(rowIdx);
-            });
+        // TODO: refactor pruner into generating prototype
+        //  This method actually does server side update the table, but does
+        //  not refresh the 'backup' for the refresh button
+        $scope.saveTable= function() {
+            var cellVal, found;
+            var table = $scope.recordList;
 
-            $rootScope.save($rootScope.formData); // Changes pushed to server on mini save
+            // backwards for idempotent
+            
+            var foundNonSparse = false;
+            for ( var rowIdx = table.length; rowIdx--;)  {
+                var row = table[rowIdx];
+
+                if (row.isDeleted) {
+                    table.splice(rowIdx, 1);
+                    continue;
+                }
+
+                if (row.isNew) {
+                    delete row.isNew; // Not new now that we saved it.
+                }
+
+                // It's not deleted, it may still be empty... two checks.
+                // This way we skip entirely over it the first time we've
+                // found non sparse rows
+                if(! foundNonSparse) {
+                    for(var col = 0; col < row.length; col ++) {
+                        cellVal = row[col].value;
+                        if (cellVal !== null && cellVal !== '') {
+                            foundNonSparse = true;
+                            break;
+                        }
+                    }
+                    if(! foundNonSparse) {
+                        table.splice(rowIdx, 1);
+                        // Frag this row
+                    }
+                }
+            }
+            // We have deleted any deleted rows, or empty rows at the end
+
+            // Changes pushed to server on mini save, 
+            // no updating restore-copy
+            $rootScope.save($rootScope.formData, false); 
         };
 
         // Purge out an entire row
-        $scope.deleteAttr = function(recIdx) {
+        $scope.deleteRow = function(recIdx) {
             // find match in recordlist
-             $scope.recordList.splice(recIdx, 1);
+            $scope.recordList[recIdx].isDeleted = true;
         };
-
     });
 
 

@@ -5,23 +5,6 @@
         <h2>NMEPSCoR Data Documentation Tool: <small>Describe Attributes</small></h2>
       </div>
 
-      <!--
-      <div class="panel panel-warning">
-        <div class="panel-heading"> Caution
-        </div>
-        <div class="panel-body">
-          <p>
-          You may pick the type of attribute you're anotating to
-          explore them, and even after editing them.  However, once
-          you <i>commit</i> the attribute, you will be unable to change
-          to another type.  This choice will be fixed forever for this
-          dataset.  When you do commit, <i>all</i> changes you
-          have made to the other types will be lost forever.
-          </p>
-        </div>
-      </div>
-      -->
-
       <div class="panel panel-info">
         <div class="panel-heading">
           Instructions
@@ -110,14 +93,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="records in recordList">
+              <tr ng-repeat="records in recordList | filter:notDeleted">
                 <td ng-repeat="record in records">
                   <span editable-text="record.value" e-form="tableform" >
                     {{record.value || 'empty' }}
                   </span>
                 </td>
                 <td ng-show="tableform.$visible">
-                  <button type="button" ng-show="tableform.$visible" ng-click="deleteAttr($index)" 
+                  <button type="button" ng-show="tableform.$visible" ng-click="deleteRow($index)" 
                     class="btn btn-danger pull-right"> 
                     <span class="glyphicon glyphicon-minus-sign">
                       Del
@@ -162,12 +145,24 @@
     </div>
 
     <div class="row">
-      <!-- No click event, it's disabled but tooltipped-->
+      <!-- No click event, it's disabled but tooltipped -->
+
+      <button class="btn btn-danger"
+        ng-disabled="tableform.$visible"
+        ng-click="localReset()"
+        tooltip="Behave as if you have just entered this page"
+      >Reset this step</button>
+
+      <button class="btn btn-danger"
+        ng-disabled="tableform.$visible"
+        ng-click="save(formData)"
+        tooltip="Save my work, I'm done for now"
+      >Quit</button>
+
       <button class="btn btn-primary" 
         ng-disabled="tableform.$visible"
         ng-click="nextStep(formData, '/license')"
-        >Next Step
-      </button>
+      >Next Step</button>
     </div>
   </div>
 </div> 
