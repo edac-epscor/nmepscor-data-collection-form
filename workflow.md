@@ -24,7 +24,11 @@ here (installing django-bower for example), will require bower.  Bower will
 require node and npm.  The easiest way to actually have this work on Ubuntu is
 *NEVER* to use the ubuntu node package, but instead to use the creepy way...
 
-(If you use the ubuntu package, node will be called nodejs
+(If you use the Ubuntu package, node will be called nodejs, as node is a different
+command.  Installing node /locally/ will override this if you have appropriate
+bashrc settings.  Otherwise, bower will fail as the npm package shebangs
+/bin/node... TLDR: when building your desktop environment, make sure the bower
+command actually works)
 
 ```bash
 curl -L https://npmjs.org/install.sh | sh
@@ -33,6 +37,10 @@ sudo npm install -g n # get latest stable node
 sudo n stable  # use latest stable node
 sudo npm install -g bower  # get bower
 ```
+
+Be sure bower works when you type `bower` on the command line...
+
+Now we're going to build our python virtualenv and get the project configured
 
 ```bash
 cd /workspace
@@ -43,6 +51,10 @@ cd nmepscor-data-collection-form
 pip install -r requirements/local.list
 cd application
 ```
+
+You /should/ be able to type `python manage.py bower_install` and have no
+changes happen, as all of the vendor javascript files should presently be in
+this git repo.
 
 Now you will have to get the database setup according to your needs.
 
@@ -57,6 +69,7 @@ python manage.py runserver 0.0.0.0:8000
 * If you made database changes, remember to run migrations.
 * If you changed javascript, make sure you ran bower_install
 * Save all of the above to the subversion repo.  At some point, this should be a /prod/ branch
+** And of course, don't forget to change settings.production if appropriate
 
 ## Deploy to staging
 
