@@ -72,9 +72,14 @@ def remoteAuthenticate(**kwargs):
     @RETURNS tuple:
         success  (Bool)
         response (requests.Response)
+
     """
 
-    URL = 'http://%s/user/login' % settings.SECRET_EPSCOR_SERVER
+    #  6/11/14 Disable cert verification so we can still use crypto
+    #  The *MOST RIGHT* way to do this is by setting REQUESTS_CA_BUNDLE
+    #  variable and adding CA for self signed cert.
+
+    URL = 'https://%s/user/login' % settings.SECRET_EPSCOR_SERVER
     HEADERS = {
         'User-Agent': 'nmepscor-data-collection-form.git'
     }
@@ -87,7 +92,9 @@ def remoteAuthenticate(**kwargs):
     }  # no chance of ever sending epscor server other params
 
     response = requests.post(URL, headers=HEADERS,
-        data=PAYLOAD, timeout=8.0)  # 2s
+        data=PAYLOAD, timeout=8.0,
+        verify=False
+    )  # 2s
 
     #  If we come back without a history/302
     if len(response.history) == 0:
