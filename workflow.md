@@ -3,14 +3,15 @@ nmepscor-data-collection-form
 
 # Anticipated Developer Workflow Document
 
-1. Get working node/bower
-2. Build virtualenv
-3. Checkout application
-4. Test
-5. Setup database
-6. Edit/Make Changes/Test
-7. If you changed JS, save vendor_packages
-8. Commit
+1. Get working node/bower on local desktop
+2. Build python virtualenv
+3. Checkout application from github
+4. Install python dependencies
+5. Run Test `python manage.py test`
+6. Setup database
+7. Edit/Make Changes/Tests
+8. If you changed JS, add/save vendor_packages (production ansible)
+9. Commit & GOTO 7
 
 ## Getting a new copy
 
