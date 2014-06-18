@@ -68,7 +68,7 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 * If you made database changes, remember to run migrations.
-* If you changed javascript, make sure you ran bower_install
+* If you changed javascript, make sure you ran bower_install (Note: for javascript package changes rather than code changes)
 * Save all of the above to the subversion repo.  At some point, this should be a /prod/ branch
     * And of course, don't forget to change settings.production if appropriate
 
