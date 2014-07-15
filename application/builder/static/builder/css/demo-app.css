@@ -11,10 +11,6 @@ a {
     cursor: pointer;
 }
 
-.hide-demo {
-    display:none;
-}
-
 /** nested row patch **/
 .row .row {
     margin: 0;
@@ -36,7 +32,7 @@ label.checkboxdialog {
 jumbotron mods
 **/
 .jumbotron {
-    background-color:#e6e6e6;
+    background-color:#60AE71;
     text-align:center;
     padding-top:24px;
     padding-bottom:24px;
@@ -309,7 +305,27 @@ p.grey{
 */
 
 .navbar {
-    border-top: 10px solid #336666;
+    border-top: 10px solid #430600;
+}
+
+.hide-demo {
+    display:block;
+}
+
+.navbar-demo {
+    float:left;
+    color:#fff;
+    font-size:30px;
+    font-weight:bold;
+    padding-left: 100px;
+}
+
+.panel-demo {
+    background-color:#BA5146;
+    text-align:center;
+    padding-top:24px;
+    padding-bottom:24px;
+    margin:0 0 15px 0;
 }
 
 /*
