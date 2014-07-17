@@ -11,6 +11,10 @@ a {
     cursor: pointer;
 }
 
+.hide-demo {
+    display:block;
+}
+
 /** nested row patch **/
 .row .row {
     margin: 0;
